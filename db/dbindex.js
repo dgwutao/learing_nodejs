@@ -18,7 +18,7 @@ const pool = mysql.createPool({
 });
 
 // 'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',['Morty', 14]
-exports.excuteQuery = (sql, complete)=>{
+exports.excute = (sql, complete)=>{
     pool.getConnection((err, conn)=> {
         if (err) {
             
@@ -31,7 +31,7 @@ exports.excuteQuery = (sql, complete)=>{
     });
 }
 
-exports.excuteQueryParams = (sql, params, complete)=>{
+exports.excuteParams = (sql, params, complete)=>{
     pool.getConnection((err, conn)=> {
             if (err) {
                 console.log(err)

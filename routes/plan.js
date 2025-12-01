@@ -14,7 +14,7 @@ router.get('/add', function(req, res) {
   const weight = req.query.weight ?? 0
   const sql = `insert into users (name,hight,weight) values (?, ?, ?)`
   const params = [name, hight, weight]
-  dbindex.excuteQueryParams(sql, params,(err, results)=>{
+  dbindex.excuteParams(sql, params,(err, results)=>{
     res.json(results)
   })
 });
@@ -22,7 +22,7 @@ router.get('/add', function(req, res) {
 // Define a simple GET endpoint
 router.get('/get', (req, res) => {
   // Get name from query parameter, default to 'Guest'
-  dbindex.excuteQuery('select * from users', (err, results)=>{
+  dbindex.excute('select * from users', (err, results)=>{
     res.json(results)
   })
 });
