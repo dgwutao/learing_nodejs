@@ -21,7 +21,8 @@ const pool = mysql.createPool({
 exports.excute = (sql, complete)=>{
     pool.getConnection((err, conn)=> {
         if (err) {
-            
+            console.log(err)
+            return
         }
         conn.execute(sql, (err, results, fields) => {
             complete(err, results)
@@ -35,6 +36,7 @@ exports.excuteParams = (sql, params, complete)=>{
     pool.getConnection((err, conn)=> {
             if (err) {
                 console.log(err)
+                return
             }
             conn.execute(sql, params, (err, results, fields) => {
                 complete(err, results)

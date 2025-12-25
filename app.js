@@ -7,6 +7,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const plansRouter = require('./routes/plan');
 const cacheManager = require('./utility/cacheManager');
+const responseMiddleware = require('./middlewares/resposeMiddleware');
 
 // const cm = new cacheManager()
 // console.log(cm)
@@ -20,6 +21,7 @@ const app = express();
 app.set('port', normalizePort(process.env.PORT || '3000'));
 app.set('env', process.env.NODE_ENV || 'production');
 
+app.use(responseMiddleware);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -43,7 +45,7 @@ app.use(function(err, req, res, next) {
   // res.locals.error = req.app.get('env') === 'development' ? err : {};
   // render the error page
   res.status(err.status || 500);
-  res.send('500--error');
+  res.send(err.message + err.stack);
 });
 
 function normalizePort(val) {
