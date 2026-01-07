@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node --env-file=.env.dev ./bin/www.js",
     "run": "node --env-file=.env ./bin/www.js",
-    "testai":"node --env-file=.env ./openai/aitest.mjs "
+    "testai": "node --env-file=.env ./openai/aitest.mjs "
   },
   "dependencies": {
     "axios": "^1.13.2",
@@ -20,6 +20,7 @@
     "express-fileupload": "^1.5.2",
     "fs-extra": "^11.3.2",
     "http-errors": "^2.0.0",
+    "ioredis": "^5.8.2",
     "jade": "^1.11.0",
     "morgan": "^1.10.1",
     "mysql2": "^3.15.3",

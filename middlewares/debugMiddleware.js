@@ -1,4 +1,4 @@
-const errorDebugMiddleware = (options = {})=> {
+exports.errorDebug = (options = {})=> {
   return function(err, req, res, next) {
     // 检查是否开启调试模式
     const debugEnabled = options.enabled || 
@@ -40,5 +40,3 @@ const errorDebugMiddleware = (options = {})=> {
     }
   };
 };
-
-module.exports = errorDebugMiddleware;

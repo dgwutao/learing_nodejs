@@ -1,5 +1,7 @@
 const express = require('express');
 const dbindex = require('../db/dbindex');
+const testMiddleware = require('../middlewares/testMiddleware')
+const plansController = require('../controllers/plansController');
 const router = express.Router();
 
 /* GET users listing. */
@@ -20,12 +22,7 @@ router.get('/add', function(req, res) {
 });
 
 // Define a simple GET endpoint
-router.get('/get', (req, res) => {
-  // Get name from query parameter, default to 'Guest'
-  dbindex.excute('select * from users', (err, results)=>{
-    res.json(results)
-  })
-});
+router.get('/get', [testMiddleware.mw1,testMiddleware.mw2] ,plansController.get);
 
 
 // Define a simple GET endpoint

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>撒花效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* 背景色便于观察花朵 */
+            background-color: #f0f8ff;
+            min-height: 100vh;
+            overflow: hidden; /* 隐藏溢出视口的元素 */
+        }
+
+        /* 花朵容器：全屏定位，用于承载所有花朵 */
+        .flower-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* 不遮挡页面其他元素的交互 */
+        }
+
+        /* 花朵基础样式 */
+        .flower {
+            position: absolute;
+            top: -20px; /* 初始位置在视口上方外部 */
+            font-size: 20px; /* 花朵大小 */
+            opacity: 1; /* 初始完全显示 */
+            /* 动画：名称 时长 线性运动 无限循环（可选，注释后只撒一次） */
+            animation: flowerFall 2s linear forwards; /* forwards保持动画结束状态 */
+            transform-origin: center center; /* 旋转中心点 */
+        }
+
+        /* 核心动画：下落+中间消失 */
+        @keyframes flowerFall {
+            0% {
+                top: -20px; /* 起始位置：视口上方 */
+                opacity: 1; /* 完全显示 */
+                transform: rotate(0deg); /* 初始旋转角度 */
+            }
+            50% {
+                top: 50vh; /* 动画进行到1秒时，到达视口垂直中间 */
+                opacity: 0; /* 中间位置完全消失 */
+                transform: rotate(180deg); /* 下落过程中旋转，更灵动 */
+            }
+            100% {
+                top: 100vh; /* 动画结束时，到达视口下方外部 */
+                opacity: 0; /* 保持消失状态 */
+                transform: rotate(360deg); /* 完成一周旋转 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flower-container" id="flowerContainer"></div>
+
+    <script>
+        // 配置参数
+        const flowerCount = 50; // 花朵数量
+        const flowerSymbols = ['❀', '🌸', '💮', '🌼', '🌹']; // 花朵符号（可自定义添加）
+        const container = document.getElementById('flowerContainer');
+
+        // 动态生成50朵花
+        for (let i = 0; i < flowerCount; i++) {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+
+            // 1. 随机选择花朵符号
+            const randomSymbol = flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+            flower.innerText = randomSymbol;
+
+            // 2. 随机水平位置（0到100%视口宽度）
+            const randomLeft = Math.random() * 100;
+            flower.style.left = `${randomLeft}vw`;
+
+            // 3. 随机动画延迟（0到2秒，避免所有花朵同时下落）
+            const randomDelay = Math.random() * 2;
+            flower.style.animationDelay = `${randomDelay}s`;
+
+            // 4. 随机花朵大小（15px-25px，增加层次感）
+            const randomSize = 15 + Math.random() * 10;
+            flower.style.fontSize = `${randomSize}px`;
+
+            // 5. 随机花朵颜色（浅色系，更美观）
+            const colors = ['#e63946', '#f77f00', '#fcbf49', '#06d6a0', '#118ab2', '#073b4c'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            flower.style.color = randomColor;
+
+            // 将花朵添加到容器
+            container.appendChild(flower);
+        }
+    </script>
+</body>
+</html>

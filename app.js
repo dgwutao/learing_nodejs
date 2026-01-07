@@ -21,13 +21,12 @@ const app = express();
 app.set('port', normalizePort(process.env.PORT || '3000'));
 app.set('env', process.env.NODE_ENV || 'production');
 
-app.use(responseMiddleware);
+app.use(responseMiddleware.responseHandler);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/plans', plansRouter);
