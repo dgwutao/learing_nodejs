@@ -1,13 +1,14 @@
 module.exports = {
   apps : [
       {
-        name: "axel.wu",
+        name: "www.learnnodejs.com",
         script: "./bin/www.js",
-        watch: true,
-        // instances: 2,max
-        // exec_mode: "cluster",fork default
-        // increment_var : 'PORT',
-        // instance_var: 'INSTANCE_ID',
+        watch: false,
+        instances: 'max',
+        exec_mode: 'cluster',//fork default
+        increment_var : 'PORT',
+        instance_var: 'INSTANCE_ID',
+        autorestart: false,
         env: {
             "PORT": 3000,
             "NODE_ENV": "development",
