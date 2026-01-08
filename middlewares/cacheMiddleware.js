@@ -300,5 +300,5 @@ class RedisCacheAdapter {
     await this.redis.del(key);
   }
 }
-
-module.exports = CacheMiddleware;
+export default CacheMiddleware
+// module.exports = CacheMiddleware;

@@ -1,4 +1,4 @@
-exports.responseHandler = (req, res, next) => {
+const responseHandler = (req, res, next) => {
   res.success = (data , message = '') => {
     if (data && Object.keys(data).length>0) {
       data.code = 200;
@@ -18,3 +18,5 @@ exports.responseHandler = (req, res, next) => {
   };
   next(); 
 };
+
+export default {responseHandler}

@@ -69,4 +69,5 @@ class SimpleCache {
   }
 }
 
-module.exports = SimpleCache
+export default SimpleCache
+// module.exports = SimpleCache

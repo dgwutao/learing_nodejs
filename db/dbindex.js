@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+import mysql from 'mysql2';
 
 // Create the connection pool. The pool-specific settings are the defaults
 const pool = mysql.createPool({
@@ -18,7 +18,7 @@ const pool = mysql.createPool({
 });
 
 // 'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',['Morty', 14]
-exports.excute = (sql, complete)=>{
+const excute = (sql, complete)=>{
     pool.getConnection((err, conn)=> {
         if (err) {
             complete(err, null)
@@ -32,7 +32,7 @@ exports.excute = (sql, complete)=>{
     });
 }
 
-exports.excuteParams = (sql, params, complete)=>{
+const excuteParams = (sql, params, complete)=>{
     pool.getConnection((err, conn)=> {
             if (err) {
                 complete(err, null)
@@ -44,11 +44,9 @@ exports.excuteParams = (sql, params, complete)=>{
             pool.releaseConnection(conn);
             // conn.release()
     });
-    try {
+}
 
-    } catch (error) {
-        
-    }finally{
-        
-    }
+export default {
+    excute,
+    excuteParams
 }

@@ -1,5 +1,5 @@
-const express = require('express');
-const fileUpload = require('express-fileupload');
+import express from 'express';
+import fileUpload from 'express-fileupload';
 const router = express.Router();
 
 // default options
@@ -30,4 +30,4 @@ router.post('/', function(req, res) {
   });
 });
 
-module.exports = router;
+export default router;

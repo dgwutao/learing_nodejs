@@ -1,3 +1,5 @@
-exports.login = (req,res,next)=>{
+const login = (req,res,next)=>{
     next()
 }
+
+export default {login}

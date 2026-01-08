@@ -1,4 +1,4 @@
-const fs = require('fs-extra')
+import fs from 'fs-extra'
 
 const file = '/tmp/this/path/does/not/exist/file.txt'
 

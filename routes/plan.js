@@ -1,7 +1,7 @@
-const express = require('express');
-const dbindex = require('../db/dbindex');
-const testMiddleware = require('../middlewares/testMiddleware')
-const plansController = require('../controllers/plansController');
+import express from 'express';
+import dbindex from '../db/dbindex.js';
+import testMiddleware from '../middlewares/testMiddleware.js'
+import plansController from '../controllers/plansController.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -34,5 +34,5 @@ router.get('/del', (req, res) => {
 });
 
 // export default router
-module.exports = router;
+export default router;
 

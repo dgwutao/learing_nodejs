@@ -1,4 +1,4 @@
-exports.errorDebug = (options = {})=> {
+const errorDebug = (options = {})=> {
   return function(err, req, res, next) {
     // 检查是否开启调试模式
     const debugEnabled = options.enabled || 
@@ -40,3 +40,7 @@ exports.errorDebug = (options = {})=> {
     }
   };
 };
+
+export default {
+  errorDebug
+}

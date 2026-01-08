@@ -1,14 +1,17 @@
 // var createError = require('http-errors');
 // var cookieParser = require('cookie-parser');
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const plansRouter = require('./routes/plan');
-const cacheManager = require('./utility/cacheManager');
-const responseMiddleware = require('./middlewares/resposeMiddleware');
+import express from 'express';
+import path from 'path';
+import logger from 'morgan';
+import indexRouter from './routes/index.js';
+import usersRouter from './routes/users.js';
+import plansRouter from './routes/plan.js';
+import cacheManager from './utility/cacheManager.js';
+import responseMiddleware from './middlewares/resposeMiddleware.js';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // const cm = new cacheManager()
 // console.log(cm)
 
@@ -67,4 +70,4 @@ function normalizePort(val) {
   return false;
 }
 
-module.exports = app;
+export default app

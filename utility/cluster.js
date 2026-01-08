@@ -1,6 +1,7 @@
-const cluster = require('cluster');
-const http = require('http');
-const numCPUs = require('os').cpus().length; // 获取CPU核心数
+import cluster from 'cluster';
+import http from 'http';
+import os from 'os'
+const numCPUs = os.cpus().length; // 获取CPU核心数
 
 if (cluster.isMaster) {
     console.log(`主进程 ${process.pid} 正在运行`);

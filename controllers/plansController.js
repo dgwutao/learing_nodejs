@@ -1,7 +1,9 @@
-const dbindex = require('../db/dbindex');
+import dbindex from '../db/dbindex.js';
 
-exports.get = (req, res)=>{
+const get = (req, res)=>{
     dbindex.excute('select * from users', (err, results)=>{
         res.json(results)
     })
 }
+
+export default {get}
