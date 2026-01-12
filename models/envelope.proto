@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package myprotocol;
+
+// 定义所有可能的消息类型枚举
+enum MessageType {
+  UNKNOWN = 0;
+  LOGIN_REQUEST = 1;
+  LOGIN_RESPONSE = 2;
+  CHAT_MESSAGE = 3;
+  HEARTBEAT = 4;
+}
+
+// “信封”消息
+message Envelope {
+  MessageType type = 1;     // 用于标识负载的类型
+  bytes payload = 2;        // 存放已被序列化的具体消息（二进制）
+  uint64 sequence_id = 3;   // 可选的序列号，用于请求-响应匹配
+  string session_id = 4;    // 可选的会话ID
+}

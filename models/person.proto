@@ -1,0 +1,33 @@
+// 指定protobuf语法版本（proto3更简洁，推荐）
+syntax = "proto3";
+
+// 可选：包名，用于防止命名冲突，会映射为JS对象的命名空间
+package example;
+
+// 定义消息（类似接口/类）
+message Person {
+  // 字段规则 类型 字段名 = 字段编号（唯一，不可更改）
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
+  
+  // 枚举类型
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+  
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+  
+  // 数组/列表
+  repeated PhoneNumber phones = 4;
+}
+
+// 另一个消息，可引用Person
+message AddressBook {
+  repeated Person people = 1;
+}
