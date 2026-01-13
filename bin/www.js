@@ -6,7 +6,7 @@
 
 import app from '../app.js';
 import debug from 'debug';
-import http from 'http';
+import http from 'node:http';
 
 /**
  * Get port from environment and store in Express.

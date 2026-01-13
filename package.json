@@ -1,9 +1,9 @@
 {
   "name": "nodejssec",
   "version": "1.0.0",
-  "description": "",
+  "description": "none",
   "license": "ISC",
-  "author": "",
+  "author": "axel.wu",
   "type": "module",
   "main": "index.js",
   "scripts": {

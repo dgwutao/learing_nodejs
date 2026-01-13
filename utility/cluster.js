@@ -1,6 +1,6 @@
-import cluster from 'cluster';
-import http from 'http';
-import os from 'os'
+import cluster from 'node:cluster';
+import http from 'node:http';
+import os from 'node:os'
 const numCPUs = os.cpus().length; // 获取CPU核心数
 
 if (cluster.isMaster) {

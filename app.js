@@ -1,7 +1,8 @@
 // var createError = require('http-errors');
 // var cookieParser = require('cookie-parser');
 import express from 'express';
-import path from 'path';
+import path from 'node:path';
+import os from 'node:os'
 import logger from 'morgan';
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
@@ -15,15 +16,15 @@ const __dirname = path.dirname(__filename);
 // const cm = new cacheManager()
 // console.log(cm)
 
+// console.log(os)
 const app = express();
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 
-app.set('port', normalizePort(process.env.PORT || '3000'));
-app.set('env', process.env.NODE_ENV || 'production');
-
+app.set('port', normalizePort(process.env.PORT));
+app.set('env', process.env.NODE_ENV);
 app.use(responseMiddleware.responseHandler);
 app.use(logger('dev'));
 app.use(express.json());
