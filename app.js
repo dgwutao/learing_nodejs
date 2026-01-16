@@ -25,6 +25,7 @@ const app = express();
 
 app.set('port', normalizePort(process.env.PORT));
 app.set('env', process.env.NODE_ENV);
+app.set('trust proxy', true);
 app.use(responseMiddleware.responseHandler);
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
+app.use('/api', indexRouter);
 app.use('/users', usersRouter);
 app.use('/plans', plansRouter);
 
