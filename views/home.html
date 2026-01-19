@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="JWP Property">
+    <meta name="keywords" content="JWP Property">
+    <meta name="author" content="JWP Group">
+    <title>JWP Global Investment - 全球资产配置专家</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <!-- <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css"> -->
+    <!-- <script src="/static/lib/vue.js"></script> -->
+    <!-- <script src="/components/navComponent.js"></script>
+    <script src="/components/footerComponent.js"></script> -->
+    <!-- <script src="/static/js/redirect.js"></script> -->
+    <style>
+        :root {
+            --primary-dark: #0d1b2a;
+            --secondary-dark: #1b263b;
+            --primary-gold: #d4af37;
+            --light-gold: #f5d76e;
+            --text-light: #f8f9fa;
+            --accent-blue: #48cae4;
+            --section-padding: 80px 5%;
+
+            --dark-blue: #0a192f;
+            --gold: #d4af37;
+            --light-gold: #f0e6d2;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-gray: #8892b0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 30px;
+        }
+        
+        .country-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .country-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .country-flag {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .country-flag:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to top, rgba(10, 25, 47, 0.9), transparent);
+        }
+        
+        .country-info {
+            padding: 25px;
+        }
+        
+        .country-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .business-type {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .country-info p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+        
+        /* 导航栏样式 */
+        
+        /* 英雄区域样式 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(13, 27, 42, 0.85), rgba(13, 27, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-highlight {
+            color: var(--primary-gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-gold), #c9a227);
+            color: var(--primary-dark);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+        }
+        
+        /* 业务展示区域 */
+        .business-section {
+            padding: var(--section-padding);
+            background-color: var(--secondary-dark);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title-img {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        /* .section-title-img:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+        } */
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gold);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+        
+        /* 3D业务卡片 */
+        .business-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+            /* animation: fadeInUp 1s ease; */
+        }
+        
+        .business-card {
+            perspective: 1000px;
+            height: 400px;
+            transition: transform 0.5s ease;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+       .business-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* .business-card:hover .card-inner {
+            transform: rotateY(180deg);
+        } */
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-front {
+            background-color:var(--primary-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            transform: rotateY(180deg);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .business-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+        }
+        
+        .card-front h3 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        .card-front p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .card-back h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-gold);
+        }
+        
+        .card-back ul {
+            list-style: none;
+        }
+        
+        .card-back ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-back ul li i {
+            margin-right: 10px;
+            color: var(--primary-gold);
+        }
+        
+        /* 全球分布区域 */
+        .global-section {
+            padding: var(--section-padding);
+            background-size: cover;
+            background-attachment: fixed;
+            background: linear-gradient(rgba(13, 27, 42, 0.95), rgba(13, 27, 42, 0.95)), 
+                        url('https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+
+        .global-section2 {
+            padding: 100px 0;
+            position: relative;
+            background: #0d2340;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 30px;
+            background: rgba(27, 38, 59, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(27, 38, 59, 0.85);
+        }
+        
+        .stat-icon {
+            font-size: 40px;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* 发展历程区域 */
+        .timeline-section {
+            padding: var(--section-padding);
+            background-color: var(--secondary-dark);
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 60px auto 0;
+            position: relative;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--primary-gold);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: calc(50% - 40px);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: calc(50% + 20px);
+        }
+        
+        .timeline-content {
+            padding: 25px;
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -15px;
+            border: 7px solid transparent;
+            border-left-color: rgba(27, 38, 59, 0.8);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -15px;
+            right: auto;
+            border-left-color: transparent;
+            border-right-color: rgba(27, 38, 59, 0.8);
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-year {
+            left: auto;
+            right: -20px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-year {
+            left: -20px;
+        }
+        
+        /* 图表区域 */
+        .chart-section {
+            padding: var(--section-padding);
+            background: linear-gradient(135deg, var(--primary-dark), #0a1520);
+        }
+        
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .chart-box {
+            background: rgba(27, 38, 59, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+        
+        .chart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+        }
+        
+        /* 页脚样式 */
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+
+        /* Properties Section */
+        .properties {
+            padding: 120px 0;
+        }
+        
+        .properties-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background-color: transparent;
+            color: var(--text);
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+        
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .property-card {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 400px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .property-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .property-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            transition: all 0.3s ease;
+        }
+        
+        .property-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent);
+        }
+        
+        .property-card:hover .property-image {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- 导航栏 -->
+    <nav-component></nav-component>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h2>全球资产配置与<span class="hero-highlight">高端地产投资</span>的领航者</h2>
+            <a href="#business" class="cta-button">探索我们的业务 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- 业务领域 -->
+    <section class="business-section" id="business">
+        <div class="section-title">
+            <h2>核心业务领域</h2>
+            <p>JWP地产开发业务在高净值人群日益增长的跨境置业及海外资产配置需求下，产品覆盖文旅酒店、别墅与住宅、商业养老物业、学生公寓等多元房产类别。</p>
+        </div>
+        
+        <div class="business-container">
+            <!-- 文旅酒店 -->
+            <div class="business-card animated">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-hotel business-icon"></i>
+                        <h3>文旅酒店</h3>
+                        <p>联袂全球五星级酒店品牌，打造东南亚文旅度假地产"山海天"战略</p>
+                        <p class="location">爱尔兰</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>文旅酒店投资</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 高端度假村开发</li>
+                            <li><i class="fas fa-check-circle"></i> 五星级酒店品牌合作</li>
+                            <li><i class="fas fa-check-circle"></i> 旅游地产开发与管理</li>
+                            <li><i class="fas fa-check-circle"></i> 文旅项目规划与运营</li>
+                            <li><i class="fas fa-check-circle"></i> 区域旅游经济促进</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 豪华别墅 -->
+            <div class="business-card animated">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-home business-icon"></i>
+                        <h3>豪华别墅</h3>
+                        <p>定制奢华私人别墅，提供全球高端别墅开发与资产管理服务</p>
+                        <p class="location">土耳其</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>豪华别墅投资</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 私人定制豪宅开发</li>
+                            <li><i class="fas fa-check-circle"></i> 高端别墅资产组合管理</li>
+                            <li><i class="fas fa-check-circle"></i> 滨海别墅与度假别墅</li>
+                            <li><i class="fas fa-check-circle"></i> 可持续建筑设计</li>
+                            <li><i class="fas fa-check-circle"></i> 智能化居住解决方案</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 住宅公寓 -->
+            <div class="business-card animated">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-building business-icon"></i>
+                        <h3>住宅公寓</h3>
+                        <p>高品质住宅公寓开发，满足多元居住需求</p>
+                        <p class="location">希腊</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>住宅公寓开发</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 城市高端公寓</li>
+                            <li><i class="fas fa-check-circle"></i> 学生公寓开发</li>
+                            <li><i class="fas fa-check-circle"></i> 装配式建筑实践</li>
+                            <li><i class="fas fa-check-circle"></i> 智能化居住体验</li>
+                            <li><i class="fas fa-check-circle"></i> 绿色生态社区</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商业养老 -->
+            <div class="business-card animated">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-hospital business-icon"></i>
+                        <h3>商业养老</h3>
+                        <p>打造高端养老社区，提供全方位康养服务</p>
+                        <p class="location">葡萄牙</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>商业养老地产</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 高端养老社区开发</li>
+                            <li><i class="fas fa-check-circle"></i> 康养服务体系</li>
+                            <li><i class="fas fa-check-circle"></i> 医疗配套设施</li>
+                            <li><i class="fas fa-check-circle"></i> 适老化建筑设计</li>
+                            <li><i class="fas fa-check-circle"></i> 养老地产投资咨询</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 房产托管 -->
+            <div class="business-card animated">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-hand-holding-usd business-icon"></i>
+                        <h3>房产托管</h3>
+                        <p>专业全球房产管理服务，实现资产保值增值</p>
+                        <p class="location">美国</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>房产托管服务</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 全球物业托管</li>
+                            <li><i class="fas fa-check-circle"></i> 租赁管理服务</li>
+                            <li><i class="fas fa-check-circle"></i> 资产增值计划</li>
+                            <li><i class="fas fa-check-circle"></i> 物业管理优化</li>
+                            <li><i class="fas fa-check-circle"></i> 财务报告与分析</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全球布局 -->
+    <section class="global-section" id="global">
+        <div class="section-title">
+            <h2>全球业务布局</h2>
+            <p>JWP业务范围覆盖全球四大洲30多个国家和地区，在全球20+个地区成立了分公司，拥有超过千人的员工团队。</p>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-item animated">
+                <i class="fas fa-globe-asia stat-icon"></i>
+                <div class="stat-number">30+</div>
+                <div class="stat-text">覆盖国家和地区</div>
+            </div>
+            
+            <div class="stat-item animated">
+                <i class="fas fa-building stat-icon"></i>
+                <div class="stat-number">20+</div>
+                <div class="stat-text">全球分公司</div>
+            </div>
+            
+            <div class="stat-item animated">
+                <i class="fas fa-users stat-icon"></i>
+                <div class="stat-number">1000+</div>
+                <div class="stat-text">专业团队规模</div>
+            </div>
+            
+            <div class="stat-item animated">
+                <i class="fas fa-home stat-icon"></i>
+                <div class="stat-number">2000+</div>
+                <div class="stat-text">分销渠道</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全球业务分布 -->
+    <section class="global-section2" id="global">
+        <div class="container">
+            <div class="section-title" style="margin-bottom: 0;">
+                <h2>全球业务分布</h2>
+                <p>JWP地产集团在全球30多个国家和地区开展业务，以下是部分重点国家的业务布局</p>
+            </div>
+            <img class="section-title-img" src="/static/images/service_distribution.png" alt="全球业务分布" object-fit="cover" object-positon="center" title="全球业务分布"/>
+        </div>
+    </section>
+
+    <section id="properties" class="properties">
+        <div class="container">
+            <div class="section-title">
+                <h2>精选项目展示</h2>
+            </div>
+            <div class="properties-grid">
+                <div class="property-card animated" data-type="hotel">
+                    <img src="https://dream-visas.oss-ap-southeast-1.aliyuncs.com/uploads/2025/0403/20250403153625_993.png" alt="泰国普吉岛综合度假村" class="property-image">
+                    <div class="property-overlay">
+                        <h3 class="property-title">泰国普吉岛综合度假村</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>泰国，普吉岛</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card animated" data-type="villa">
+                    <img src="https://dream-visas.oss-ap-southeast-1.aliyuncs.com/uploads/2025/0408/20250408140545_983.png" alt="塞浦路斯顶级海岸度假花园" class="property-image">
+                    <div class="property-overlay">
+                        <h3 class="property-title">塞浦路斯顶级海岸度假花园</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>塞浦路斯</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card animated" data-type="apartment">
+                    <img src="https://dream-visas.oss-ap-southeast-1.aliyuncs.com/uploads/2025/0408/20250408140631_635.png" alt="日本大阪一户建" class="property-image">
+                    <div class="property-overlay">
+                        <h3 class="property-title">日本大阪一户建</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>日本，大阪</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer-component></footer-component>
+
+    <script>
+        // 平滑滚动导航
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        // 滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+    <script type="module">
+        const { createApp, ref, onMounted, reactive } = Vue
+            const app = createApp({
+                setup() {
+                    const info = reactive({
+
+                    })
+
+                    onMounted(()=>{
+                        console.log('hello from vue')
+                        let pid = 13
+                        fetch(`https://crmapi.delsk.com/api/housing/start1?pid=${pid}&token=`)
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data.data)
+                        })
+                        .catch(error => console.error('Error:', error));
+                    })
+                    
+                    return {
+                        info
+                    }
+                }
+            })
+            app.mount('#app')
+    </script>
+</body>
+</html>
