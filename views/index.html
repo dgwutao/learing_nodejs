@@ -3,11 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="JWP Property" />
     <meta name="keywords" content="JWP Property" />
     <meta name="author" content="JWP Group" />
+    <meta name="copyright" content="© 2024 版权所有">
     <title>JWP Global Investment - 全球资产配置专家</title>
+    <!-- DNS预连接 -->
+    <link rel="dns-prefetch" href="//cdn.example.com">
+    <!-- 预连接（建立TCP/TLS连接） -->
+    <link rel="preconnect" href="https://api.example.com">
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="critical-font.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="hero-image.jpg" as="image">
+
+    <!-- 预获取非关键资源 -->
+    <link rel="prefetch" href="./home.html">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <!-- <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css"> -->
@@ -897,9 +908,7 @@
           onMounted(() => {
             console.log("hello from vue");
             let pid = 13;
-            fetch(
-              `https://crmapi.delsk.com/api/housing/start1?pid=${pid}&token=`,
-            )
+            fetch(`https://crmapi.delsk.com/api/housing/start1?pid=${pid}&token=`,)
               .then((res) => res.json())
               .then((data) => {
                 console.log(data.data);
