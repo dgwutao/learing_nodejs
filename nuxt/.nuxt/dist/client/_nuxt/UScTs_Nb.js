@@ -1,0 +1,1 @@
+import{b as _,_ as c,a}from"./CGcgf37N.js";import{G as r,I as p,c as u,b as e,B as i,o as m}from"./WOULvUWJ.js";const h=r({__name:"index",setup(l){const n=p();return(x,f)=>{const t=c,o=a,s=_;return m(),u("div",null,[e(t,{title:"Home"}),e(o,{description:"Simple authentification example using Nuxt3"}),e(s,{user:i(n)},null,8,["user"])])}}});export{h as default};
