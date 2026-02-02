@@ -10,6 +10,7 @@ import plansRouter from './routes/plan.js';
 import cacheManager from './utility/cacheManager.js';
 import responseMiddleware from './middlewares/resposeMiddleware.js';
 import { fileURLToPath } from 'node:url';
+import helmet from 'helmet'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +27,7 @@ const app = express();
 app.set('port', normalizePort(process.env.PORT));
 app.set('env', process.env.NODE_ENV);
 app.set('trust proxy', true);
+app.use(helmet())
 app.use(responseMiddleware.responseHandler);
 app.use(logger('dev'));
 app.use(express.json());
