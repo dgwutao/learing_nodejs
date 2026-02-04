@@ -7,6 +7,7 @@ import logger from 'morgan';
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import plansRouter from './routes/plan.js';
+import tasksRouter from './routes/tasksRouter.js'
 import cacheManager from './utility/cacheManager.js';
 import responseMiddleware from './middlewares/resposeMiddleware.js';
 import { fileURLToPath } from 'node:url';
@@ -38,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/api', indexRouter);
 app.use('/users', usersRouter);
 app.use('/plans', plansRouter);
+app.use('/tasks',tasksRouter);
 
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
