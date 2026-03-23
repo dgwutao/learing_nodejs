@@ -12,6 +12,11 @@ import cacheManager from './utility/cacheManager.js';
 import responseMiddleware from './middlewares/resposeMiddleware.js';
 import { fileURLToPath } from 'node:url';
 import helmet from 'helmet'
+import client from 'prom-client';
+import monitor from 'express-status-monitor'
+
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics({ timeout: 5000 }); // 收集 Node.js 默认指标（堆内存、GC等）
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,10 +29,23 @@ const app = express();
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
-
+app.use(monitor({
+  path: '/monitor',
+  chartVisibility: {
+    cpu: true,
+    mem: true,
+    load: true,
+    eventLoop: true,
+    heap: true,
+    responseTime: true,
+    rps: true,
+    statusCodes: true
+  }
+}));
 app.set('port', normalizePort(process.env.PORT));
 app.set('env', process.env.NODE_ENV);
 app.set('trust proxy', true);
+
 app.use(helmet())
 app.use(responseMiddleware.responseHandler);
 app.use(logger('dev'));
@@ -35,11 +53,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', client.register.contentType);
+  res.end(await client.register.metrics());
+});
+
 app.use('/', indexRouter);
 app.use('/api', indexRouter);
 app.use('/users', usersRouter);
 app.use('/plans', plansRouter);
 app.use('/tasks',tasksRouter);
+
 
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();

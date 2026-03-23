@@ -13,6 +13,13 @@ class SimpleCache {
     SimpleCache.instance = this
   }
 
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new SimpleCache();
+    }
+    return this.instance;
+  }
+
   set(key, value, ttl = this.defaultTTL) {
     const expire = Date.now() + ttl;
     this.cache.set(key, { value, expire });

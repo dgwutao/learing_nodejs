@@ -1,4 +1,4 @@
-const loginChecker = (req,res,next)=>{
+export const loginChecker = (req,res,next)=>{
 
     next()
 }
