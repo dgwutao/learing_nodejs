@@ -1,0 +1,116 @@
+<view style="position: relative;min-height: 100vh;">
+<view style="padding: 30rpx;">
+<view style="font-size: 26rpx;color: #666666;">需新学<text style="color: #50D0AF;">     {{tongji.new_num}}</text></view>
+<view style="font-size: 26rpx;color: #666666;margin-top: 2rpx;">需复习<text style="color: #264EEB;">     {{tongji.fuxi_num}}</text></view>
+</view>
+
+<view style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+<view wx:if="{{info.type_id==0}}" style="font-size: 64rpx;color: #1d1e1f;font-weight: bold;margin-top: {{showHint?'0':'120rpx'}};">{{danci.danci}}</view>
+
+<view wx:if="{{info.type_id==1}}" style="font-size: 64rpx;color: #1d1e1f;font-weight: bold;margin-top: {{showHint?'0':'180rpx'}};">{{danci.shiyi_cn}}</view>
+
+<image bindtap="preview" data-url="{{danci.peitu}}" wx:if="{{danci.peitu.length>0 && (info.type_id==2||info.type_id==3)}}" src="{{danci.peitu}}" mode="aspectFill" style="width: 410rpx;height: 306rpx;border-radius: 12rpx;margin-top: {{showHint?'0':'60rpx'}};"/>
+
+<image wx:if="{{danci.yinpin.length>0&&(info.type_id==0||showHint)}}" bindtap="playVoice" data-item="{{danci}}" src="/image/{{playing_audio_state==danci.yinpin?'0_playing.gif':'0_play2.png'}}" mode="widthFix" style="width: 100rpx;height: 100rpx;margin-top: 60rpx;"/>
+
+<image bindtap="preview" data-url="{{danci.peitu}}" wx:if="{{danci.peitu.length>0&&(info.type_id==1&&showHint)}}" src="{{danci.peitu}}" mode="aspectFill" style="width: 304rpx;height: 226rpx;border-radius: 12rpx;margin-top: 60rpx;"/>
+
+<view wx:if="{{(info.type_id==0||info.type_id==2||info.type_id==3)&&showHint}}" style="padding: 14rpx 40rpx;font-size: 32rpx;color: #009855;background: #E2F4F1;border-radius: 14rpx;margin-top: 60rpx;">释义：{{danci.shiyi_cn}}</view>
+</view>
+
+
+<view wx:if="{{info.type_id==0}}" style="display:flex;align-items: center;flex-wrap: wrap;width: 100%;padding: 0 40rpx;position: absolute;bottom: 280rpx;">
+<view wx:for="{{list}}" bindtap="answer" data-item="{{item}}" data-idx="{{idx}}" wx:for-index="idx" style="position: relative;">
+<image wx:if="{{idx==answer_idx}}" src="/image/ff_{{item.is_zhengque==1?'10':'11'}}.png" mode="widthFix" style="width: 70rpx;height: 70rpx;position: absolute;top: -40rpx;right: {{idx%2==0?'0':'-10'}}rpx;"/>
+<image src="{{item.peitu}}" style="width: 310rpx;height: 230rpx;border-radius: 12rpx;margin-right: {{idx%2==0?'40':'0'}}rpx;margin-bottom: 30rpx;" mode="aspectFill"/>
+</view>
+
+</view>
+
+
+<view wx:else style="width: 100%;padding: 0 40rpx;position: absolute;bottom: {{(info.type_id==2||info.type_id==3)?'200rpx':'230rpx'}};">
+<view wx:for="{{list}}" bindtap="answer" data-item="{{item}}" data-idx="{{idx}}" wx:for-index="idx">
+<view style="padding: 32rpx;text-align: center;width: 100%;background: {{(idx==answer_idx&&item.is_zhengque==0)?'#ED8B8B':(idx==answer_idx&&item.is_zhengque==1)?'#50D0AF':'white'}};box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.02);border-radius: 8px;margin-top: 20rpx;color: {{idx==answer_idx?'white':'black'}};font-size: 32rpx;font-weight: bold;position: relative;">
+  {{item.danci}}<image wx:if="{{idx==answer_idx&&item.is_zhengque==1}}" src="/image/ff_13.png" mode="widthFix" style="width: 50rpx;height: 34rpx;position: absolute;right: 32rpx;"/>
+</view>
+</view>
+
+</view>
+
+
+
+<view style="height: 200rpx;"></view>
+</view>
+
+<view bindtap="show" style="position: fixed;bottom: 70rpx;display: flex;align-items: center;justify-content: center;flex-direction: column;width: 100%;">
+<view style="padding: 12rpx 26rpx;background: #E1E4EB;border-radius: 28rpx;display: flex;align-items: center;">
+<image src="/image/ff_12.png" mode="widthFix" style="width:30rpx;height:32rpx"/>
+<view style="font-size: 24rpx;color: #999999;">单词解析</view>
+</view>
+</view>
+
+<van-popup show="{{showSlider}}" position="bottom" custom-style="height:100vh;width:100%;background-color: #F2F7FA;" bind:close="sizerClose">
+<view style="padding: 0 30rpx;background-color: #F2F7FA;">
+<view style="display: flex;align-items: center;justify-content: space-between;margin-top: 40rpx;">
+<view style="font-size: 56rpx;color: #1d1e1f;font-weight: bold;">{{danci.danci}}</view>
+<image bindtap="collect" src="/image/ff_0{{info.is_shoucang==1?'8':'7'}}.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"/>
+</view>
+<image bindtap="playVoice" data-item="{{danci}}" src="/image/{{playing_audio_state==danci.yinpin?'ff_15.gif':'ff_06.png'}}" mode="widthFix" style="width: 44rpx;height: 35rpx;margin-top: 10rpx;"/>
+
+<view style="background-color: white;border-radius: 12rpx;margin-top: 50rpx;padding: 20rpx;">
+<view style="font-size: 28rpx;">释义：</view>
+<view style="margin-top: 10rpx;font-size: 36rpx;font-weight: bold;">{{danci.shiyi_cn}}</view>
+<image wx:if="{{danci.peitu.length>0}}" src="{{danci.peitu}}" mode="aspectFill" style="width: 290rpx;height: 216rpx;margin-top: 40rpx;border-radius: 12rpx;"/>
+</view>
+
+<view style="background-color: white;border-radius: 12rpx;margin-top: 50rpx;padding: 20rpx;">
+<view style="font-size: 28rpx;">英文释义：</view>
+<view style="margin-top: 10rpx;font-size: 36rpx;font-weight: bold;">{{danci.shiyi_en}}</view>
+</view>
+</view>
+
+<view style="position: fixed;bottom: 0;width: 100%;height: 172rpx;background-color: white;">
+<view style="padding: 20rpx 40rpx;">
+<view bindtap="goon" style="width: 100%;padding: 24rpx 0;background: #41D996;border-radius: 12rpx;text-align: center;color: white;">继续做题</view>
+</view>
+</view>
+</van-popup>
+
+<van-popup show="{{showSlider2}}" position="bottom" custom-style="height:100vh;width:100%;background-color: #F9f9f9;" bind:close="sizerClose">
+<view style="padding: 70rpx 40rpx;background-color: #F9f9f9;">
+<view style="background: #FFFFFF;box-shadow: 0px 2px 25px 0px rgba(79,79,79,0.06);border-radius: 36rpx;">
+<view style="height: 90rpx;"></view>
+<view style="font-size: 44rpx;font-weight: bold;margin-left: 48rpx;">{{data.all_wancheng==1?'已完成所有单词学习':data.today_wancheng==1?'今日计划已完成':''}}</view>
+<view wx:if="{{data.all_wancheng==1}}" style="font-size: 34rpx;font-weight: bold;margin-left: 48rpx;margin-top: 30rpx;">共学习了{{data.all_tongji.wancheng_num}}个单词</view>
+<view wx:if="{{data.today_wancheng==1}}" style="display: flex;align-items: center;margin-top: 36rpx;margin-left: 48rpx;">
+<view style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+<view>
+<text style="font-size: 64rpx;font-weight: bold;">{{data.today_tongji.new_num}}</text>
+</view>
+<view style="font-size: 24rpx;margin-top: 4rpx;">共学习单词</view>
+</view>
+
+<view style="display: flex;align-items: center;justify-content: center;flex-direction: column;margin-left: 150rpx;">
+<view>
+<text style="font-size: 64rpx;font-weight: bold;">{{data.today_tongji.fuxi_num}}</text>
+</view>
+<view style="font-size: 24rpx;margin-top: 4rpx;">共复习单词</view>
+</view>
+</view>
+<view style="margin-left: 48rpx;"><image src="https://staticpms.delsk.com/images/edu/finish.png" mode="widthFix" style="width: 100%;"/></view>
+
+<view style="display: flex;align-items: center;justify-content: center;">
+<view catch:tap="goback" style="padding: 22rpx 104rpx;background-color: #08CA94;font-size: 36rpx;color: white;font-weight: bold;border-radius: 48rpx;">回到词书</view>
+</view>
+<view style="height: 140rpx;"></view>
+</view>
+
+
+
+</view>
+
+</van-popup>
+
+<view wx:if="{{info.type_id==0}}" wx:for="{{list2}}" style="display: none;">
+<image src="{{item}}" style="width: 0;height: 0;" mode="aspectFill"/>
+</view>

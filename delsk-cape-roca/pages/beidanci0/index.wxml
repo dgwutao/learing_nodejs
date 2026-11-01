@@ -1,0 +1,27 @@
+<view style="padding: 0 20rpx;">
+<view wx:for="{{list}}" bindtap="click" data-item="{{item}}" style="position: relative;">
+<view wx:if="{{item.is_index==1}}" style="padding: 8rpx 28rpx;font-size: 24rpx;color: white;background-color: #41D996;border-top-right-radius: 20rpx;border-bottom-left-radius: 20rpx;position: absolute;top: 0;right: 0;">当前选择</view>
+<view style="display: flex;align-items: center;padding: 30rpx;background-color: white;margin-top: 20rpx;border-radius: 22rpx;">
+<image src="{{item.cs_fengmian}}" mode="aspectFill" style="width: 148rpx;height: 176rpx;border-radius: 12rpx;"/>
+<view style="flex: 1;margin-left: 20rpx;">
+<view style="font-size: 30rpx;color: #1d1e1f;font-weight: bold;">{{item.cs_name}}</view>
+<view style="font-size: 24rpx;color: #999999;margin-top: 16rpx;">单词：{{item.danci_num}}词</view>
+<view style="background-color: #F6F5FA;width: 100%;height: 10rpx;border-radius: 6rpx;margin-top: 20rpx;">
+<view style="width: {{item.rate}}%;background-color: #50D0AF;height: 10rpx;border-radius: 6rpx;"></view>
+</view>
+<view style="display: flex;align-items: center;justify-content: space-between;margin-top: 16rpx;">
+<view style="font-size: 22rpx;color: #999999;">学习进度</view>
+<view style="font-size: 22rpx;color: #999999;">{{item.wancheng_num}}/{{item.danci_num}}</view>
+</view>
+</view>
+</view>
+</view>
+
+<view style="font-size: 24rpx;color: #999999;margin-top: 30rpx;width: 100%;text-align: center;">暂时没有更多了~</view>
+
+<view style="height: 200rpx;"></view>
+</view>
+
+<van-dialog id="van-dialog" showCancelButton="true" show="{{showDia}}" message="是否确认切换至【{{item.cs_name}}】？" title="" cancel-button-text="我再想想" 
+confirm-button-text="确认切换"
+bind:confirm="goOK"/>

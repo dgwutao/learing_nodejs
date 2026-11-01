@@ -1,0 +1,23 @@
+<!--components/navigationBar/navigationBar.wxml-->
+<cover-view class='nav-bar' style='display:{{ishiddenBar?"none":"block"}};'>
+  <cover-view style='width:100%;height:{{statusBarHeight}}rpx;background:{{background}};'></cover-view>
+  <cover-view class='cont' style='background:{{background}};height:88rpx;color:{{titleColor}};display:flex;'>
+    <!-- {{title}} -->
+    <cover-view class='icon-cont' style='height:88rpx;'>
+      <!-- <cover-view bindtap='goBack' style='width:50rpx;height:34rpx;margin-right:44rpx' wx:if='{{goBack}}'> -->
+      <cover-view bindtap='goBack' style='display:flex;align-items:center' wx:if='{{goBack}}'>
+
+        <!-- <cover-image src='/image/back2.png' style='width:20rpx;height:34rpx;'></cover-image> -->
+        <cover-image src='/image/flag_logo.png' style='width:52rpx;height:52rpx;'></cover-image>
+        <cover-view class="left-title" style="padding-left:12rpx;font-size:24rpx">希腊</cover-view>
+      </cover-view>
+      <!-- <cover-image src='/image/to_home.png' style='width:40rpx;height:40rpx;' wx:if='{{goIndexReal}}' bindtap='goRealIndex'></cover-image> -->
+    </cover-view>
+    <cover-view style='flex:1;height:88rpx;line-height:88rpx;text-align:center'>{{title}}</cover-view>
+    <cover-view style='width:190rpx;height:88rpx'></cover-view>
+  </cover-view>
+  <cover-view wx:if='{{haveShadow}}' style='width:100%;height:26rpx'>
+    <cover-image src='../../image/shadow_bg.png' style='height:100%;width:100%'></cover-image>
+  </cover-view>
+</cover-view>
+<cover-view class="bottom-null" style="width:100%;height:{{statusBarHeight+88}}rpx;" wx:if="{{!ishiddenBar}}"></cover-view>

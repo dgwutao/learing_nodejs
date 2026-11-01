@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>普吉岛翡翠湾度假酒店 - 泰国奢华度假体验</title>
+    <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css">
+    <link href="/static/css/google-fonts.css" rel="stylesheet">
+    <script src="/components/navComponentLight.js"></script>
+    <script src="/components/footerComponentLight.js"></script>
+    <style>
+        :root {
+            --primary-dark: #0d1b2a;
+            --secondary-dark: #1b263b;
+            --primary-gold: #d4af37;
+            --light-gold: #f5d76e;
+            --text-light: #f8f9fa;
+            --accent-blue: #48cae4;
+            --section-padding: 80px 5%;
+
+            --gold: #d4af37;
+            --teal: #008080;
+            --sandy: #f0e6d2;
+            --coral: #ff6b6b;
+            --deep-blue: #0a2463;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f7f1;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 头部样式 */
+        header {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        .cta-button:hover {
+            background: #c19b2c;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 导航 */
+        /* nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 35px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        } */
+/* 导航栏样式 */
+        /* nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(13, 27, 42, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-h1 {
+            font-size: 28px;
+            margin-left: 15px;
+            background: linear-gradient(to right, var(--primary-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            color: var(--primary-gold);
+            font-size: 32px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-gold);
+            color: var(--primary-dark);
+        } */
+
+        /* 酒店介绍 */
+        .section {
+            padding: 100px 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: #777;
+            max-width: 700px;
+            margin: 30px auto 0;
+        }
+
+        /* 图文混排 */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .intro-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .intro-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .intro-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--deep-blue);
+        }
+
+        .intro-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* 房型展示 */
+        .rooms {
+            background: linear-gradient(to bottom, #f9f7f1 0%, #e8e3d5 100%);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .room-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.1);
+        }
+
+        .room-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+        }
+
+        .room-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .room-overlay .price {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .room-details {
+            padding: 25px;
+        }
+
+        .room-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature i {
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-bottom: 10px;
+        }
+
+        .feature .value {
+            font-weight: 600;
+            color: var(--deep-blue);
+        }
+
+        /* 设施部分 */
+        .facilities {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .facilities::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover fixed;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .facility-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .facility-tab {
+            padding: 15px 30px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            margin: 0 10px 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .facility-tab.active, .facility-tab:hover {
+            background: var(--gold);
+            color: white;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .facility-content {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .facility-content.active {
+            display: grid;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .facility-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .facility-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .facility-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--deep-blue);
+        }
+
+        .facility-text ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .facility-text ul li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .facility-text ul li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--teal);
+            font-size: 1.2rem;
+        }
+
+        /* 位置部分 */
+        .location {
+            background: linear-gradient(to right, var(--deep-blue), #1c3a6e);
+            color: white;
+        }
+
+        .location-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .location-map {
+            height: 450px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: #ddd url('https://images.unsplash.com/photo-1599640842225-85d111c60e6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover;
+            position: relative;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(10, 36, 99, 0.8), rgba(0, 128, 128, 0.7));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .location-info h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .location-info ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .location-info ul li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .location-info ul li::before {
+            content: '\f3c5';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        /* 联系表单 */
+        .contact {
+            padding: 100px 0;
+            background: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover fixed;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-container {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info {
+            padding: 40px 0;
+        }
+
+        .contact-info h3 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--deep-blue);
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .contact-text h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--deep-blue);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.2);
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: #c19b2c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* 页脚 */
+        /* footer {
+            background: var(--deep-blue);
+            color: #aaa;
+            padding: 70px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: var(--gold);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .footer-heading {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        } */
+
+        /* 动画 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 4rem;
+            }
+            
+            .intro-grid,
+            .location-container,
+            .contact-container,
+            .facility-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .facility-image {
+                order: -1;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .room-overlay h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 28px;
+            background-color: var(--secondary-dark);
+            min-width: 120px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--primary-gold);
+            color: var(--primary-dark);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav-component-light></nav-component-light>
+    <!-- 头部 -->
+    <header>
+        <!-- <nav>
+            <div class="logo">翡翠<span>湾</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">酒店介绍</a></li>
+                <li><a href="#rooms">房型展示</a></li>
+                <li><a href="#facilities">设施服务</a></li>
+                <li><a href="#location">地理位置</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav> -->
+        
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');">
+                <div class="slide-overlay"></div>
+                <div class="hero-content">
+                    <h1>普吉岛翡翠湾度假酒店</h1>
+                    <p>沉浸在泰国南部的奢华海滨度假体验中</p>
+                    <a href="#rooms" class="cta-button">探索奢华房型</a>
+                </div>
+            </div>
+            
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1473116763249-2faaef81ccda?q=80&w=2696&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+                <div class="slide-overlay"></div>
+                <div class="hero-content">
+                    <h1>私人海滩天堂</h1>
+                    <p>500米纯净白沙滩，专属您的热带天堂</p>
+                    <a href="#facilities" class="cta-button">探索度假设施</a>
+                </div>
+            </div>
+            
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1561501900-3701fa6a0864?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');">
+                <div class="slide-overlay"></div>
+                <div class="hero-content">
+                    <h1>泰式奢华体验</h1>
+                    <p>传统泰式设计与现代奢华的完美融合</p>
+                    <a href="#contact" class="cta-button">预订您的假期</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 酒店介绍 -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>酒店介绍</h2>
+                <p>坐落于普吉岛西海岸，翡翠湾度假酒店是泰国奢华度假的新标杆</p>
+            </div>
+            
+            <div class="intro-grid">
+                <div class="intro-image">
+                    <img src="https://images.unsplash.com/photo-1615880484746-a134be9a6ecf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="翡翠湾度假酒店">
+                </div>
+                
+                <div class="intro-text">
+                    <h3>泰国天堂中的奢华绿洲</h3>
+                    <p>翡翠湾度假酒店坐落在普吉岛最迷人的西海岸，拥有500米长的私人白沙滩和清澈见底的安达曼海水。酒店设计融合了传统泰式元素与现代奢华理念，创造出一个真正的热带天堂。</p>
+                    <p>酒店由世界知名建筑师设计，灵感来自泰国古代宫殿和传统水上村庄。120间豪华套房和别墅全部拥有私人泳池和海景阳台，提供无与伦比的隐私和舒适体验。</p>
+                    <p>我们的度假村占地30英亩，拥有郁郁葱葱的热带花园、三个大型无边泳池、世界级的水疗中心和五家特色餐厅，为您提供完美的度假体验。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 房型展示 -->
+    <section id="rooms" class="section rooms">
+        <div class="container">
+            <div class="section-title">
+                <h2>奢华房型</h2>
+                <p>精心设计的住宿空间，满足您对奢华度假的所有期待</p>
+            </div>
+            
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="海景套房">
+                        <div class="room-overlay">
+                            <h3>海景套房</h3>
+                            <div class="price">¥3,200/晚起</div>
+                        </div>
+                    </div>
+                    <div class="room-details">
+                        <div class="room-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <div class="value">1-2人</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <div class="value">85㎡</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-swimming-pool"></i>
+                                <div class="value">私人泳池</div>
+                            </div>
+                        </div>
+                        <p>宽敞的海景套房，带私人阳台和无边泳池，可欣赏壮丽的安达曼海景色。套房配备豪华大床、独立起居区和豪华大理石浴室。</p>
+                    </div>
+                </div>
+                
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="海滨别墅">
+                        <div class="room-overlay">
+                            <h3>海滨别墅</h3>
+                            <div class="price">¥6,800/晚起</div>
+                        </div>
+                    </div>
+                    <div class="room-details">
+                        <div class="room-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <div class="value">2-4人</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <div class="value">180㎡</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-swimming-pool"></i>
+                                <div class="value">私人泳池</div>
+                            </div>
+                        </div>
+                        <p>独立海滨别墅，带私人花园和泳池，直通酒店私人沙滩。别墅包含两间卧室、宽敞的起居区、设备齐全的厨房和户外用餐区。</p>
+                    </div>
+                </div>
+                
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="皇家套房">
+                        <div class="room-overlay">
+                            <h3>皇家套房</h3>
+                            <div class="price">¥12,500/晚起</div>
+                        </div>
+                    </div>
+                    <div class="room-details">
+                        <div class="room-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <div class="value">2-6人</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <div class="value">320㎡</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-swimming-pool"></i>
+                                <div class="value">私人泳池</div>
+                            </div>
+                        </div>
+                        <p>极致奢华的皇家套房，占据酒店最佳位置，提供270度海景视野。套房包含三间卧室、私人健身房、水疗室、家庭影院和24小时私人管家服务。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 设施服务 -->
+    <section id="facilities" class="section facilities">
+        <div class="container">
+            <div class="section-title">
+                <h2>设施与服务</h2>
+                <p>世界级度假设施，打造难忘的奢华体验</p>
+            </div>
+            
+            <div class="facility-tabs">
+                <button class="facility-tab active" data-tab="spa">水疗中心</button>
+                <button class="facility-tab" data-tab="dining">美食餐饮</button>
+                <!-- <button class="facility-tab" data-tab="pool">泳池海滩</button>
+                <button class="facility-tab" data-tab="activities">休闲活动</button> -->
+            </div>
+            
+            <div class="facility-content active" id="spa-content">
+                <div class="facility-image">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="水疗中心">
+                </div>
+                <div class="facility-text">
+                    <h3>翡翠水疗中心</h3>
+                    <p>我们的3000平方米水疗中心是放松和恢复活力的天堂，提供融合传统泰式疗法的世界级水疗体验。</p>
+                    <ul>
+                        <li>12间私人理疗套房，部分配备私人蒸汽浴室</li>
+                        <li>传统泰式按摩、芳香疗法和热石疗法</li>
+                        <li>专业面部护理使用泰国天然草药成分</li>
+                        <li>瑜伽和冥想课程，由资深导师指导</li>
+                        <li>男女独立的桑拿、蒸汽房和冷水池</li>
+                        <li>私人情侣套房，可享受双人护理体验</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="facility-content" id="dining-content">
+                <div class="facility-image">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="美食餐饮">
+                </div>
+                <div class="facility-text">
+                    <h3>美食体验</h3>
+                    <p>五家特色餐厅和酒吧提供从传统泰式美食到国际风味的精致餐饮体验。</p>
+                    <ul>
+                        <li>海蓝餐厅：海滨海鲜餐厅，每日新鲜捕获</li>
+                        <li>兰花泰餐厅：正宗泰北风味，传统厨艺展示</li>
+                        <li>天际酒吧：日落鸡尾酒与精致小食</li>
+                        <li>地中海厨房：意大利主厨掌勺的地中海风味</li>
+                        <li>皇家茶室：下午茶与精致糕点</li>
+                        <li>私人沙滩晚餐：定制浪漫用餐体验</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 地理位置 -->
+    <section id="location" class="section location">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">地理位置</h2>
+                <p>普吉岛西海岸的绝佳位置，探索安达曼海的明珠</p>
+            </div>
+            
+            <div class="location-container">
+                <div class="location-map">
+                    <div class="map-overlay">普吉岛翡翠湾度假酒店位置图</div>
+                </div>
+                
+                <div class="location-info">
+                    <h3>探索普吉岛的绝佳起点</h3>
+                    <p>酒店位于普吉岛西海岸的翡翠湾，距离普吉国际机场仅45分钟车程，提供免费接送服务。我们优越的地理位置让您轻松探索普吉岛的所有景点。</p>
+                    
+                    <ul>
+                        <li>距离巴东海滩：15分钟车程</li>
+                        <li>距离普吉老镇：25分钟车程</li>
+                        <li>距离大佛观景点：20分钟车程</li>
+                        <li>距离查龙寺：30分钟车程</li>
+                        <li>距离珊瑚岛：快艇15分钟</li>
+                        <li>距离斯米兰群岛：快艇90分钟</li>
+                    </ul>
+                    
+                    <p>酒店礼宾部可为您安排各种探险活动，包括岛屿跳岛游、潜水课程、大象保护区参观和泰式烹饪课程。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 联系表单 -->
+    <!-- <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系我们</h2>
+                <p>预订您的奢华假期或获取更多信息</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>开启您的翡翠湾之旅</h3>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>地址</h4>
+                            <p>88 Emerald Bay Road, Phuket, Thailand 83110</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>电话</h4>
+                            <p>+66 76 123 4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>电子邮件</h4>
+                            <p>reservations@emeraldbayphuket.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>工作时间</h4>
+                            <p>24小时服务</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">电子邮箱</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">电话</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="checkin">入住日期</label>
+                            <input type="date" id="checkin" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nights">入住晚数</label>
+                            <select id="nights" class="form-control" required>
+                                <option value="">请选择</option>
+                                <option value="3">3晚</option>
+                                <option value="5">5晚</option>
+                                <option value="7">7晚</option>
+                                <option value="10">10晚以上</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="room-type">房型偏好</label>
+                            <select id="room-type" class="form-control" required>
+                                <option value="">请选择</option>
+                                <option value="seaview">海景套房</option>
+                                <option value="beachfront">海滨别墅</option>
+                                <option value="royal">皇家套房</option>
+                                <option value="notsure">尚未决定</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">特别要求</label>
+                            <textarea id="message" class="form-control" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">提交预订咨询</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    
+    <!-- 页脚 -->
+    <!-- <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">翡翠<span>湾</span></div>
+                    <p>普吉岛翡翠湾度假酒店提供无与伦比的奢华体验，融合泰国传统文化与现代舒适，创造难忘的热带假期回忆。</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 class="footer-heading">快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">酒店介绍</a></li>
+                        <li><a href="#rooms">房型展示</a></li>
+                        <li><a href="#facilities">设施服务</a></li>
+                        <li><a href="#location">地理位置</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 class="footer-heading">特别优惠</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">早鸟预订优惠</a></li>
+                        <li><a href="#">长住特惠计划</a></li>
+                        <li><a href="#">蜜月套餐</a></li>
+                        <li><a href="#">家庭度假套餐</a></li>
+                        <li><a href="#">水疗套餐</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-heading">联系我们</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 普吉岛翡翠湾88号</li>
+                        <li><i class="fas fa-phone-alt"></i> +66 76 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> info@emeraldbayphuket.com</li>
+                        <li><i class="fas fa-globe"></i> www.emeraldbayphuket.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 普吉岛翡翠湾度假酒店. 保留所有权利. | 设计开发: 创意酒店展示团队</p>
+            </div>
+        </div>
+    </footer> -->
+    <footer-component-light></footer-component-light>
+    <script>
+        // 头部轮播图
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        function changeSlide() {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        // 每5秒切换一次
+        setInterval(changeSlide, 5000);
+        
+        // 设施标签切换
+        const facilityTabs = document.querySelectorAll('.facility-tab');
+        const facilityContents = document.querySelectorAll('.facility-content');
+        
+        facilityTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // 移除所有活动状态
+                facilityTabs.forEach(t => t.classList.remove('active'));
+                facilityContents.forEach(c => c.classList.remove('active'));
+                
+                // 添加当前活动状态
+                tab.classList.add('active');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+        
+        // 图片悬停放大效果
+        const roomImages = document.querySelectorAll('.room-image');
+        roomImages.forEach(image => {
+            image.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                overlay.style.display = 'flex';
+                overlay.style.justifyContent = 'center';
+                overlay.style.alignItems = 'center';
+                overlay.style.zIndex = '1000';
+                overlay.style.cursor = 'zoom-out';
+                
+                const enlargedImg = document.createElement('img');
+                enlargedImg.src = imgSrc;
+                enlargedImg.style.maxWidth = '90%';
+                enlargedImg.style.maxHeight = '90%';
+                enlargedImg.style.borderRadius = '10px';
+                enlargedImg.style.boxShadow = '0 0 40px rgba(255,255,255,0.2)';
+                
+                overlay.appendChild(enlargedImg);
+                document.body.appendChild(overlay);
+                
+                overlay.addEventListener('click', () => {
+                    document.body.removeChild(overlay);
+                });
+            });
+        });
+        
+        // 导航平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 表单提交
+        const contactForm = document.querySelector('.contact-form form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('感谢您的咨询！我们的团队将尽快与您联系，为您安排完美的翡翠湾假期。');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>

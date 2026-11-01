@@ -1,0 +1,53 @@
+# ---------- 通用 ----------
+*.log
+logs/
+.env
+.env.prod
+.env.dev
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# ---------- Node.js ----------
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+coverage/
+.npm/
+.yarn/
+.pnpm-store/
+.eslintcache
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# ---------- Java ----------
+target/
+*.class
+*.jar
+*.war
+
+# ---------- Go ----------
+bin/
+*.exe
+*.test
+*.out
+vendor/

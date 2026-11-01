@@ -1,0 +1,55 @@
+.mine {
+  padding: 0rpx 0rpx;
+}
+.mine .header {
+  font-size: 0;
+  position: relative;
+}
+.mine .header .bg {
+  width: 100%;
+  height: 0;
+}
+.mine .header .user {
+  width: 100%;
+  /* height: 100%; */
+  /* display: flex; */
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0rpx 0rpx;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mine .header .user .avater {
+  width: 188rpx;
+  padding: 140rpx 0 34rpx;
+  height: 0;
+}
+
+.mine .header .user  .name {
+  font-size: 46rpx;
+  font-weight: bold;
+  color: white;
+  padding:0 0 0rpx;
+}
+.mine .header .user  .intro {
+  font-size: 28rpx;
+  color: white;
+}
+.mine .header .user  .bottom {
+  background-color: #ffffff;
+  margin: 120rpx 0;  
+  height: 90rpx;
+  border-radius: 40rpx 40rpx 0 0; 
+}
+
+.mine .btn-cont {
+  padding-top: 200rpx;
+}
+.mine .btn-cont .btn {
+  text-align: center;
+}
+
+
+.button::after{ border: none;}

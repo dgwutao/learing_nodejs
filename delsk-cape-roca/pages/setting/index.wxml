@@ -1,0 +1,40 @@
+<view style="padding: 30rpx;">
+
+<view style="display: flex;align-items: center;justify-content: space-between;padding: 50rpx 0 30rpx 0;">
+<view style="font-size: 32rpx;color: #1d1e1f;">头像</view>
+<view style="display: flex;align-items: center;">
+<button style="width: 100rpx;height: 100rpx;border-radius: 50%;padding: 0;" class="button" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+<image src="{{user.head.length>0?user.head:'/image/roca_default_avatar.png'}}" style="width: 100rpx;height: 100rpx;border-radius: 50%;"/>
+</button> 
+<image src="/image/roca_arrow_right.png" style="width: 16rpx;height: 26rpx;margin-left: 26rpx;"/>
+</view>
+</view>
+
+
+<view style="width: 100%;background-color: #e6e6e6;height: 2rpx;"></view>
+<view bindtap="changeName" style="display: flex;align-items: center;justify-content: space-between;padding: 50rpx 0 0 0;">
+<view style="font-size: 32rpx;color: #1d1e1f;">昵称</view>
+<view style="display: flex;align-items: center;">
+<view style="font-size:30rpx;color:#999999;">{{user.name.length>0?user.name:'昵称'}}</view>
+<image src="/image/roca_arrow_right.png" style="width: 16rpx;height: 26rpx;margin-left: 26rpx;"/>
+</view>
+</view>
+
+</view>
+
+<view style="padding: 0 30rpx;width: 100%;position: fixed;bottom: 100rpx;height: 150rpx;background-color: white;">
+<view bindtap="logout" style="padding: 24rpx 0;background-color:#BEE7DE;border-radius:12rpx;font-size: 30rpx;color: white;font-weight: bold;text-align: center;">
+退出登录
+</view>
+</view>
+
+<van-dialog id="van-dialog" showCancelButton="true" show="{{showLogout}}" message="确定要退出吗？" title="退出" confirm-button-text="确定" bind:confirm="goLogout"/>
+
+<van-dialog use-slot id="van-dialog" showCancelButton="true" show="{{showChangeName}}" title="修改昵称" confirm-button-text="确定" bind:confirm="OK">
+<view style="padding: 40rpx;">
+<view style="width: 100%;background-color: #f4f6f9;padding:20rpx;border-radius: 10rpx;">
+<input type="nickname" bindinput="handleChange" style="font-size: 36rpx;width: 100%;" placeholder-style="font-size:36rpx;color:#999999"  value="{{value}}" placeholder="请输入昵称"></input>
+</view>
+
+</view>
+</van-dialog>

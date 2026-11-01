@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球奢华地产项目展示 | JWP集团</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="JWP Property">
+    <meta name="keywords" content="JWP Property">
+    <meta name="author" content="JWP Group">
+    <title>全球地产项目展示</title>
+    <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/google-fonts.css">
+    <script src="/components/navComponentModern.js"></script>
+    <script src="/components/footerComponent.js"></script>
+    <style>
+        :root {
+            --primary: #1a3a6c;
+            --secondary: #ff6b35;
+            --gold: #d4af37;
+            --light: #f8f9fa;
+            --dark: #0d1b2a;
+            --accent: #48cae4;
+            --transition: all 0.5s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* font-family: 'Montserrat', sans-serif; */
+            background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            color: var(--light);
+            overflow-x: hidden;
+            /* line-height: 1.7; */
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+        
+        /* nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+        } */
+        
+        /* 英雄区域 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            animation: zoomEffect 30s infinite alternate;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.9));
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 15px;
+            min-width: 180px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        /* 国家导航 */
+        .country-nav {
+            position: sticky;
+            top: 72px;
+            z-index: 900;
+            background: rgba(26, 58, 108, 0.9);
+            padding: 10px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .country-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .country-item {
+            margin: 0 10px;
+        }
+        
+        .country-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .country-link i {
+            margin-right: 8px;
+        }
+        
+        .country-link:hover,
+        .country-link.active {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* 项目展示区域 */
+        .projects {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin: 0 0 3rem 0;
+            position: relative;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            padding-top: 30px;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .country-section {
+            margin-bottom: 40px;
+            padding-top: 40px;
+        }
+        
+        .country-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .country-flag {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+        
+        .country-info h2 {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+        
+        .country-desc {
+            font-size: 1.0rem;
+            opacity: 0.9;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeUp 0.8s forwards;
+        }
+        
+        .project-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+        }
+        
+        .project-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .project-location i {
+            margin-right: 8px;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        .project-stats {
+            display: flex;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .stat-item i {
+            color: var(--accent);
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .project-features {
+            margin-top: 20px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .feature-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        
+        .project-type {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        /* 页脚 */
+        /* footer {
+            background: #0a1627;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-desc {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        } */
+        
+        /* 动画效果 */
+        @keyframes zoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        @keyframes fadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav-component-modern></nav-component-modern>
+
+    <!-- 国家导航 -->
+    <div id="countries" class="country-nav">
+        <div class="container">
+            <ul class="country-list">
+                <li class="country-item"><a href="#thailand" class="country-link"><i class="fas fa-map-marker-alt"></i> 泰国</a></li>
+                <li class="country-item"><a href="#portugal" class="country-link"><i class="fas fa-map-marker-alt"></i> 葡萄牙</a></li>
+                <li class="country-item"><a href="#greece" class="country-link"><i class="fas fa-map-marker-alt"></i> 希腊</a></li>
+                <li class="country-item"><a href="#turkey" class="country-link"><i class="fas fa-map-marker-alt"></i> 土耳其</a></li>
+                <li class="country-item"><a href="#japan" class="country-link"><i class="fas fa-map-marker-alt"></i> 日本</a></li>
+                <li class="country-item"><a href="#cyprus" class="country-link"><i class="fas fa-map-marker-alt"></i> 塞浦路斯</a></li>
+                <li class="country-item"><a href="#ireland" class="country-link"><i class="fas fa-map-marker-alt"></i> 爱尔兰</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 项目展示区域 -->
+    <section class="projects">
+        <div class="container">
+            <!-- 泰国 -->
+            <div id="thailand" class="country-section">
+                <div class="country-header">
+                    <img src="https://flagcdn.com/w320/th.png" alt="泰国国旗" class="country-flag">
+                    <div class="country-info">
+                        <h2>泰国项目</h2>
+                        <p class="country-desc">作为"一带一路"重要枢纽，泰国已成为东南亚强劲的价值增长极</p>
+                    </div>
+                </div>
+                <div class="project-grid">
+                    <!-- 普吉岛LAYA度假酒店 -->
+                     <a href="detail-thailand.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">文旅酒店</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="普吉岛LAYA度假酒店">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                            </div>
+                            <h3 class="project-title">LAYA度假酒店</h3>
+                            <p>由丽笙酒店(Radisson Blu)运营，占地13,972平米，853套客房，配备船舶码头、SPA会所、全日制餐厅等高端设施。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 13,972 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-bed"></i> 853套客房
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star"></i> 五星级设施
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- BB综合度假村 -->
+                     <a href="detail-thailand.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">综合度假村</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1551632436-7a879920dd5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="BB综合度假村">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                            </div>
+                            <h3 class="project-title">BB综合度假村</h3>
+                            <p>普吉岛东海岸最大的一站式度假区，占地62,346.08㎡，建筑面积约25,000平米，致力打造生活、出行、亲子、娱乐等全方位体验。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 62,346 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-umbrella-beach"></i> 私人海滩
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-ship"></i> 游艇俱乐部
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- AOPO半岛别墅 -->
+                     <a href="detail-thailand.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">豪宅别墅</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AOPO半岛别墅">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                            </div>
+                            <h3 class="project-title">AOPO半岛别墅</h3>
+                            <p>项目位于普吉岛东海岸AOPO半岛，三面环海，绝版地块。占地80,000平方米，计划打造高奢酒店、270度海景顶奢别墅和高端公寓。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 80,000 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-water"></i> 270°海景视野
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-crown"></i> 阿玛尼品牌合作
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 葡萄牙 -->
+            <div id="portugal" class="country-section">
+                <div class="country-header">
+                    <img src="https://flagcdn.com/w320/pt.png" alt="葡萄牙国旗" class="country-flag">
+                    <div class="country-info">
+                        <h2>葡萄牙项目</h2>
+                        <p class="country-desc">涵盖高端酒店式公寓、精品酒店和豪华别墅的多元化地产项目</p>
+                    </div>
+                </div>
+                
+                <div class="project-grid">
+                    <!-- 阿尔加维酒店 -->
+                     <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">文旅酒店</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1565333299109-85fefb8c3b07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="阿尔加维酒店">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 葡萄牙 · 阿尔加维
+                            </div>
+                            <h3 class="project-title">费托利亚酒店</h3>
+                            <p>酒店位于波尔蒂芒，能够俯瞰Prala da Rocha沙滩。65间豪华客房，提供顶级度假体验。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-hotel"></i> 65间客房
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-umbrella-beach"></i> 沙滩景观
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star"></i> 五星级服务
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 里斯本公寓 -->
+                     <a href="detail-thailand.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">住宅公寓</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="里斯本公寓">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 葡萄牙 · 里斯本
+                            </div>
+                            <h3 class="project-title">八号家庭公寓</h3>
+                            <p>位于里斯本核心区，作为酒店式公寓运营，三年房价增幅高达36%。紧邻火车站、地铁站和旅游码头。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-building"></i> 酒店式公寓
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-chart-line"></i> 36%增值
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-subway"></i> 地铁交通
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 卡斯卡伊斯别墅 -->
+                     <a href="detail-thailand.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">豪宅别墅</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="卡斯卡伊斯别墅">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 葡萄牙 · 卡斯卡伊斯
+                            </div>
+                            <h3 class="project-title">海天颐墅</h3>
+                            <p>位于里斯本大区的著名私人区，三、四层室联排别墅，高品质装修，享受海滨生活。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-home"></i> 联排别墅
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-water"></i> 海滨位置
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-lock"></i> 私人社区
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 希腊 -->
+            <div id="greece" class="country-section">
+                <div class="country-header">
+                    <img src="https://flagcdn.com/w320/gr.png" alt="希腊国旗" class="country-flag">
+                    <div class="country-info">
+                        <h2>希腊项目</h2>
+                        <p class="country-desc">构建覆盖别墅、资源住宅、行政公寓及城市住宅的全品类体系</p>
+                    </div>
+                </div>
+                
+                <div class="project-grid">
+                    <!-- 格力法达湾滨酒店 -->
+                     <a href="detail.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">文旅酒店</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="格力法达湾滨酒店">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 希腊 · 格力法达
+                            </div>
+                            <h3 class="project-title">格力法达河滨酒店</h3>
+                            <p>格力法达河滨地区唯一在运营的星级酒店，希腊极盛稀缺的优质大宗地产项目。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-hotel"></i> 星级酒店
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-water"></i> 河滨位置
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-unique"></i> 稀缺项目
+                                </div>
+                            </div>
+
+                            <!-- <div class="project-features">
+                                <h4>项目亮点：</h4>
+                                <ul class="feature-list">
+                                    <li>使馆区3km雷达旁法广场</li>
+                                    <li>雅典北哈兰德里CBD</li>
+                                    <li>雅典南部卡里地亚升值区</li>
+                                    <li>家景观阳台设计</li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                    </a>
+                    <!-- THE PLACE系列 -->
+                     <a href="detail.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">住宅公寓</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="THE PLACE系列">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 希腊 · 雅典
+                            </div>
+                            <h3 class="project-title">THE PLACE系列</h3>
+                            <p>雅典市中心使馆区、北哈兰德里CBD、南部卡里地亚等核心地段的高端住宅项目，持续开发中。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-city"></i> 雅典核心地段
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-subway"></i> 双地铁交通
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-building"></i> 多期开发
+                                </div>
+                            </div>
+                            
+                            <div class="project-features">
+                                <h4>项目亮点：</h4>
+                                <ul class="feature-list">
+                                    <li>使馆区3km雷达旁法广场</li>
+                                    <li>雅典北哈兰德里CBD</li>
+                                    <li>雅典南部卡里地亚升值区</li>
+                                    <li>家景观阳台设计</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 土耳其 -->
+            <div id="turkey" class="country-section">
+                <div class="country-header">
+                    <img src="https://flagcdn.com/w320/tr.png" alt="土耳其国旗" class="country-flag">
+                    <div class="country-info">
+                        <h2>土耳其项目</h2>
+                        <p class="country-desc">埃森克特区域最值得投资的房产项目</p>
+                    </div>
+                </div>
+                
+                <div class="project-grid">
+                    <!-- 诺德·御景 -->
+                     <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">住宅公寓</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="诺德·御景">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 土耳其 · 埃森克特
+                            </div>
+                            <h3 class="project-title">诺德·御景</h3>
+                            <p>埃森克特区域最值得投资的房产项目，高品质住宅社区，现代化设计，优越地理位置。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-building"></i> 高端社区
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-chart-line"></i> 高投资价值
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-map"></i> 优越地段
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 上城雅高 -->
+                     <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">豪宅别墅</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="上城雅高">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 土耳其
+                            </div>
+                            <h3 class="project-title">上城雅高</h3>
+                            <p>奢阔宅邸——奥林匹克花园，高品质别墅社区，融合现代设计与自然景观。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-home"></i> 豪华别墅
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-tree"></i> 花园景观
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-medal"></i> 高端品质
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 日本 -->
+            <div id="japan" class="country-section">
+                <div class="country-header">
+                    <img src="https://flagcdn.com/w320/jp.png" alt="日本国旗" class="country-flag">
+                    <div class="country-info">
+                        <h2>日本项目</h2>
+                        <p class="country-desc">高品质一户建私家住宅与民宿项目</p>
+                    </div>
+                </div>
+                
+                <div class="project-grid">
+                    <!-- 锦璇系一户建 -->
+                    <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">私家住宅</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="锦璇系一户建">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 日本 · 大阪
+                            </div>
+                            <h3 class="project-title">锦璇系一户建</h3>
+                            <p>3层木造结构，超大阳台设计，土地面积58-63平方米，建筑面积89.10平方米，持有特区民宿牌照。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-home"></i> 3层木造
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-vector-square"></i> 89.10 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-key"></i> 民宿牌照
+                                </div>
+                            </div>
+                            
+                            <div class="project-features">
+                                <h4>项目特点：</h4>
+                                <ul class="feature-list">
+                                    <li>超大阳台设计</li>
+                                    <li>抗震性强的J级松木结构</li>
+                                    <li>私家庭院空间</li>
+                                    <li>特区民宿运营资质</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 锦枫系民宿 -->
+                     <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">民宿公寓</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="锦枫系民宿">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 日本 · 大阪
+                            </div>
+                            <h3 class="project-title">锦枫系民宿</h3>
+                            <p>位于大阪市中央区、生野区等核心区域，6-15层民宿公寓，套数18-65套不等，高品质民宿运营。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-building"></i> 多栋公寓
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-map-marker"></i> 核心地段
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-key"></i> 民宿运营
+                                </div>
+                            </div>
+
+                            <div class="project-features">
+                                <h4>项目特点：</h4>
+                                <ul class="feature-list">
+                                    <li>超大阳台设计</li>
+                                    <li>抗震性强的J级松木结构</li>
+                                    <li>私家庭院空间</li>
+                                    <li>特区民宿运营资质</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 塞浦路斯 -->
+            <div id="cyprus" class="country-section">
+                <div class="country-header">
+                    <img src="https://flagcdn.com/w320/cy.png" alt="塞浦路斯国旗" class="country-flag">
+                    <div class="country-info">
+                        <h2>塞浦路斯项目</h2>
+                        <p class="country-desc">品质精装公寓与永久产权住宅</p>
+                    </div>
+                </div>
+                
+                <div class="project-grid">
+                    <!-- 格拉38期 -->
+                     <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">住宅公寓</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1512916194211-3f2b7f5f7de3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="格拉38期">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 塞浦路斯 · 拉纳卡
+                            </div>
+                            <h3 class="project-title">格拉38期</h3>
+                            <p>位于拉纳卡核心地段，品质精装，8套两层室公寓，永久产权，4层建筑。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-building"></i> 8套公寓
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-paint-roller"></i> 品质精装
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-key"></i> 永久产权
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 星格拉39期 -->
+                     <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">住宅公寓</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="星格拉39期">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 塞浦路斯 · 拉纳卡
+                            </div>
+                            <h3 class="project-title">星格拉39期</h3>
+                            <p>拉纳卡核心地段，8套1-2层室公寓，品质精装，永久产权，4层建筑。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-building"></i> 8套公寓
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-paint-roller"></i> 精装交付
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-map"></i> 核心地段
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 学生公寓 -->
+                     <a href="detail-japan.html" style="text-decoration: none;color: white;">
+                    <div class="project-card">
+                        <div class="project-type">学生公寓</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="学生公寓">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 塞浦路斯
+                            </div>
+                            <h3 class="project-title">大学学生公寓</h3>
+                            <p>为尼科西亚大学、塞浦路斯欧洲大学和塞浦路斯大学提供学生公寓，由知名运营商管理，平均收益4%。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-university"></i> 大学配套
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-chart-line"></i> 4%收益
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-user-graduate"></i> 学生需求
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 爱尔兰 -->
+            <div id="ireland" class="country-section">
+                <div class="country-header">
+                    <img src="https://flagcdn.com/w320/ie.png" alt="爱尔兰国旗" class="country-flag">
+                    <div class="country-info">
+                        <h2>爱尔兰项目</h2>
+                        <p class="country-desc">专业养老社区与疗养院项目</p>
+                    </div>
+                </div>
+                
+                <div class="project-grid">
+                    <!-- Kilcoole Lodge养老院 -->
+                    <div class="project-card">
+                        <div class="project-type">商业养老</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1583418855867-19e0fda1f5b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kilcoole Lodge养老院">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 爱尔兰
+                            </div>
+                            <h3 class="project-title">Kilcoole Lodge养老院</h3>
+                            <p>位于都柏林南边富人区，严格按照爱尔兰健康卫生署(HSE)要求设计，解决社会养老问题。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-heartbeat"></i> HSE标准
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-user-md"></i> 专业护理
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-home"></i> 富人区位置
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dundalk养老院 -->
+                    <div class="project-card">
+                        <div class="project-type">商业养老</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dundalk养老院">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 爱尔兰 · Louth郡
+                            </div>
+                            <h3 class="project-title">Dundalk养老院</h3>
+                            <p>两层楼建筑，提供130张床位，总建筑面积6,000平方米，配备花园式庭院、餐厅、活动室等设施。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-bed"></i> 130张床位
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 6,000 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-tree"></i> 花园庭院
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Duleek养老院 -->
+                    <div class="project-card">
+                        <div class="project-type">商业养老</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1576495199011-eb94736d05d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Duleek养老院">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 爱尔兰
+                            </div>
+                            <h3 class="project-title">Duleek养老院</h3>
+                            <p>地理位置优越，环境安静优美，占地23,000平方米，120张床位，配备专业医疗设备与医护团队。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 23,000 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-bed"></i> 120张床位
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-hand-holding-heart"></i> 政府支持
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer-component></footer-component>
+
+    <script>
+        // 滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 滚动时显示项目卡片
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            projectCards.forEach(card => {
+                observer.observe(card);
+            });
+            
+            // 平滑滚动导航
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // 更新活动链接
+                        document.querySelectorAll('.country-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // 头部背景变化
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+                    header.style.background = 'rgba(10, 22, 39, 0.98)';
+                } else {
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+                    header.style.background = 'rgba(13, 27, 42, 0.95)';
+                }
+                
+                // 高亮当前国家
+                const countrySections = document.querySelectorAll('.country-section');
+                countrySections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 150) {
+                        const countryId = section.id;
+                        document.querySelectorAll('.country-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${countryId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // 初始激活泰国链接
+            document.querySelector('a[href="#thailand"]').classList.add('active');
+        });
+    </script>
+</body>
+</html>

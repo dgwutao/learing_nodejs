@@ -1,0 +1,67 @@
+.h-btn {
+  color: white;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.h-btn.h-btn-bold {
+  font-weight: bold;
+}
+.h-btn.btn-type-standard {
+  background: #2D99EB;
+  box-shadow: 0 2rpx 14rpx rgba(109, 132, 246, 0.5);
+  color: white;
+}
+.h-btn.btn-type-warning {
+  background: #F8BC0C;
+  box-shadow: 0 2rpx 14rpx #F8BC0C;
+}
+.h-btn.btn-type-danger {
+  background: #F8830C;
+  box-shadow: 0 2rpx 14rpx #F8830C;
+}
+.h-btn.btn-type-success {
+  background: #77C57C;
+  box-shadow: 0 2rpx 14rpx #77C57C;
+}
+.h-btn.btn-type-info {
+  background: #DADADA;
+  box-shadow: 0 2rpx 14rpx #DADADA;
+}
+.h-btn.btn-standard {
+  font-size: 32rpx;
+  width: 300rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+}
+.h-btn.btn-big {
+  width: 100%;
+  height: 100rpx;
+  border-radius: 50rpx;
+}
+.h-btn.btn-mini {
+  font-size: 28rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
+  padding: 0 24rpx;
+}
+.h-btn.btn-small {
+  font-size: 32rpx;
+  min-width: 200rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  padding: 0 32rpx;
+  box-shadow: none;
+}
+.h-btn.btn-unchoosed {
+  background-color: #f7f7f7;
+  color: #262626;
+}
+.h-btn .icon {
+  width: 0;
+  margin-right: 12rpx;
+}
+.h-btn.noshadow {
+  box-shadow: none;
+}

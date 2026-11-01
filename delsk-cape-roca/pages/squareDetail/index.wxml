@@ -1,0 +1,366 @@
+<view wx:if="{{info.type==2&&info.ziyuan_info.id.length>0}}" style="display: flex;align-items: center;width: 100%;padding: 20rpx 0;background-color: white;position: fixed;top: 0;z-index: 9999;">
+<view bindtap="changeTab" data-tab="0" style="display: flex;align-items: center;width: 50%;justify-content: center;flex-direction: column;">
+<view style="font-size: {{tab==0?'32':'32'}}rpx;font-weight: {{tab==0?'bold':'bold'}};color: {{tab==0?'#4AAB9F':'black'}};">本课重点</view>
+
+<view style="background-color: #4AAB9F;width: 28rpx;height: 6rpx;margin-top: 12rpx;visibility: {{tab==0?'visible':'hidden'}};"></view>
+</view>
+
+<view bindtap="changeTab" data-tab="1" style="display: flex;align-items: center;width: 50%;justify-content: center;flex-direction: column;">
+
+<view style="font-size: {{tab==1?'32':'32'}}rpx;font-weight: {{tab==1?'bold':'bold'}};color: {{tab==1?'#4AAB9F':'black'}};">全程回放</view>
+<view style="background-color: #4AAB9F;width: 28rpx;height: 6rpx;margin-top: 12rpx;visibility: {{tab==1?'visible':'hidden'}};"></view>
+</view>
+</view>
+
+
+<view wx:if="{{tab==0}}">
+<view style="position: fixed;top: 0;left: 0;font-size: 40rpx;font-weight: bold;width: 100%;z-index: 999;margin-top: {{(info.type==2&&info.ziyuan_info.id.length>0)?'100':'0'}}rpx;">
+<video id="video"
+src="{{infoS.video_url}}" 
+title="{{infoS.title}}"
+page-gesture="true"
+autoplay="{{false}}"
+loop="{{false}}"
+show-play-btn="{{true}}"
+show-center-play-btn="{{true}}"
+show-mute-btn="{{true}}"
+enable-play-gesture="{{true}}"
+vslide-gesture="{{true}}"
+show-casting-button="{{true}}"
+enable-auto-rotation="{{true}}"
+show-screen-lock-button="{{true}}"
+show-snapshot-button="{{true}}"
+bindfullscreenchange="video_bindfullscreenchange"
+bindcontrolstoggle="video_bindcontrolstoggle"
+bindplay="video_bindplay"
+bindpause="video_bindpause"
+bindended="video_bindended"
+bindtimeupdate="video_bindtimeupdate"
+binderror="video_binderror"
+bindwaiting="video_bindwaiting"
+bindseekcomplete="video_bindseekcomplete"
+bindloadedmetadata="video_bindloadedmetadata"
+style="width: 100%;height: 400rpx;"></video>
+<view style="padding: 10rpx 40rpx 0 40rpx;width: 100%;background-color: #f7f7f7;">{{infoS.title}}</view>
+</view>
+<view style="height: {{(info.type==2&&info.ziyuan_info.id.length>0)?'600':'500'}}rpx;"></view>
+<view>
+<scroll-view scroll-into-view="{{toView}}" enable-back-to-top="true" enable-passive="true" scroll-y style="height:calc(100vh - 500rpx);" scroll-with-animation="true">
+<view wx:for="{{infoS.video_content}}" wx:for-index="idx" id="scroll-{{idx}}" class="a-class" style="{{toView==('scrollx-'+idx)?'background-color:white;':''}}">
+<view id="scrollx-{{idx}}" style="position: absolute;margin-top: calc(-50vh + 300rpx);"></view>
+<view>
+<view bindtap="jump" data-index="{{idx}}" wx:if="{{trans==0 || trans==1}}" style="font-size: 30rpx;color: {{currentIndex==idx?'#078684':'#333333'}};font-weight:{{currentIndex==idx?'bold':'normal'}} ;">{{item.por}}</view>
+<view wx:if="{{trans==0}}" style="display: flex;align-items: center;padding: 2rpx 0;">
+<view style="width: 100%;height: 2rpx;background-color: #e5e5e5;"></view>
+<view style="font-size: 22rpx;color: #999999;margin-left: 10rpx;">译</view>
+</view>
+<view bindtap="jump" data-index="{{idx}}" wx:if="{{trans==0 || trans==2}}" style="font-size: {{trans==2?'28':'30'}}rpx;color: {{(currentIndex==idx&&trans==2)?'#078684':'#333333'}};font-weight:{{(currentIndex==idx&&trans==2)?'bold':'normal'}} ;">{{item.cn}}</view>
+<view wx:if="{{item.pic&&item.pic.length>0}}" style="margin-top: 20rpx;display: flex;align-items: center;justify-content: center;">
+<image src="{{item.pic}}" mode="aspectFill" style="width: 60vw;height: 30vw;border-radius: 24rpx;"/>
+</view>
+
+</view>
+</view>
+<view id="footer" style="height: 300rpx;"></view>
+</scroll-view>
+</view>
+
+
+
+<view style="position: fixed;bottom: 0;height: 280rpx;box-shadow: 0 -4rpx 8rpx 0 rgba(159,159,159,0.16);padding: 10rpx 40rpx;width: 100%;background-color: white;">
+<view style="display: flex;align-items: center;width: 100%;">
+<view style="font-size: 26rpx;color: #333333;">{{start_s}}</view>
+<slider bindchange='sliderChanged_s' bindchanging="sliderChanging_s" min="0" max="100" value="{{length_s}}" color="#CCCCCC" activeColor="#29AEAB" style="margin-left: 30rpx;margin-right: 30rpx;flex: 1;" block-size="20rpx" block-color="#29AEAB"></slider>
+<view style="font-size: 26rpx;color: #333333;">{{end_s}}</view>
+</view>
+
+<view style="display: flex;align-items: center;margin-top: 10rpx;width: 100%;justify-content: space-around;">
+
+<image bindtap="transAction" src="/image/audio_trans_{{trans}}.png" style="width: 44rpx;height: 52rpx;"/>
+
+
+<view style="display: flex;align-items: center;">
+
+<image bindtap="play" src="/image/audio_{{state_s}}.png" style="width: 110rpx;height: 110rpx;"/>
+
+</view>
+
+<image bindtap="wholeAction" src="/image/{{whole==0?'wowowo':'rororo'}}.png" style="width: 62rpx;height: 62rpx;"/>
+
+
+</view>
+
+
+</view>
+
+
+
+
+</view>
+
+
+
+
+
+<view wx:if="{{tab==1}}" style="margin-top: {{(info.type==2&&info.ziyuan_info.id.length>0)?'100':'0'}}rpx;">
+<view style="width: 100%;">
+<view wx:if="{{info.type==2}}" style="width: 100%;">
+  <!-- show-casting-button="{{true}}" -->
+  <!-- show-snapshot-button="{{true}}" -->
+<video wx:if="{{info.video_url.length>0}}" id="video2"
+src="{{info.video_url}}" 
+title="{{info.title}}"
+page-gesture="true"
+bindtimeupdate="handleTimeUpdate"
+bindfullscreenchange="bindfullscreenchange"
+bindcontrolstoggle="bindcontrolstoggle"
+autoplay="{{false}}"
+loop="{{false}}"
+show-play-btn="{{true}}"
+show-center-play-btn="{{true}}"
+show-mute-btn="{{true}}"
+enable-play-gesture="{{true}}"
+vslide-gesture="{{true}}"
+enable-auto-rotation="{{true}}"
+show-screen-lock-button="{{true}}"
+style="width: 100%;height: {{fullScreen?'100vh':'400rpx'}};position: relative;">
+
+<view wx:if="{{showRateBtn&&fullScreen&&info.video_content.length>0}}" bind:tap="goxxx" style="font-size: 16rpx;color: white;padding: 10rpx;border-radius: 6rpx;background-color: transparent;width: fit-content;position: absolute;right: 100rpx;top: 30rpx;font-weight: bold;">章节</view>
+
+<view wx:if="{{showRateBtn&&!fullScreen}}" bind:tap="playbackRate" style="font-size: 24rpx;color: white;padding: 10rpx;border-radius: 6rpx;background-color: transparent;width: fit-content;position: absolute;right: 30rpx;top: 30rpx;font-weight: bold;">
+{{selectedfff.t}}倍速</view>
+
+<view wx:if="{{showRateBtn&&fullScreen}}" bind:tap="playbackRate" style="font-size: 16rpx;color: white;padding: 10rpx;border-radius: 6rpx;background-color: transparent;width: fit-content;position: absolute;right: 30rpx;top: 30rpx;font-weight: bold;">
+{{selectedfff.t}}倍速</view>
+
+<view wx:if="{{showffff&&!fullScreen}}" style="font-size: 24rpx;color: white;padding: 20rpx;border-radius: 6rpx;background-color: transparent;width: fit-content;position: absolute;left: 20rpx;bottom: 80rpx;font-weight: bold;">
+已开启{{selectedfff.t}}倍速播放</view>
+
+<view wx:if="{{showffff&&fullScreen}}" style="font-size: 16rpx;color: white;padding: 20rpx;border-radius: 6rpx;background-color: transparent;width: fit-content;position: absolute;left: 20rpx;bottom: 80rpx;font-weight: bold;">
+已开启{{selectedfff.t}}倍速播放</view>
+
+
+<van-popup show="{{showxxxx}}" position="right" custom-style="height:100vh;width:50vw;background-color:white;" bind:close="sizerClose">
+<view style="background-color: white;width: 100%;">
+<view style="padding: 10rpx 20rpx;font-size: 16rpx;font-weight: bold;border-bottom: 2rpx #EEEEEE solid;display: flex;align-items: center;justify-content: space-between;">
+<view>选择倍速播放</view>
+<image bind:tap="sizerClose" src="/image/billDetail_del_reason_close.png" mode="widthFix" style="width: 20rpx;"/>
+</view>
+<scroll-view scroll-y="true" style="height: 80vh;">
+<view style="padding: 0 16rpx;">
+<view wx:for="{{fff}}" bindtap="gofff" data-item="{{item}}" style="padding: 20rpx;background: {{item.t==selectedfff.t?'#62C4C1':'#F1F1F1'}};border-radius: 10rpx;font-size: 12rpx;color: {{item.t==selectedfff.t?'white':'#666666'}};margin-top: 12rpx;flex-shrink: 0;">{{item.t}}</view>
+</view>
+</scroll-view>
+
+</view>
+</van-popup>
+
+
+<van-popup show="{{showxxx}}" position="right" custom-style="height:100vh;width:50vw;background-color:white;" bind:close="sizerClose">
+<view style="background-color: white;width: 100%;">
+<view style="padding: 20rpx;font-size: 16rpx;font-weight: bold;border-bottom: 2rpx #EEEEEE solid;display: flex;align-items: center;justify-content: space-between;">
+<view>{{info.title}} 章节</view>
+<image bind:tap="sizerClose" src="/image/billDetail_del_reason_close.png" mode="widthFix" style="width: 20rpx;"/>
+</view>
+<scroll-view scroll-y="true" style="height: 80vh;width: 100%;">
+<view style="padding: 16rpx;">
+<view wx:for="{{info.video_content}}" wx:for-index="idx" data-index="{{idx}}" bind:tap="goff" data-item="{{item}}" style="height: 60rpx;display: flex;align-items:flex-start;">
+<view style="flex-shrink: 0;display: flex;align-items: center;flex-direction: column;height: 60rpx;">
+  <view style="padding: 12rpx 18rpx;background: {{currentIdx==idx?'#62C4C1':'#EBEDF2'}};border-radius: 18rpx;font-size: 12rpx;flex-shrink: 0;color: {{currentIdx==idx?'white':'black'}};">{{item.time}}</view>
+  <view wx:if="{{idx<info.video_content.length-1}}" style="width: 2rpx;background-color: #EBEDF2;height:100%"></view>
+</view>
+
+<textarea disabled="{{true}}" disable-default-padding="true" show-confirm-bar="false"  cursor-spacing="16" style="font-size: 12rpx;margin-left: 12rpx;flex: 1;height: 60rpx;color: {{currentIdx==idx?'#62C4C1':'black'}};"  value="{{item.cn}}"></textarea>
+
+
+</view>
+</view>
+
+</scroll-view>
+</view>
+</van-popup>
+
+
+
+</video>
+<image wx:else src="https://staticpms.delsk.com/images/edu/playback.png" mode="widthFix" style="width: 100%;"/>
+</view>
+<image wx:else src="{{info.pic}}" mode="widthFix" style="width: 100%;"/>
+</view>
+
+
+
+<view style="width: 100%;">
+<view wx:if="{{info.video_content.length>0}}" style="padding: 30rpx 40rpx;background-color: white;">
+<view style="display: flex;align-items: center;justify-content: space-between;">
+<view style="font-size: 30rpx;font-weight: bold;">章节</view>
+<view bind:tap="moreff" style="display: flex;align-items: center;">
+<view style="font-size: 24rpx;color: #666666;">查看全部</view>
+<image src="/image/roca_arrow_right.png" mode="widthFix" style="width: 14rpx;margin-left: 12rpx;"/>
+</view>
+</view>
+
+<view>
+<scroll-view scroll-into-view="{{toView2}}" scroll-x="true" style="width: 100vw;margin-top: 24rpx;">
+<view style="display: flex;align-items: center;flex-wrap: nowrap;">
+<view wx:for="{{info.video_content}}" id="scrollx-{{idx}}"  wx:for-index="idx" data-index="{{idx}}" bind:tap="goff" data-item="{{item}}" style="min-width: 230rpx;">
+<view style="display:flex;align-items: center;">
+<view style="padding: 8rpx 26rpx;background: {{currentIdx==idx?'#62C4C1':'#EBEDF2'}};border-radius: 18rpx;font-size: 20rpx;color: {{currentIdx==idx?'white':'black'}};">{{item.time}}</view>
+<view wx:if="{{idx<info.video_content.length-1}}" style="background-color: #EBEDF2;height: 2rpx;width: 100%;"></view>
+</view>
+<view style="font-size: 24rpx;margin-top: 24rpx;max-width: 200rpx;color: {{currentIdx==idx?'#62C4C1':'black'}};">{{item.cn}}</view>
+</view>
+</view>
+</scroll-view>
+
+</view>
+
+
+
+
+</view>
+
+<view style="padding: 30rpx 40rpx;background-color: white;margin-top: 20rpx;">
+<view style="font-size: 36rpx;font-weight: bold;">{{info.title}}</view>
+<view wx:if="{{item.intro.length>0}}" style="font-size: 22rpx;color: #666666;margin-top: 20rpx;">{{item.intro}}</view>
+</view>
+
+
+
+
+<view wx:if="{{info.content.length>0}}" style="padding: 30rpx 40rpx;background-color: white;margin-top: 20rpx;">
+<view style="font-size: 32rpx;font-weight: bold;">课前预习</view>
+<view style="width: 100%;background-color: #f7f7f7;height: 2rpx;margin-top: 30rpx;"></view>
+
+<view>
+<view wx:for="{{info.content}}">
+<image wx:if="{{item.type==1}}" bind:tap="preview2" data-url="{{item.value}}" show-menu-by-longpress="{{true}}" src="{{item.value}}" mode="aspectFill" style="width: 100%;margin-top: 20rpx;border-radius: 10rpx;height: 300rpx;"/>
+
+<view wx:if="{{item.type==2}}">
+
+<view style="position: relative;margin-top: 50rpx;display: flex;align-items: flex-start;">
+<image src="/image/rectangle.png" mode="widthFix" style="width: 7rpx;margin-right: 10rpx;margin-top: 8rpx;"/>
+<view style="font-size: 30rpx;font-weight: bold;color: #333333;">{{item.value}}</view>
+</view>
+
+
+</view>
+
+<view wx:if="{{item.type==3}}" style="font-size: 28rpx;color: #666666;margin-top: 20rpx;">{{item.value}}</view>
+
+
+</view>
+
+</view>
+
+
+</view>
+
+
+
+<view wx:if="{{info.files.length>0}}" style="background-color: white;margin-top: 20rpx;padding: 30rpx 40rpx;">
+<view style="font-size: 32rpx;font-weight: bold;">课程课件</view>
+<view style="width: 100%;background-color: #f7f7f7;height: 2rpx;margin-top: 30rpx;"></view>
+<view wx:for="{{info.files}}" wx:for-index="idx">
+<view bindtap="preview" data-index="{{idx}}" data-item="{{item}}" style="display: flex;align-items: center;margin-top: 40rpx;justify-content: space-between;width: 100%;">
+<view style="display: flex;align-items: center;flex: 1;">
+<view style="font-size:22rpx;color:#049F9C;padding:2rpx 10rpx;border-radius: 2px;border: 2rpx solid rgba(4,159,156,0.24);width: 14%;text-align: center;">{{item.ext}}</view>
+<view style="font-size: 26rpx;color: #333333;margin-left: 26rpx;flex: 1;">{{idx+1}}.{{item.name}}</view>
+</view>
+
+<view style="background: linear-gradient(90deg, #05A09D 0%, rgba(4,160,157,0.53) 100%);border-radius: 24rpx;padding: 6rpx 28rpx;font-size: 20rpx;color: white;">查看</view>
+</view>
+</view>
+
+
+</view>
+
+
+
+</view>
+
+</view>
+
+<view style="height: 150rpx;"></view>
+
+
+<image wx:if="{{info.is_task==1}}" bindtap="goHomework" src="/image/roca_homework_icon.png" style="width: 84rpx;height: 84rpx;position: fixed;bottom: 400rpx;right: 20rpx;"/>
+
+
+<van-popup show="{{showSlider}}" position="bottom" custom-class="round" custom-style="height:650rpx;width:100%;background-color:white;" bind:close="sizerClose2">
+<view style="padding: 30rpx 40rpx 0 40rpx">
+<view style="display: flex;align-items: center;justify-content: flex-end;width: 100%;">
+<image bindtap="sizerClose2" src="/image/roca_player_close.png" mode="widthFix" style="width: 30rpx;"/>
+</view>
+<view style="font-size: 40rpx;color: #333333;font-weight: bold;">{{playItem.name}}</view>
+
+<view style="display: flex;align-items: center;width: 100%;margin-top: 40rpx;">
+<view style="font-size: 26rpx;color: #333333;">{{start}}</view>
+<slider bindchanging="sliderChanging" bindchange='sliderChanged' min="0" max="100" value="{{length}}" color="#E0F3F3" activeColor="#29AEAB" style="margin-left: 30rpx;margin-right: 30rpx;flex: 1;" block-size="20" block-color="#29AEAB"></slider>
+<view style="font-size: 26rpx;color: #333333;">{{end}}</view>
+</view>
+
+<view style="display: flex;align-items: center;justify-content:space-around;width: 100%;margin-top: 30rpx;">
+  <image catch:tap="f_5s" data-type="rewind" src="/image/f_5b.png" style="width: 78rpx;" mode="widthFix"/>
+
+  <image catch:tap="playVoice" src="/image/f_{{state}}.png" style="width: 56rpx;" mode="widthFix"/>
+
+  <image catch:tap="f_5s" data-type="forward" src="/image/f_5f.png" style="width: 78rpx;" mode="widthFix"/>
+</view>
+
+<view style="background-color: #E3E3E3;width: 100%;height: 2rpx;margin-top: 40rpx;"></view>
+<view style="font-size: 28rpx;margin-top: 30rpx;margin-bottom: 30rpx;">倍速播放</view>
+<view style="display: flex;align-items: center;justify-content: space-between;">
+<view wx:for="{{audioRates}}" catch:tap="rate_c" data-item="{{item}}" style="width: 100rpx;padding: 14rpx 0;font-size: 24rpx;color: {{item==currentAudioRate?'white':'#666666'}};text-align: center;background-color: {{item==currentAudioRate?'#25ADAA':'#EDEDED'}};border-radius: 4rpx;">
+{{item}}x
+</view>
+</view>
+</view>
+</van-popup>
+
+
+<van-popup show="{{showFF}}" position="bottom" custom-style="height:70vh;width:100%;background-color:white;" bind:close="sizerClose">
+<view>
+<view style="padding: 20rpx 40rpx;font-size: 28rpx;font-weight: bold;border-bottom: 2rpx #EEEEEE solid;display: flex;align-items: center;justify-content: space-between;">
+<view>{{info.title}} 章节</view>
+<image bind:tap="sizerClose" src="/image/billDetail_del_reason_close.png" mode="widthFix" style="width: 28rpx;height: 26rpx;"/>
+</view>
+<scroll-view scroll-y="true" style="height: 60vh;">
+<view style="padding: 40rpx;">
+<view wx:for="{{info.video_content}}" wx:for-index="idx" data-index="{{idx}}" bind:tap="goff" data-item="{{item}}" style="height: 130rpx;">
+<view style="display: flex;align-items:flex-start;height:130rpx;">
+<view style="height: 100%;display: flex;flex-direction: column;align-items: center;">
+  <view style="padding: 8rpx 26rpx;background: {{currentIdx==idx?'#62C4C1':'#EBEDF2'}};border-radius: 18rpx;font-size: 20rpx;color: {{currentIdx==idx?'white':'black'}};">{{item.time}}</view>
+  <view wx:if="{{idx<info.video_content.length-1}}" style="width: 2rpx;background-color: #EBEDF2;height:100%"></view>
+</view>
+
+<view style="font-size: 24rpx;margin-left: 28rpx;color: {{currentIdx==idx?'#62C4C1':'black'}};">{{item.cn}}</view>
+</view>
+
+</view>
+</view>
+
+</scroll-view>
+
+
+
+
+</view>
+</van-popup>
+
+
+
+
+<van-popup show="{{showFFF}}" position="bottom" custom-class="round" custom-style="height:800rpx;width:100%;background-color:white;z-index:9999;" bind:close="sizerClose">
+<view wx:for="{{fff}}" bindtap="gofff" data-item="{{item}}" style="padding: 34rpx 0;display: flex;align-items: center;justify-content: center;">
+  <view style="font-size:30rpx;color: {{item.t==selectedfff.t?'#479693':'black'}};">{{item.t}}</view>
+</view>
+<view style="height: 14rpx;background-color: #f7f7f7;"></view>
+<view bindtap="sizerClose" style="padding: 34rpx 0;display: flex;align-items: center;justify-content: center;">
+  <view style="font-size:32rpx;">取消</view>
+</view>
+</van-popup>
+
+
+
+

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纯HTML/CSS/JavaScript开发示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --success-color: #4cc9f0;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-theme {
+            --text-color: #f8f9fa;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(20deg);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(120deg, #e0e7ff, #d0ebff);
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header i {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .dark-theme .card p {
+            color: #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .interactive-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .interactive-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .counter {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .error {
+            color: #e63946;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .success {
+            background: rgba(76, 201, 240, 0.2);
+            color: #1d3557;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+        }
+
+        .dark-theme .footer {
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .counter-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .counter {
+                font-size: 3rem;
+            }
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .loader .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(67, 97, 238, 0.2);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>纯前端开发</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>纯HTML/CSS/JavaScript开发</h1>
+            <p>无需框架或库，使用原生技术构建现代化、响应式且功能丰富的Web应用程序。</p>
+            <button class="btn" id="exploreBtn">探索功能 <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="features">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>响应式设计</h3>
+                </div>
+                <div class="card-content">
+                    <p>使用CSS媒体查询和弹性布局创建在手机、平板和桌面设备上完美显示的界面。</p>
+                    <button class="btn card-btn">了解更多</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-palette"></i>
+                    <h3>主题切换</h3>
+                </div>
+                <div class="card-content">
+                    <p>通过CSS变量和JavaScript实现深色/浅色模式切换，提升用户体验。</p>
+                    <button class="btn card-btn">了解更多</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-magic"></i>
+                    <h3>动画效果</h3>
+                </div>
+                <div class="card-content">
+                    <p>使用CSS过渡、变换和关键帧动画为您的界面添加流畅的交互体验。</p>
+                    <button class="btn card-btn">了解更多</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-section">
+            <h2>交互式功能演示</h2>
+            
+            <div class="counter-container">
+                <button class="btn" id="decrementBtn"><i class="fas fa-minus"></i></button>
+                <div class="counter" id="counter">0</div>
+                <button class="btn" id="incrementBtn"><i class="fas fa-plus"></i></button>
+            </div>
+
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" placeholder="请输入您的姓名">
+                    <div class="error" id="nameError">请输入有效的姓名</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">电子邮箱</label>
+                    <input type="email" id="email" placeholder="example@email.com">
+                    <div class="error" id="emailError">请输入有效的邮箱地址</div>
+                </div>
+                
+                <button class="btn" id="submitBtn" style="width:100%">提交表单</button>
+                
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                </div>
+                
+                <div class="form-message success" id="successMessage">
+                    表单提交成功！感谢您的参与。
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 纯HTML/CSS/JavaScript开发示例 | 使用原生Web技术构建</p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM元素
+        const themeToggle = document.getElementById('themeToggle');
+        const counterElement = document.getElementById('counter');
+        const incrementBtn = document.getElementById('incrementBtn');
+        const decrementBtn = document.getElementById('decrementBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const loader = document.getElementById('loader');
+        const successMessage = document.getElementById('successMessage');
+        const exploreBtn = document.getElementById('exploreBtn');
+        const cardButtons = document.querySelectorAll('.card-btn');
+
+        // 计数器状态
+        let count = 0;
+
+        // 主题切换功能
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // 计数器功能
+        incrementBtn.addEventListener('click', () => {
+            count++;
+            counterElement.textContent = count;
+            counterElement.style.color = getCounterColor();
+        });
+
+        decrementBtn.addEventListener('click', () => {
+            if (count > 0) {
+                count--;
+                counterElement.textContent = count;
+                counterElement.style.color = getCounterColor();
+            }
+        });
+
+        function getCounterColor() {
+            if (count > 10) return '#4caf50';
+            if (count > 5) return '#ff9800';
+            return '#4361ee';
+        }
+
+        // 表单验证
+        function validateForm() {
+            let isValid = true;
+            
+            // 验证姓名
+            if (nameInput.value.trim() === '' || nameInput.value.length < 2) {
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameError.style.display = 'none';
+            }
+            
+            // 验证邮箱
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+            
+            return isValid;
+        }
+
+        // 表单提交
+        submitBtn.addEventListener('click', () => {
+            if (validateForm()) {
+                // 显示加载动画
+                loader.style.display = 'block';
+                
+                // 模拟API请求延迟
+                setTimeout(() => {
+                    // 隐藏加载动画
+                    loader.style.display = 'none';
+                    
+                    // 显示成功消息
+                    successMessage.style.display = 'block';
+                    
+                    // 重置表单
+                    nameInput.value = '';
+                    emailInput.value = '';
+                    
+                    // 3秒后隐藏成功消息
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 3000);
+                }, 1500);
+            }
+        });
+
+        // 探索按钮动画
+        exploreBtn.addEventListener('click', () => {
+            exploreBtn.innerHTML = '滚动查看功能 <i class="fas fa-arrow-down"></i>';
+            
+            // 滚动到交互部分
+            document.querySelector('.interactive-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // 卡片按钮效果
+        cardButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.card');
+                card.style.transform = 'scale(0.95)';
+                card.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+                
+                setTimeout(() => {
+                    card.style.transform = '';
+                    card.style.boxShadow = '';
+                }, 300);
+            });
+        });
+
+        // 页面加载时随机计数器值
+        window.addEventListener('load', () => {
+            count = Math.floor(Math.random() * 20);
+            counterElement.textContent = count;
+            counterElement.style.color = getCounterColor();
+        });
+    </script>
+</body>
+</html>

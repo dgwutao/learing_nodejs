@@ -1,0 +1,90 @@
+
+ 
+<view wx:if="{{isLogin&&list.length>0}}" style="padding: 30rpx;">
+<view style="font-size: 36rpx;font-weight: bold;">已购课程</view>
+<view wx:for="{{list}}">
+<view bindtap="toDetail" data-item="{{item}}" style="padding:20rpx;box-shadow: 0 4rpx 12rpx 0 #f4f4f4;border-radius: 12rpx;display:flex;align-items:center;margin-top:20rpx;background-color: white;">
+<image src="{{item.pic}}" mode="aspectFill" style="width: 224rpx;height: 164rpx;border-radius: 10rpx;"/>
+<view style="margin-left: 20rpx;flex: 1;">
+<view style="font-size: 32rpx;font-weight: bold;margin-top: 10rpx;">{{item.title}}</view>
+<view style="display: flex;align-items: center;justify-content: space-between;margin-top: 20rpx;width: 100%;">
+<view style="display: flex;align-items:center;">
+<view style="font-size: 24rpx;color: #999999;">共{{item.course_count}}节</view>
+</view>
+<view style="padding: 8rpx 22rpx;font-size: 21rpx;color: white;background: linear-gradient(90deg, #05A09D 0%, rgba(4,160,157,0.53) 100%);border-radius: 24rpx;">开始学习</view>
+</view>
+</view>
+</view>
+</view>
+<view style="font-size: 24rpx;color: #999999;margin-top: 30rpx;width: 100%;text-align: center;">暂时没有更多了~</view>
+
+<view wx:if="{{is_student}}" style="font-size: 36rpx;font-weight: bold;color: #333333;margin-top: 20rpx;">我的作业</view>
+<view wx:if="{{is_student}}" style="display: flex;align-items: center;margin-top: 50rpx;width: 100%;">
+<view bindtap="changeTab" data-tab="0" style="position: relative;">
+<view style="width:128rpx;height:28rpx;background:linear-gradient(90deg, #56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;visibility: {{tab==0?'visibility':'hidden'}};"></view>
+<view style="font-size: {{tab==0?'32':'28'}}rpx;font-weight: {{tab==0?'bold':'normal'}};position: absolute;top: -20rpx;left: 0;color: {{tab==0?'#333333':'#666666'}};">已提交</view>
+<view wx:if="{{showReddot}}" style="width: 10rpx;height: 10rpx;background-color: #FF3A3A;position: absolute;top: -20rpx;right: 24rpx;border-radius: 10rpx;"></view>
+</view>
+
+<view bindtap="changeTab" data-tab="1" style="position: relative;margin-left: 60rpx;">
+<view style="width:128rpx;height:28rpx;background:linear-gradient(90deg, #56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;visibility: {{tab==1?'visibility':'hidden'}};"></view>
+<view style="font-size: {{tab==1?'32':'28'}}rpx;font-weight: {{tab==1?'bold':'normal'}};position: absolute;top: -20rpx;left: 0;color: {{tab==1?'#333333':'#666666'}};">待提交</view>
+</view>
+</view>
+
+<view wx:if="{{is_student&&tab==0}}">
+<view bindtap="goHomework" data-item="{{item}}" wx:for="{{homework}}">
+<view wx:if="{{item.is_post==1}}" style="padding:28rpx 20rpx;margin-top:20rpx;border-radius:12rpx;background-color:white;display:flex;align-items:center;justify-content:space-between;">
+<view style="font-size: 28rpx;color: #333333;">{{item.title}}</view>
+<view style="position:relative;">
+<view style="font-size: 24rpx;color: #10A4A2;">查看</view>
+<view wx:if="{{item.is_read==0}}" style="width: 10rpx;height: 10rpx;background-color: #FF3A3A;position: absolute;top: -4rpx;right: -4rpx;border-radius: 10rpx;"></view>
+</view>
+</view>
+</view>
+<view wx:if="{{show_no_data0}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-top: 100rpx;">
+<image src="/image/no_data.png" mode="widthFix" style="width: 280rpx;"/>
+<view style="margin-top: 30rpx;font-size: 24rpx;color: #999999;">暂时没有作业</view>
+</view>
+</view>
+
+<view wx:if="{{is_student&&tab==1}}">
+<view bindtap="goHomework" data-item="{{item}}" wx:for="{{homework}}">
+<view wx:if="{{item.is_post==0}}" style="padding:28rpx 20rpx;margin-top:20rpx;border-radius:12rpx;background-color:white;display:flex;align-items:center;justify-content:space-between;">
+<view style="font-size: 28rpx;color: #333333;">{{item.title}}</view>
+
+<view style="font-size: 24rpx;font-weight: bold;color: white;padding: 6rpx 20rpx;background: linear-gradient(90deg, #05A09D 0%, rgba(4,160,157,0.53) 100%);border-radius: 24rpx;">去完成</view>
+
+</view>
+</view>
+<view wx:if="{{show_no_data1}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-top: 100rpx;">
+<image src="/image/no_data.png" mode="widthFix" style="width: 280rpx;"/>
+<view style="margin-top: 30rpx;font-size: 24rpx;color: #999999;">暂时没有作业</view>
+</view>
+</view>
+
+<!-- <view style="height: 200rpx;"></view> -->
+</view>
+
+
+
+
+<view wx:if="{{!isLogin}}" style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+<image src="/image/roca_not_login.png" mode="widthFix" style="width: 400rpx;height: 400rpx;margin-top: 300rpx;"/>
+<view style="font-size: 34rpx;color: #1d1e1f;margin-top: 34rpx;">同学，你还未登录哦~</view>
+<view style="font-size: 24rpx;color: #999999;margin-top: 16rpx;">快快登录，开始你的学习之旅吧~</view>
+<view style="padding: 0 80rpx;width: 100%;margin-top: 80rpx;">
+<view bindtap="login" style="font-size: 30rpx;color: white;font-weight: bold;padding: 24rpx 0;width: 100%;background: linear-gradient(90deg, #0AA29F 0%, #76CBC9 100%);border-radius: 12rpx;text-align: center;">登录</view>
+</view>
+</view>
+
+<view wx:if="{{isLogin&&list.length==0}}" style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+<image src="/image/roca_no_lession.png" mode="widthFix" style="width: 400rpx;height: 400rpx;margin-top: 300rpx;"/>
+<view style="font-size: 34rpx;color: #1d1e1f;margin-top: 34rpx;">您还没有报名课程呢</view>
+<view style="font-size: 24rpx;color: #999999;margin-top: 16rpx;">去选择适合自己的课程吧～</view>
+<view style="padding: 0 80rpx;width: 100%;margin-top: 80rpx;">
+<button open-type="contact" style="padding: 0;line-height: unset;">
+<view bindtap="login" style="font-size: 30rpx;color: white;font-weight: bold;padding: 24rpx 0;width: 100%;background: linear-gradient(90deg, #0AA29F 0%, #76CBC9 100%);border-radius: 12rpx;text-align: center;">在线咨询，了解适合你的课程</view>
+</button>
+</view>
+</view>

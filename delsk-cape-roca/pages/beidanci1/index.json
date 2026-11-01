@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-dialog": "@vant/weapp/dialog/index"
+  },
+  "navigationBarTitleText": "背单词",
+  "navigationBarBackgroundColor": "#41D996",
+  "navigationBarTextStyle": "white"
+}

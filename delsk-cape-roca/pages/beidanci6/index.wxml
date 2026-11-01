@@ -1,0 +1,76 @@
+
+
+<view style="display: flex;align-items: center;padding: 30rpx;background-color: white;">
+<image src="{{cs_info.cs_fengmian}}" mode="aspectFill" style="width: 148rpx;height: 176rpx;border-radius: 12rpx;"/>
+<view style="flex: 1;margin-left: 20rpx;">
+<view style="display: flex;align-items: center;justify-content: space-between;">
+  <view style="font-size: 30rpx;color: #1d1e1f;font-weight: bold;">{{cs_info.cs_name}}</view>
+  <view bindtap="reset" style="display: flex;align-items: center;">
+  <image src="/image/ff_09.png" mode="widthFix" style="width: 32rpx;height: 28rpx;margin-right: 8rpx;"/>
+  <view style="font-size: 24rpx;color: #999999;">进度重置</view>
+  </view>
+</view>
+
+<view style="font-size: 24rpx;color: #999999;margin-top: 16rpx;">单词：{{cs_info.danci_num}}词</view>
+<view style="background-color: #F6F5FA;width: 100%;height: 10rpx;border-radius: 6rpx;margin-top: 20rpx;">
+<view style="width: {{rate}}%;background-color: #50D0AF;height: 10rpx;border-radius: 6rpx;"></view>
+</view>
+<view style="display: flex;align-items: center;justify-content: space-between;margin-top: 16rpx;">
+<view style="font-size: 22rpx;color: #999999;">学习进度</view>
+<view style="font-size: 22rpx;color: #999999;">{{cs_info.wancheng_num}}/{{cs_info.danci_num}}</view>
+</view>
+</view>
+</view>
+
+<view style="padding: 30rpx 20rpx 0 30rpx;">
+<view style="font-size: 30rpx;color: #333333;font-weight: bold;">学习计划</view>
+<view style="font-size: 24rpx;color: #999999;margin-top: 12rpx;">完成日期：{{date}}</view>
+<view style="padding: 30rpx 0;border-radius: 12rpx;background-color: white;margin-top: 20rpx;">
+<view style="display: flex;align-items: center;justify-content: space-around;">
+<view style="font-size: 28rpx;color: #333333;">每天背单词</view>
+<view style="font-size: 28rpx;color: #333333;">完成天数</view>
+</view>
+<view style="height: 2rpx;width: 100%;background-color: #F3F3F3;margin-top: 30rpx;"></view>
+<van-picker id="picker"
+columns="{{ columns }}" 
+bind:change="onChange"/>
+</view>
+
+
+</view>
+
+<van-popup show="{{showSlider}}" position="bottom" custom-class="round" custom-style="height:460rpx;width:100%;background-color: white;" bind:close="sizerClose">
+<view style="padding: 30rpx;background-color: white;position: relative;">
+<image bindtap="sizerClose" src="/image/billDetail_del_reason_close.png" mode="widthFix" style="width: 30rpx;height: 30rpx;position: absolute;top: 30rpx;right:30rpx;"/>
+<view style="font-size: 32rpx;font-weight: bold;text-align: center;">是否重置学习进度？</view>
+<view style="font-size: 28rpx;font-weight: bold;margin: 60rpx 40rpx 0 40rpx;text-align: center;">您已学习该计划的{{cs_info.wancheng_num}}个单词，重置后将无法撤销，是否确定重置</view>
+</view>
+
+<view style="position: fixed;bottom: 0;width: 100%;height: 172rpx;background-color: white;">
+<view style="padding: 20rpx 40rpx;display: flex;align-items: center;justify-content: space-between;">
+  <view bindtap="sizerClose" style="width: 49%;padding: 24rpx 0;background: #F4F4F4;border-radius: 12rpx;text-align: center;color: #34A588;">取消</view>
+  <view bindtap="goon" style="width: 49%;padding: 24rpx 0;background: #41D996;border-radius: 12rpx;text-align: center;color: white;">确定</view>
+</view>
+</view>
+</van-popup>
+
+<van-popup show="{{showSlider2}}" position="bottom" custom-class="round" custom-style="height:450rpx;width:100%;background-color: white;" bind:close="sizerClose">
+<view style="padding: 30rpx;background-color: white;position: relative;">
+<image bindtap="sizerClose" src="/image/billDetail_del_reason_close.png" mode="widthFix" style="width: 30rpx;height: 30rpx;position: absolute;top: 30rpx;right:30rpx;"/>
+<view style="font-size: 32rpx;font-weight: bold;text-align: center;">计划保存成功</view>
+<view style="font-size: 28rpx;font-weight: bold;margin: 60rpx 40rpx 0 40rpx;text-align: center;">{{change==1?'新的学习计划将于下次学习时生效':'请开始学习吧~'}}</view>
+</view>
+
+<view style="position: fixed;bottom: 0;width: 100%;height: 172rpx;background-color: white;">
+<view style="padding: 20rpx 40rpx;display: flex;align-items: center;justify-content: space-between;">
+  <view bindtap="knowit" style="width: 100%;padding: 24rpx 0;background: #41D996;border-radius: 12rpx;text-align: center;color: white;">我知道了</view>
+</view>
+</view>
+</van-popup>
+
+<view style="position: fixed;bottom: 0;width: 100%;height: 172rpx;background-color: white;">
+<view style="padding: 20rpx 40rpx;">
+<view bindtap="saveData" style="width: 100%;padding: 24rpx 0;background: #41D996;border-radius: 12rpx;text-align: center;color: white;">保存计划</view>
+</view>
+</view>
+

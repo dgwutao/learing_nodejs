@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index",
+    "van-popup": "/miniprogram_npm/@vant/weapp/popup/index",
+    "van-picker": "@vant/weapp/picker/index"
+  },
+  "navigationBarTitleText": "学习计划"
+}

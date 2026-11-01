@@ -1,0 +1,137 @@
+<view>
+<view style="width: 100%;height: 530rpx;position: relative;">
+<image bindtap="preview" data-url="{{info.pic}}" src="{{info.pic}}" mode="aspectFill" style="width: 100%;height: 100%;"/>
+</view>
+
+<image src="/image/roca_image_cover.png" style="width: 100%;position: absolute;top: 482rpx;left: 0;" mode="widthFix"/>
+
+<view style="width: 100%;position: relative;padding: 20rpx;top: -70rpx;">
+<view style="background-color: white;border-radius: 24rpx;padding: 30rpx 40rpx;">
+<view style="font-size: 40rpx;font-weight: bold;">{{info.title}}</view>
+<view style="font-size: 24rpx;color: #666666;margin-top: 20rpx;">{{info.intro}}</view>
+<view style="display: flex;align-items: center;margin-top: 20rpx;">
+<view wx:if="{{info.type==2}}" style="font-size: 24rpx;color: #fe7300;font-weight: bold;margin-top: 12rpx;">￥</view>
+<view style="font-size: 44rpx;color: #fe7300;font-weight: bold;">{{info.type==1?'免费':info.price}}</view>
+</view>
+</view>
+
+<view style="background-color: white;border-radius: 24rpx;padding: 30rpx 40rpx;margin-top: 20rpx;">
+<view wx:if="{{info.buy==0}}" style="display: flex;align-items: center;width: 100%;border-bottom: 2rpx #f2f2f2 solid;padding: 20rpx 0;">
+<view style="display: flex;align-items: center;width: 50%;justify-content: center;">
+<view bindtap="changeTab" data-tab="0" style="position: relative;">
+<view style="width:134rpx;height:28rpx;background:linear-gradient(90deg, #56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;visibility: {{tab==0?'visibility':'hidden'}};"></view>
+<view style="font-size: {{tab==0?'32':'32'}}rpx;font-weight: {{tab==0?'bold':'bold'}};position: absolute;top: -20rpx;left: 0;color: {{tab==0?'#333333':'#666666'}};">课程详情</view>
+</view>
+</view>
+
+<view style="display: flex;align-items: center;width: 50%;justify-content: center;">
+<view bindtap="changeTab" data-tab="1" style="position: relative;">
+<view style="width:134rpx;height:28rpx;background:linear-gradient(90deg, #56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;visibility: {{tab==1?'visibility':'hidden'}};"></view>
+<view style="font-size: {{tab==1?'32':'32'}}rpx;font-weight: {{tab==1?'bold':'bold'}};position: absolute;top: -20rpx;left: 0;color: {{tab==1?'#333333':'#666666'}};">课程课时</view>
+</view>
+</view>
+
+
+</view>
+
+<view wx:if="{{info.buy==1}}" style="display: flex;align-items: center;width: 100%;border-bottom: 2rpx #f2f2f2 solid;padding: 20rpx 0;">
+<view style="display: flex;align-items: center;width: 50%;justify-content: center;">
+<view bindtap="changeTab" data-tab="1" style="position: relative;">
+<view style="width:134rpx;height:28rpx;background:linear-gradient(90deg, #56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;visibility: {{tab==1?'visibility':'hidden'}};"></view>
+<view style="font-size: {{tab==1?'32':'32'}}rpx;font-weight: {{tab==1?'bold':'bold'}};position: absolute;top: -20rpx;left: 0;color: {{tab==1?'#333333':'#666666'}};">课程课时</view>
+</view>
+</view>
+
+<view style="display: flex;align-items: center;width: 50%;justify-content: center;">
+<view bindtap="changeTab" data-tab="0" style="position: relative;">
+<view style="width:134rpx;height:28rpx;background:linear-gradient(90deg, #56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;visibility: {{tab==0?'visibility':'hidden'}};"></view>
+<view style="font-size: {{tab==0?'32':'32'}}rpx;font-weight: {{tab==0?'bold':'bold'}};position: absolute;top: -20rpx;left: 0;color: {{tab==0?'#333333':'#666666'}};">课程详情</view>
+</view>
+</view>
+
+
+</view>
+
+
+
+<view wx:if="{{tab==0}}">
+<view wx:for="{{info.content}}">
+<view wx:if="{{item.type==3}}" style="font-size: 28rpx;color: #666666;margin-top: 20rpx;">{{item.value}}</view>
+
+<image wx:if="{{item.type==1}}" show-menu-by-longpress="{{true}}" src="{{item.value}}" mode="widthFix" style="width: 100%;height: auto;margin-top: 20rpx;border-radius: 10rpx;"/>
+
+<view wx:if="{{item.type==2}}">
+<view style="position: relative;margin-top: 50rpx;height: 40rpx;display: flex;align-items: flex-start;">
+<image src="/image/rectangle.png" mode="widthFix" style="width: 7rpx;margin-right: 10rpx;margin-top: 8rpx;"/>
+<view style="font-size: 30rpx;font-weight: bold;color: #333333;">{{item.value}}</view>
+</view>
+</view>
+
+
+</view>
+
+<view wx:if="{{info.content.length==0}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-top: 90rpx;">
+<image src="/image/no_data.png" mode="widthFix" style="width: 280rpx;"/>
+<view style="margin-top: 30rpx;font-size: 28rpx;color: #666666;">暂无课程</view>
+</view>
+
+
+</view>
+
+
+
+
+<view wx:if="{{tab==1}}">
+<view wx:if="{{info.buy==1}}">
+<view wx:for="{{list}}">
+<view bindtap="goDetail" data-item="{{item}}" style="display: flex;align-items: flex-start;margin-top: 40rpx;">
+<view style="font-size:22rpx;color:#049F9C;padding:2rpx 10rpx;border-radius: 2px;border: 2rpx solid rgba(4,159,156,0.24);flex-shrink: 0;min-width: 110rpx;text-align: center;">{{item.type==2?'直播课':item.type==3?'精听':item.type==4?'精看':'图文'}}</view>
+<view style="flex: 1;margin-left: 26rpx;">
+        <view style="font-size: 28rpx;color: #333333;">{{item.title}}</view>
+        <view style="border-bottom: 2rpx #F4F4F4 solid;margin-top: 30rpx;"></view>
+</view>
+
+</view>
+</view>
+</view>
+
+
+<view wx:if="{{info.buy==0}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-top: 90rpx;">
+<image src="/image/roca_center_no_lession.png" style="width: 280rpx;height: 210rpx;"/>
+<view style="font-size: 28rpx;color: #666666;margin-top: 30rpx;">请{{info.type==1?'加入':'购买'}}后查看全部课时</view>
+</view>
+
+
+</view>
+
+
+
+</view>
+
+
+
+
+
+
+
+
+
+
+</view>
+
+
+
+
+</view>
+
+<view style="height: 100rpx;"></view>
+
+<view wx:if="{{info.buy==0&&info.type==1}}" style="padding: 0 30rpx;width: 100%;position: fixed;bottom: 0;height: 150rpx;background-color: white;">
+<view bindtap="join" style="padding: 24rpx 0;background:linear-gradient(90deg, #0AA29F 0%, #76CBC9 100%);border-radius:12rpx;font-size: 30rpx;color: white;font-weight: bold;text-align: center;">加入课程</view>
+</view>
+
+<view wx:if="{{info.buy==0&&info.type==2}}" style="padding: 0 30rpx;width: 100%;position: fixed;bottom: 0;height: 150rpx;background-color: white;">
+<button open-type="contact" style="padding: 0;line-height: unset;">
+        <view style="padding: 24rpx 0;background:linear-gradient(90deg, #0AA29F 0%, #76CBC9 100%);border-radius:12rpx;font-size: 30rpx;color: white;font-weight: bold;text-align: center;">咨询客服购买</view>
+</button>
+</view>

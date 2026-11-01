@@ -1,0 +1,17 @@
+<!--components/navigationBar/navigationBar.wxml-->
+<cover-view class='nav-bar' style='display:{{ishiddenBar?"none":"block"}};opacity:{{opacityVal}};background:{{backgroundVal}}'>
+  <cover-view style='width:100%;height:{{statusBarHeight}}rpx;'></cover-view>
+  <cover-view class='cont' style='height:88rpx;color:{{titleColor}};display:flex;align-items: flex-start;'>
+    <cover-view class='icon-cont' style='height:88rpx;width:190rpx'>
+      <cover-view bindtap='goBack' style='width:50rpx;height:50rpx;margin-right:44rpx;' wx:if='{{goBack}}'>
+        <cover-image src='/image/backIcon{{iconBackType}}.png' style='width:18rpx;height:36rpx;'></cover-image>
+      </cover-view>
+      <cover-image src='/image/to_home.png' style='width:40rpx;height:40rpx;' wx:if='{{goIndexReal}}' bindtap='goRealIndex'></cover-image>
+    </cover-view>
+    <cover-view style='flex:1;height:88rpx;line-height:88rpx;text-align:center;font-size:36rpx;color:{{colorVal}};'>{{title}}</cover-view>
+    <button class="button" open-type="share" style="background-color: transparent;border:none;outline: none;">
+      <cover-image wx:if='{{share}}' src='/image/icon-share{{iconBackType}}.png' style='width:60rpx;height:60rpx;margin-right: 200rpx;' bindtap='goShare'></cover-image>
+    </button>
+    
+  </cover-view>
+</cover-view>

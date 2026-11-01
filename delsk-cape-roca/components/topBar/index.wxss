@@ -1,0 +1,20 @@
+/* components/navigationBar/navigationBar.wxss */
+.nav-bar{
+  position: fixed;top:0;left:0;right: 0;z-index: 999;width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.nav-bar .cont{
+  text-align: center;font-size: 28rpx;font-weight: bold;
+  position: relative;
+
+}
+.nav-bar .cont .icon-cont{
+  /* position: absolute;bottom:0;left: 0; */
+  height: 100%;display: flex;align-items: center;
+  padding-left: 10rpx;box-sizing: border-box;
+}
+.have-shadow{
+  /* box-shadow:0 10rpx 30rpx rgba(238, 238, 238, .5)  */
+  box-shadow:0 16rpx 26rpx rgba(238, 238, 238, .5) 
+}

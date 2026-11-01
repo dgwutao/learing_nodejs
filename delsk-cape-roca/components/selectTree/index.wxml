@@ -1,0 +1,18 @@
+<view class="flex">
+  <view class="left">
+    <scroll-view scroll-y="true"  class="scrollbar">
+    <view class="title {{item==leve1?'active':''}}" wx:for="{{list1}}" data-key="{{item}}"  wx:key="index" bindtap="selectLevel1">{{item}} </view>
+  </scroll-view>
+  </view>
+  <view class="center">
+    <scroll-view scroll-y="true" class="scrollbar">
+      <view class="title2 {{item==leve2?'active':''}}"  wx:for="{{list2}}" data-key="{{item}}" wx:key="index" bindtap="selectLevel2">{{item}}</view>      
+    </scroll-view>
+  </view>
+  <view class="right">
+    <scroll-view scroll-y="true" class="scrollbar">
+      <view class="title3 {{item.n==leve3?'active':''}}" wx:for="{{list3}}"  data-key="{{item.n}}" wx:key="index" bindtap="selectLevel3">{{item.n}}-{{item.c}}</view>
+    
+    </scroll-view>
+  </view>
+</view>

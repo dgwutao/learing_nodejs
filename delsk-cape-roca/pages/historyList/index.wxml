@@ -1,0 +1,39 @@
+<view style="padding: 30rpx;">
+<view wx:if="{{list.length>0}}" style="font-size: 30rpx;color: #333333;font-weight: bold;">今天</view>
+<view wx:for="{{list}}">
+<view bindtap="goVideo" data-item="{{item}}" style="display: flex;align-items: center;margin-top: 20rpx;">
+<image src="{{item.cover}}" style="width: 280rpx;height: 160rpx;border-radius: 10rpx;" mode="aspectFill"/>
+<view style="margin-left: 20rpx;">
+<view style="font-size: 28rpx;color: #333333;">{{item.title}}</view>
+<view style="font-size: 28rpx;color: #999999;margin-top: 14rpx;">已看{{item.progress}}%</view>
+</view>
+</view>
+</view>
+
+<view wx:if="{{list2.length>0}}" style="font-size: 30rpx;color: #333333;font-weight: bold;">一周内</view>
+<view wx:for="{{list2}}">
+<view bindtap="goVideo" data-item="{{item}}" style="display: flex;align-items: center;margin-top: 20rpx;">
+<image src="{{item.cover}}" style="width: 280rpx;height: 160rpx;border-radius: 10rpx;" mode="aspectFill"/>
+<view style="margin-left: 20rpx;">
+<view style="font-size: 28rpx;color: #333333;">{{item.title}}</view>
+<view style="font-size: 28rpx;color: #999999;margin-top: 14rpx;">已看{{item.progress}}%</view>
+</view>
+</view>
+</view>
+
+<view wx:if="{{list3.length>0}}" style="font-size: 30rpx;color: #333333;font-weight: bold;">更早</view>
+<view wx:for="{{list3}}">
+<view bindtap="goVideo" data-item="{{item}}" style="display: flex;align-items: center;margin-top: 20rpx;">
+<image src="{{item.cover}}" style="width: 280rpx;height: 160rpx;border-radius: 10rpx;" mode="aspectFill"/>
+<view style="margin-left: 20rpx;">
+<view style="font-size: 28rpx;color: #333333;">{{item.title}}</view>
+<view style="font-size: 28rpx;color: #999999;margin-top: 14rpx;">已看{{item.progress}}%</view>
+</view>
+</view>
+</view>
+
+
+</view>
+
+<view style="font-size: 24rpx;color: #999999;margin-top: 30rpx;width: 100%;text-align: center;">暂时没有更多了~</view>
+<view style="height: 200rpx;"></view>

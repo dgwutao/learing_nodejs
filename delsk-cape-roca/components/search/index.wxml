@@ -1,0 +1,21 @@
+
+<view class="search-input flex_box">
+    <view class="input-cont flex_box">
+        <view class="search-cont" catchtap='startSearch'>
+           <image class="search" src="/image/search.png" mode="aspectFit|aspectFill|widthFix"></image> 
+        </view>
+        <view class="input-cont">
+            <input name='search' bindconfirm="startSearch" confirm-type="search" placeholder='{{placeholder}}' placeholder-class="input-placeholder" bindinput="changeValue" value="{{value}}">
+            
+            </input>
+        </view>
+        <view class="clear-cont" catchtap='clearInput'  hidden="{{!canClear}}">
+            <image class="clear" src="/image/close.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
+            
+            </image>
+        </view>
+    </view> 
+    <view class="search-btn" catch:tap="startSearch" wx:if="{{showSearch}}">
+      搜索
+    </view>
+</view>

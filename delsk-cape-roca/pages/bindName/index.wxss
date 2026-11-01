@@ -1,0 +1,23 @@
+.button_green{
+        font-size: 32rpx;
+        font-weight: bold;
+        color: white;
+        padding: 24rpx;
+        text-align: center;
+        background: #50D0A5;
+        box-shadow: 0 10rpx 34rpx 0 rgba(68,171,135,0.61);
+        border-radius: 32rpx;
+        margin-top: 140rpx;
+}
+
+.button_normal{
+        font-size: 32rpx;
+        font-weight: bold;
+        color: white;
+        padding: 24rpx;
+        text-align: center;
+        background: #CBCBCB;
+        box-shadow: 0 10rpx 34rpx 0 rgba(163,163,163,0.61);
+        border-radius: 32rpx;
+        margin-top: 140rpx;
+}

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="JWP Property">
+    <meta name="keywords" content="JWP Property">
+    <meta name="author" content="JWP Group">
+    <title>JWP Global Investment - 全球资产配置专家</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css">
+    <link href="/static/css/google-fonts.css" rel="stylesheet">
+    <script src="/components/navComponentModern.js"></script>
+    <script src="/components/footerComponent.js"></script>
+    <style>
+        :root {
+            --primary-dark: #0d1b2a;
+            --secondary-dark: #1b263b;
+            --primary-gold: #d4af37;
+            --light-gold: #f5d76e;
+            --text-light: #f8f9fa;
+            --accent-blue: #48cae4;
+            --section-padding: 80px 5%;
+
+            --primary: #1a3a6c;
+            --secondary: #ff6b35;
+            --gold: #d4af37;
+            --light: #f8f9fa;
+            --dark: #0d1b2a;
+            --accent: #48cae4;
+            --transition: all 0.5s ease;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        /* 头部样式 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #d4af37;
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .cta-button:hover {
+            background: #c19b2c;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 项目介绍部分 */
+        .section {
+            padding: 50px 0;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #c5a47e;
+        }
+        
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .intro-text{
+            height: 100%;
+        }
+        
+        .intro-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        
+        .intro-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .intro-image {
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .intro-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .intro-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 特色部分 */
+        .features {
+            background: linear-gradient(135deg, #1a2a6c 0%, #2c3e50 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.03" d="M0,256L48,245.3C96,235,192,213,288,197.3C384,181,480,171,576,186.7C672,203,768,245,864,245.3C960,245,1056,203,1152,181.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .features .section-title h2 {
+            color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #c5a47e;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* 户型展示 */
+        .floor-plans {
+            background: white;
+        }
+        
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .plans-container a {
+            text-decoration: none;
+            color: #222;
+        }
+        
+        .plan-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .plan-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .plan-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .plan-card:hover .plan-image img {
+            transform: scale(1.05);
+        }
+        
+        .plan-details {
+            padding: 30px;
+        }
+        
+        .plan-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #222;
+        }
+        
+        .plan-specs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .spec-item {
+            text-align: center;
+        }
+        
+        .spec-item .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #c5a47e;
+        }
+        
+        .spec-item .label {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .plan-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 20px;
+        }
+        
+        /* 位置部分 */
+        .location {
+            background: #f8f9fa;
+        }
+        
+        .location-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .location-map {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            background: #ddd url('https://images.unsplash.com/photo-1571494146906-86de15d3817b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover;
+            position: relative;
+        }
+        
+        .location-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .location-info ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .location-info ul li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .location-info ul li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: #c5a47e;
+        }
+
+        .animated {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .property-card {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 400px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .property-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .property-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            transition: all 0.3s ease;
+        }
+        
+        .property-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+        
+        .property-card:hover .property-image {
+            transform: scale(1.05);
+        }
+
+       .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .project-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+        }
+        
+        .project-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .project-location i {
+            margin-right: 8px;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        .project-stats {
+            display: flex;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            background: rgba(212,175,55, 0.15);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .stat-item i {
+            color: var(--accent);
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .project-features {
+            margin-top: 20px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .feature-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        
+        .project-type {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        /* 主推项目列表 - 左右结构 */
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-item {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+            height: 400px;
+        }
+        
+        .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(26, 58, 108, 0.25);
+        }
+        
+        /* 项目图片区域 */
+        .project-image {
+            width: 40%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .project-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-item:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-type {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .project-status {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* 项目内容区域 */
+        .project-content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: fit-content;
+        }
+        
+        .project-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.7rem;
+        }
+        
+        .project-location i {
+            margin-right: 10px;
+            font-size: 1.0rem;
+        }
+        
+        .project-title {
+            font-size: 2.0rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            line-height: 1.0;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        
+        .project-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #555;
+            /* margin: 30px 0; */
+        }
+        
+        /* 项目数据统计 */
+        .project-stats-right {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 40px;
+            margin-bottom: 0;
+        }
+        
+        .stat-item-right {
+            text-align: center;
+            padding: 10px;
+            background: rgba(26, 58, 108, 0.05);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+        
+        .stat-item-right:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #777;
+        }
+        
+        .project-btn:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 58, 108, 0.2);
+        }
+        
+        /* 交替布局 */
+        .project-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        /* 装饰元素 */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+            margin: 30px 0;
+        }
+        
+        .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav-component-modern></nav-component-modern>
+
+    <!-- 头部 -->
+    <header>
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-overlay"></div>
+                <div class="hero-content">
+                    <h1>LAYA Resort</h1>
+                    <p>Discover exceptional properties that redefine luxury living in Dubai's most desirable locations.</p>
+                    <a href="#overview" class="cta-button">Explore Projects</a>
+                </div>
+            </div>
+            
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1473116763249-2faaef81ccda?q=80&w=2696&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+                <div class="slide-overlay"></div>
+                <div class="hero-content">
+                    <h1>BB Integrated Resorts</h1>
+                    <p>500 meters of pure white sand beach, exclusive to your tropical paradise</p>
+                    <a href="#overview" class="cta-button">Explore Projects</a>
+                </div>
+            </div>
+            
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1561501900-3701fa6a0864?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');">
+                <div class="slide-overlay"></div>
+                <div class="hero-content">
+                    <h1>Thai AOPO Luxury Villa</h1>
+                    <p>The perfect blend of traditional Thai design and modern luxury</p>
+                    <a href="#overview" class="cta-button">Explore Projects</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 项目概览 -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>投资优势</h2>
+                <p>奢华与品味的完美融合</p>
+            </div>
+            
+            <div class="intro-grid animated">
+                <div class="intro-text">
+                    <h3>稀缺资源 + 国际品牌 + 文旅胜地</h3>
+                    <p>占据东南亚核心区位优势，普吉岛双面价值：东海岸BB综合度假村（一站式生活配套）。西海岸：AOPO半岛（绝版海景地块）</p>
+                    <p>稀缺自然资源，安达曼湾海景资源：LAYA度假酒店直面安达曼湾。AOPO半岛三面环海：普吉岛唯⼀270度环幕海景别墅地块。原始生态保护：红树林自然保护区周边开发</p>
+                    <p>国际品牌合作保障，AYA度假酒店丽笙酒店(Radisson Blu)全球73国420+酒店运营经验。芭东半山公寓	威斯汀(Westine)国际品牌溢价保障。AOPO半岛别墅阿玛尼(Armani)顶级设计溢价。</p>
+                    <p>高价值开发潜力，土地稀缺性：AOPO半岛属绝版地块（三面环海）。溢价空间大：别墅均价：$15,000/㎡（区域最高端），公寓均价：$12,000/㎡（BB项目）。政策红利：旅游区商业用地容积率限制放宽。</p>
+                </div>
+                
+                <div class="intro-image">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 户型展示 -->
+    <section id="plans" class="section floor-plans">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>主推项目</h2>
+                <p>匠心设计，满足多元需求</p>
+            </div>
+            <div class="projects-container">
+            <a href="detail.html" style="text-decoration: none;color: #333;">
+            <div class="project-item animated">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="普吉岛LAYA度假酒店" loading="lazy">
+                    <div class="project-type">文旅酒店</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                    </div>
+                    <h3 class="project-title">LAYA度假酒店</h3>
+                    <p class="project-description">
+                        由丽笙酒店(Radisson Blu)运营，占地13,972平米，853套豪华客房，
+                        配备私人船舶码头、高端SPA会所、米其林星级餐厅等顶级设施，
+                        直面安达曼湾绝美海景。
+                    </p>
+                    
+                    <div class="project-stats-right">
+                        <div class="stat-item-right">
+                            <div class="stat-value">13,972 m²</div>
+                            <div class="stat-label">占地面积</div>
+                        </div>
+                        <div class="stat-item-right">
+                            <div class="stat-value">853套</div>
+                            <div class="stat-label">豪华客房</div>
+                        </div>
+                        <div class="stat-item-right">
+                            <div class="stat-value">5星级</div>
+                            <div class="stat-label">顶级设施</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+
+            <div class="divider"></div>
+            
+            <a href="detail.html" style="text-decoration: none;color: #333;">
+            <div class="project-item animated">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="BB综合度假村" loading="lazy">
+                    <div class="project-type">综合度假村</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                    </div>
+                    <h3 class="project-title">BB综合度假村</h3>
+                    <p class="project-description">
+                        普吉岛东海岸最大的一站式度假区，占地62,346㎡，
+                        打造集高端住宅、精品酒店、豪华游艇俱乐部于一体的综合度假天堂，
+                        提供全方位度假体验。
+                    </p>
+                    
+                    <div class="project-stats-right">
+                        <div class="stat-item-right">
+                            <div class="stat-value">62,346 m²</div>
+                            <div class="stat-label">占地面积</div>
+                        </div>
+                        <div class="stat-item-right">
+                            <div class="stat-value">500m</div>
+                            <div class="stat-label">私人海滩</div>
+                        </div>
+                        <div class="stat-item-right">
+                            <div class="stat-value">50+</div>
+                            <div class="stat-label">游艇泊位</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+
+            <div class="divider"></div>
+            <a href="detail.html" style="text-decoration: none;color: #333;">
+            <div class="project-item animated">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="AOPO半岛别墅" loading="lazy">
+                    <div class="project-type">豪宅别墅</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                    </div>
+                    <h3 class="project-title">AOPO半岛别墅</h3>
+                    <p class="project-description">
+                        位于普吉岛东海岸AOPO半岛，三面环海绝版地块，
+                        占地80,000平方米，由阿玛尼(Armani)操刀设计，
+                        打造270度环幕海景顶奢别墅和高端海景公寓。
+                    </p>
+                    
+                    <div class="project-stats-right">
+                        <div class="stat-item-right">
+                            <div class="stat-value">270°</div>
+                            <div class="stat-label">全景海景</div>
+                        </div>
+                        <div class="stat-item-right">
+                            <div class="stat-value">48栋</div>
+                            <div class="stat-label">限量别墅</div>
+                        </div>
+                        <div class="stat-item-right">
+                            <div class="stat-value">阿玛尼</div>
+                            <div class="stat-label">品牌设计</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        </div>
+    </section>
+    
+    <!-- 户型展示 -->
+    <section id="plans" class="section location">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>更多项目</h2>
+                <p>匠心设计，满足多元需求</p>
+            </div>
+            <div class="project-grid">
+                    <!-- 普吉岛LAYA度假酒店 -->
+                     <a href="detail.html" style="text-decoration: none;color: #333;">
+                    <div class="project-card animated">
+                        <div class="project-type">文旅酒店</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="普吉岛LAYA度假酒店" loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                            </div>
+                            <h3 class="project-title">LAYA度假酒店</h3>
+                            <p>由丽笙酒店(Radisson Blu)运营，占地13,972平米，853套客房，配备船舶码头、SPA会所、全日制餐厅等高端设施。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 13,972 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-bed"></i> 853套客房
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star"></i> 五星级设施
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- BB综合度假村 -->
+                    <a href="detail.html" style="text-decoration: none;color: #333;">
+                    <div class="project-card animated">
+                        <div class="project-type">综合度假村</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="BB综合度假村" loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                            </div>
+                            <h3 class="project-title">BB综合度假村</h3>
+                            <p>东海岸最大的一站式度假区占地62,346.08㎡，建筑面积约25,000平米，致力打造生活、出行、亲子、娱乐等全方位体验。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 62,346 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-umbrella-beach"></i> 私人海滩
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-ship"></i> 游艇俱乐部
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- AOPO半岛别墅 -->
+                     <a href="detail.html" style="text-decoration: none;color: #333;">
+                    <div class="project-card animated">
+                        <div class="project-type">豪宅别墅</div>
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AOPO半岛别墅" loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> 泰国 · 普吉岛
+                            </div>
+                            <h3 class="project-title">AOPO半岛别墅</h3>
+                            <p>项目位于普吉岛东海岸AOPO半岛，三面环海，绝版地块占地80,000平方米，计划打造高奢酒店270度海景顶奢别墅和高端公寓。</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-ruler-combined"></i> 80,000 m²
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-water"></i> 270°海景
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-crown"></i> 阿玛尼品牌合作
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            <!-- <div class="plans-container">
+                <a href="detail.html">
+                <div class="plan-card  animated">
+                    <div class="plan-image">
+                        <img src="https://plus.unsplash.com/premium_photo-1677474827617-6a7269f97574?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHZpbGxhfGVufDB8fDB8fHww" alt="三居室户型">
+                    </div>
+                    <div class="plan-details">
+                        <h3>雅致三居</h3>
+                        <div class="plan-specs">
+                            <div class="spec-item">
+                                <div class="value">128m²</div>
+                                <div class="label">建筑面积</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">3+1</div>
+                                <div class="label">房厅数量</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">南向</div>
+                                <div class="label">朝向</div>
+                            </div>
+                        </div>
+                        <div class="plan-price">¥ 6,800,000 起</div>
+                        <p>方正实用三居室，双阳台设计，主卧套房配备独立卫浴和衣帽间，适合三口之家。</p>
+                    </div>
+                </div>
+                </a>
+                <a href="detail.html">
+                <div class="plan-card animated">
+                    <div class="plan-image">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="四居室户型">
+                    </div>
+                    <div class="plan-details">
+                        <h3>奢华四居</h3>
+                        <div class="plan-specs">
+                            <div class="spec-item">
+                                <div class="value">198m²</div>
+                                <div class="label">建筑面积</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">4+2</div>
+                                <div class="label">房厅数量</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">南北</div>
+                                <div class="label">朝向</div>
+                            </div>
+                        </div>
+                        <div class="plan-price">¥ 10,200,000 起</div>
+                        <p>南北通透大四居，双套房设计，独立家政间，中西双厨配置，满足多代同堂家庭需求。</p>
+                    </div>
+                </div>
+                </a>
+                <a href="detail.html">
+                <div class="plan-card animated">
+                    <div class="plan-image">
+                        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="顶层复式">
+                    </div>
+                    <div class="plan-details">
+                        <h3>顶层复式</h3>
+                        <div class="plan-specs">
+                            <div class="spec-item">
+                                <div class="value">350m²</div>
+                                <div class="label">建筑面积</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">5+3</div>
+                                <div class="label">房厅数量</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">全景</div>
+                                <div class="label">朝向</div>
+                            </div>
+                        </div>
+                        <div class="plan-price">¥ 21,500,000 起</div>
+                        <p>顶层复式豪宅，360度全景视野，私人空中花园，专属电梯入户，配备智能家居系统。</p>
+                    </div>
+                </div>
+                </a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- <section id="plans" class="section location">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>更多项目</h2>
+                <p>全球视野，追求卓越品质</p>
+            </div>
+            <div class="properties-grid">
+                <div class="property-card animated" data-type="hotel">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" loading="lazy" alt="诺德·御景" class="property-image">
+                    <div class="property-overlay">
+                        <h3 class="property-title">诺德·御景</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>土耳其，艾森克特</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card animated" data-type="villa">
+                    <img src="https://dream-visas.oss-ap-southeast-1.aliyuncs.com/uploads/2025/0408/20250408140545_983.png" alt="塞浦路斯顶级海岸度假花园" class="property-image" loading="lazy">
+                    <div class="property-overlay">
+                        <h3 class="property-title">塞浦路斯顶级海岸度假花园</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>塞浦路斯</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card animated" data-type="apartment">
+                    <img src="https://dream-visas.oss-ap-southeast-1.aliyuncs.com/uploads/2025/0408/20250408140631_635.png" alt="日本大阪一户建" class="property-image" loading="lazy">
+                    <div class="property-overlay">
+                        <h3 class="property-title">日本大阪一户建</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>日本，大阪</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="plans-container">
+                <div class="plan-card  animated">
+                    <div class="plan-image">
+                        <img src="https://plus.unsplash.com/premium_photo-1677474827617-6a7269f97574?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHZpbGxhfGVufDB8fDB8fHww" alt="三居室户型">
+                    </div>
+                    <div class="plan-details">
+                        <h3>雅致三居</h3>
+                        <div class="plan-specs">
+                            <div class="spec-item">
+                                <div class="value">128m²</div>
+                                <div class="label">建筑面积</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">3+1</div>
+                                <div class="label">房厅数量</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">南向</div>
+                                <div class="label">朝向</div>
+                            </div>
+                        </div>
+                        <div class="plan-price">¥ 6,800,000 起</div>
+                        <p>方正实用三居室，双阳台设计，主卧套房配备独立卫浴和衣帽间，适合三口之家。</p>
+                    </div>
+                </div>
+                
+                <div class="plan-card animated">
+                    <div class="plan-image">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="四居室户型">
+                    </div>
+                    <div class="plan-details">
+                        <h3>奢华四居</h3>
+                        <div class="plan-specs">
+                            <div class="spec-item">
+                                <div class="value">198m²</div>
+                                <div class="label">建筑面积</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">4+2</div>
+                                <div class="label">房厅数量</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">南北</div>
+                                <div class="label">朝向</div>
+                            </div>
+                        </div>
+                        <div class="plan-price">¥ 10,200,000 起</div>
+                        <p>南北通透大四居，双套房设计，独立家政间，中西双厨配置，满足多代同堂家庭需求。</p>
+                    </div>
+                </div>
+                
+                <div class="plan-card animated">
+                    <div class="plan-image">
+                        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="顶层复式">
+                    </div>
+                    <div class="plan-details">
+                        <h3>顶层复式</h3>
+                        <div class="plan-specs">
+                            <div class="spec-item">
+                                <div class="value">350m²</div>
+                                <div class="label">建筑面积</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">5+3</div>
+                                <div class="label">房厅数量</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="value">全景</div>
+                                <div class="label">朝向</div>
+                            </div>
+                        </div>
+                        <div class="plan-price">¥ 21,500,000 起</div>
+                        <p>顶层复式豪宅，360度全景视野，私人空中花园，专属电梯入户，配备智能家居系统。</p>
+                    </div>
+                </div>
+            </div> -->
+        <!-- </div>
+    </section> -->
+
+    <footer-component></footer-component>
+    <script>
+        // 滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+
+        //头部轮播图
+        var currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        function changeSlide() {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        //每5秒切换一次
+        setInterval(changeSlide, 4000);
+
+        // 平滑滚动导航
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 30,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+    </script>
+</body>
+</html>

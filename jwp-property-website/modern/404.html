@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面未找到 - 404错误</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="JWP Property">
+    <meta name="keywords" content="JWP Property">
+    <meta name="author" content="JWP Group">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 30px;
+            max-width: 800px;
+            z-index: 10;
+        }
+        
+        /* 背景星星 */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 3s) infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        /* 宇航员和星球 */
+        .space-scene {
+            position: relative;
+            height: 300px;
+            margin: 0 auto 40px;
+            width: 100%;
+        }
+        
+        .planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            margin-top: -100px;
+            margin-left: -100px;
+            background: radial-gradient(circle at 30% 30%, #ff7e5f, #feb47b);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 126, 95, 0.6);
+            animation: rotate 40s infinite linear;
+        }
+        
+        .crater {
+            position: absolute;
+            background: rgba(198, 83, 55, 0.7);
+            border-radius: 50%;
+        }
+        
+        .astronaut {
+            position: absolute;
+            top: 40%;
+            left: 70%;
+            animation: float 8s infinite ease-in-out;
+            transform-origin: center center;
+        }
+        
+        .astronaut i {
+            font-size: 80px;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(0, 200, 255, 0.7);
+        }
+        
+        /* 404文本 */
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(0, 201, 255, 0.3);
+            letter-spacing: 10px;
+            position: relative;
+        }
+        
+        .error-code::after {
+            content: "404";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            color: transparent;
+            text-shadow: 0 0 40px rgba(0, 201, 255, 0.7);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            color: #d1e8e2;
+        }
+        
+        /* 按钮 */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            outline: none;
+        }
+        
+        .btn-home {
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+            color: #0a192f;
+            box-shadow: 0 5px 20px rgba(0, 201, 255, 0.4);
+        }
+        
+        .btn-home:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 201, 255, 0.6);
+        }
+        
+        .btn-contact {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-contact:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        /* 搜索框 */
+        .search-container {
+            max-width: 500px;
+            margin: 40px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 18px 25px;
+            padding-right: 60px;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 201, 255, 0.3);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: #0a192f;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        /* 动画 */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(20px) rotate(-5deg); }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+            
+            .space-scene {
+                height: 250px;
+            }
+            
+            .planet {
+                width: 150px;
+                height: 150px;
+                margin-top: -75px;
+                margin-left: -75px;
+            }
+            
+            .astronaut {
+                left: 75%;
+            }
+            
+            .astronaut i {
+                font-size: 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 5rem;
+                letter-spacing: 5px;
+            }
+            
+            .space-scene {
+                height: 200px;
+            }
+            
+            .planet {
+                width: 120px;
+                height: 120px;
+                margin-top: -60px;
+                margin-left: -60px;
+            }
+            
+            .astronaut i {
+                font-size: 50px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景星星 -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- 太空场景 -->
+    <div class="space-scene">
+        <div class="planet" id="planet">
+            <!-- 陨石坑通过JS动态添加 -->
+        </div>
+        <div class="astronaut">
+            <i class="fas fa-user-astronaut"></i>
+        </div>
+    </div>
+    
+    <!-- 主要内容 -->
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1>页面迷失在太空中</h1>
+        <p class="message">
+            噢，看起来您试图访问的页面已经飘向宇宙深处了。
+            也许是链接错误，或者页面已被移除。但别担心，您可以通过以下方式返回安全区域。
+        </p>
+        
+        <!-- <div class="search-container">
+            <input type="text" class="search-box" placeholder="在全站搜索您需要的内容...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div> -->
+        
+        <div class="btn-container">
+            <a href="index.html" target="_self" class="btn btn-home">
+                <i class="fas fa-home"></i> 返回首页
+            </a>
+            <!-- <a href="#" class="btn btn-contact">
+                <i class="fas fa-envelope"></i> 联系支持
+            </a> -->
+        </div>
+    </div>
+
+    <script>
+        // 创建星星背景
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机位置和大小
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // 随机动画时长
+                star.style.setProperty('--duration', `${Math.random() * 5 + 2}s`);
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // 创建陨石坑
+        function createCraters() {
+            const planet = document.getElementById('planet');
+            const craterCount = 15;
+            
+            for (let i = 0; i < craterCount; i++) {
+                const crater = document.createElement('div');
+                crater.classList.add('crater');
+                
+                // 随机位置和大小
+                const size = Math.random() * 20 + 5;
+                crater.style.width = `${size}px`;
+                crater.style.height = `${size}px`;
+                crater.style.left = `${Math.random() * 100}%`;
+                crater.style.top = `${Math.random() * 100}%`;
+                
+                planet.appendChild(crater);
+            }
+        }
+        
+        // 搜索功能
+        function setupSearch() {
+            const searchBtn = document.querySelector('.search-btn');
+            const searchBox = document.querySelector('.search-box');
+            
+            searchBtn.addEventListener('click', function() {
+                if (searchBox.value.trim() !== '') {
+                    alert(`正在搜索: "${searchBox.value}"\n抱歉，这只是一个演示页面。`);
+                    searchBox.value = '';
+                } else {
+                    searchBox.focus();
+                }
+            });
+            
+            searchBox.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createCraters();
+            setupSearch();
+            
+            // 按钮悬停效果
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

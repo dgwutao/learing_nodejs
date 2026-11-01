@@ -1,0 +1,6 @@
+/* pages/center/index.wxss */
+page{
+        background-color: #f7f7f7;
+}
+
+.button::after{ border: none;}

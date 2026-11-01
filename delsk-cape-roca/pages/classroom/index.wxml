@@ -1,0 +1,64 @@
+<view style="position: fixed;top: 0;left: 0;padding: 30rpx 40rpx;font-size: 40rpx;font-weight: bold;width: 100%;z-index: 999;">{{info.title}}</view>
+<view style="height: 120rpx;"></view>
+<view>
+<scroll-view scroll-into-view="{{toView}}"  enable-back-to-top="true" enable-passive="true" scroll-y style="height:calc(100vh - 300rpx);" scroll-with-animation="true">
+<view wx:for="{{info.audio_content}}" wx:for-index="idx" id="scroll-{{idx}}" class="a-class" style="{{toView==('scrollx-'+idx)?'background-color:white;':''}}">
+<view id="scrollx-{{idx}}" style="position: absolute;margin-top: calc(-50vh + 300rpx);"></view>
+<view>
+<view bindtap="jump" data-index="{{idx}}" wx:if="{{trans==0 || trans==1}}" style="font-size: 30rpx;color: {{currentIndex==idx?'#078684':'#333333'}};font-weight:{{currentIndex==idx?'bold':'normal'}} ;">{{item.por}}</view>
+<view wx:if="{{trans==0}}" style="display: flex;align-items: center;padding: 2rpx 0;">
+<view style="width: 100%;height: 2rpx;background-color: #e5e5e5;"></view>
+<view style="font-size: 22rpx;color: #999999;margin-left: 10rpx;">译</view>
+</view>
+<view bindtap="jump" data-index="{{idx}}" wx:if="{{trans==0 || trans==2}}" style="font-size: {{trans==2?'28':'30'}}rpx;color: {{(currentIndex==idx&&trans==2)?'#078684':'#333333'}};font-weight:{{(currentIndex==idx&&trans==2)?'bold':'normal'}} ;">{{item.cn}}</view>
+<view wx:if="{{item.pic&&item.pic.length>0}}" style="margin-top: 20rpx;display: flex;align-items: center;justify-content: center;">
+<image src="{{item.pic}}" mode="aspectFill" style="width: 60vw;height: 30vw;border-radius: 24rpx;"/>
+</view>
+
+</view>
+</view>
+<view id="footer" style="height: 300rpx;"></view>
+</scroll-view>
+</view>
+
+
+
+<view style="position: fixed;bottom: 0;height: 280rpx;box-shadow: 0 -4rpx 8rpx 0 rgba(159,159,159,0.16);padding: 10rpx 40rpx;width: 100%;background-color: white;">
+<view style="display: flex;align-items: center;width: 100%;">
+<view style="font-size: 26rpx;color: #333333;">{{start}}</view>
+<slider bindchange='sliderChanged' min="0" max="100" value="{{length}}" color="#CCCCCC" activeColor="#29AEAB" style="margin-left: 30rpx;margin-right: 30rpx;flex: 1;" block-size="20rpx" block-color="#29AEAB"></slider>
+<view style="font-size: 26rpx;color: #333333;">{{end}}</view>
+</view>
+
+<view style="display: flex;align-items: center;margin-top: 10rpx;width: 100%;justify-content: space-around;">
+
+<image bindtap="transAction" src="/image/audio_trans_{{trans}}.png" style="width: 44rpx;height: 52rpx;"/>
+
+
+<view style="display: flex;align-items: center;">
+<!-- <view bindtap="previous" style="display: flex;flex-direction: column;align-items: center;margin-top: 10rpx;">
+<image src="/image/audio_previous.png" style="width: 36rpx;height: 48rpx;"/>
+<view style="font-size: 20rpx;color: #333333;">上一句</view>
+</view> -->
+<image bindtap="play" src="/image/audio_{{state}}.png" style="width: 110rpx;height: 110rpx;"/>
+<!-- <view bindtap="next" style="display: flex;flex-direction: column;align-items: center;margin-top: 10rpx;">
+<image src="/image/audio_next.png" style="width: 36rpx;height: 48rpx;"/>
+<view style="font-size: 20rpx;color: #333333;">下一句</view>
+</view> -->
+</view>
+
+<image bindtap="wholeAction" src="/image/{{whole==0?'wowowo':'rororo'}}.png" style="width: 62rpx;height: 62rpx;"/>
+
+<!-- <view bindtap="wholeAction" style="display: flex;flex-direction: column;align-items: center;">
+<image src="/image/audio_{{whole}}_line.png" mode="widthFix" style="width: 30rpx;height: 30rpx;"/>
+<view style="font-size: 20rpx;color: #999999;font-weight: bold;margin-top: 2rpx;">{{whole==0?'整篇':'单句'}}</view>
+</view> -->
+
+
+</view>
+
+
+</view>
+
+<!--   -->
+<image wx:if="{{info.is_task==1}}" bindtap="goHomework" src="/image/roca_homework_icon.png" style="width: 84rpx;height: 84rpx;position: fixed;bottom: 400rpx;right: 20rpx;"/>

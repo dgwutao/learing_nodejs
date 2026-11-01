@@ -1,0 +1,208 @@
+<view style="position: fixed;left: 0;top: 0;background-color: white;width: 100%;z-index: 999;box-shadow: 0 4rpx 22rpx 0 rgba(0,0,0,0.07);">
+<view style="padding:0 40rpx 0 40rpx;">
+<view style="display: flex;align-items: center;">
+<image src="/image/roca_homework_course_icon.png" style="width: 76rpx;height: 76rpx;border-radius: 18rpx;"/>
+<view style="margin-left: 16rpx;">
+<view style="font-size: 28rpx;font-weight: bold;color: #1d1e1f;">{{course.title}}</view>
+<view style="font-size: 24rpx;color: #666666;margin-top: 4rpx;">发布时间：{{info.create_time}}</view>
+</view>
+</view>
+<text wx:if="{{fold}}" class="line">{{info.content}}</text>
+<scroll-view wx:if="{{!fold}}" scroll-y style="max-height: 66vh;">
+<view style="padding: 40rpx 0;">
+<text wx:if="{{!fold}}"  style="font-size: 28rpx;color: #1d1e1f;">{{info.content}}</text>
+
+<view wx:if="{{!fold}}" wx:for="{{info.pics}}">
+  <image bindtap="preview" data-urls="{{info.pics}}" data-url="{{item}}" src="{{item}}" mode="widthFix" style="width: 70%;margin-top: 22rpx;border-radius: 20rpx;"/>
+</view>
+
+<view wx:if="{{info.audios.length>0&&!fold}}" style="margin-top: 20rpx;background-color:#F1F5F5;border-radius: 12rpx;padding: 0 20rpx;">
+<view wx:for="{{info.audios}}" wx:for-index="idx">
+<view style="padding: 30rpx 0;border-bottom: {{idx==info.audios.length-1?'0':'2'}}rpx #E5E5E5 solid;">
+  <view bind:tap="foldAudio" data-audio="{{item.name}}" style="display: flex;align-items: center;justify-content: space-between;">
+    <view style="font-size: 28rpx;color: #1D1E1F;">{{item.name}}</view>
+    <view wx:if="{{fold_audio_name!=item.name}}" style="font-size: 22rpx;color: #333333;">{{item.end}}</view>
+  </view>
+  
+  <view wx:if="{{fold_audio_name==item.name}}" style="margin-top: 20rpx;">
+    <slider data-index="{{idx}}" data-playing="{{item.name}}" data-url="{{item.url}}"  bindchanging="sliderChanging" bindchange='sliderChanged' min="0" max="100" value="{{item.value}}" color="#DDDEDD" activeColor="#8F8F94" block-size="10rpx" block-color="#8F8F94" style="margin-left: 0;margin-right: 0;margin-bottom: 0;"></slider>
+    <view style="display: flex;align-items: center;justify-content: space-between;margin-top: 8rpx;">
+    <view style="font-size: 20rpx;color: #999999;">{{item.start}}</view>
+    <view style="font-size: 20rpx;color: #999999;">{{item.end}}</view>
+    </view>
+    <view style="display: flex;align-items: center;justify-content: center;position: relative;padding: 10rpx 0;">
+    <image catch:tap="f_5s" data-type="rewind" data-index="{{idx}}" data-playing="{{item.name}}" data-url="{{item.url}}" src="/image/fff_5s_rewind.png" style="width: 40rpx;height: 44rpx;"/>
+    <image catchtap="playVoice" data-index="{{idx}}" data-playing="{{item.name}}" data-url="{{item.url}}" src="/image/fff_{{playing_audio_state==item.name?'pause':'play'}}.png" style="width: 54rpx;height: 54rpx;margin-left: 64rpx;margin-right: 64rpx;"/>
+    <image catch:tap="f_5s" data-type="forward" data-index="{{idx}}" data-playing="{{item.name}}" data-url="{{item.url}}" src="/image/fff_5s_forward.png" style="width: 40rpx;height: 44rpx;"/>
+
+    <view catch:tap="showRates" style="font-size: 22rpx;color: #333333;position: absolute;right: 0;bottom: 0;">{{currentAudioRate}}X倍速</view>
+    </view>
+
+
+  </view>
+</view>
+
+<!-- <image src="/image/trangle_left.png" mode="widthFix" style="width: 12rpx;margin-right:-2rpx;"/> -->
+<!-- <view style="padding: 6rpx 18rpx;background-color: #62C4C1;border-radius: 10rpx;display: flex;align-items: center;min-width: 420rpx;">
+<image catchtap="playVoice" data-index="{{idx}}" data-playing="{{item.name}}" data-url="{{item.url}}" src="/image/{{playing_audio_state==item.name?'roca_homework_pause.png':'roca_homework_play.png'}}" style="width: 44rpx;" mode="widthFix"/>
+<slider data-index="{{idx}}" data-playing="{{item.name}}" data-url="{{item.url}}"  bindchanging="sliderChanging" bindchange='sliderChanged' min="0" max="100" value="{{item.value}}" color="#A0EBEB" activeColor="white" style="margin-left: 20rpx;margin-right: 10rpx;flex: 1;" block-size="10rpx" block-color="#A0EBEB"></slider>
+<view wx:if="{{item.audio_size>0}}" style="font-size:24rpx;color:white;margin-left: 10rpx;">{{item.audio_size}}''</view>
+</view> -->
+</view>
+
+</view>
+</view>
+</scroll-view>
+
+<view bindtap="changeFold" style="width: 100%;display: flex;align-items: center;justify-content: center;padding: 20rpx 0 20rpx 0;">
+<view style="display: flex;align-items: center;">
+<view style="font-size: 22rpx;color: #999999;">{{!fold?'收起':'展开'}}</view>
+<image src="/image/arrow_{{!fold?'up':'down'}}.png" style="width: 18rpx;height: 10rpx;margin-left: 10rpx;"/>
+</view>
+</view>
+
+</view>
+
+</view>
+
+<view style="height: 270rpx;"></view>
+<view bindtap="closePopup" style="background-color: #f5f5f5;">
+<scroll-view scroll-into-view="{{toView}}"  enable-back-to-top="true" enable-passive="true" scroll-y style="height:calc(100vh - 450rpx);" scroll-with-animation="false">
+<view wx:for="{{list}}" wx:for-index="idx" style="position: relative;">
+
+<view wx:if="{{item.create_time.length>0}}" style="padding: 30rpx 0;width: 100%;display: flex;align-items: center;justify-content: center;">
+<view style="font-size: 28rpx;color: #666666;padding: 8rpx 24rpx;border-radius: 12rpx;background-color: white;">{{item.create_time}}</view>
+</view>
+
+<!-- 长按操作区 -->
+<view class="popup" style="top: {{item.type==1?item.create_time.length>0?'46rpx':'-60rpx':'46rpx'}};" wx:if="{{popup == item.id}}">
+        <view catchtap='recallMessage' data-item="{{item}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+        <image style="width:36rpx;height: 36rpx;" src="/image/chatList_longTap_recall.png" mode="aspectFill"></image>
+        <view class="item">删除</view>
+        </view>
+        <view class="corner"></view>
+</view>
+
+<view bindlongpress="{{is_tutor?'showPopop':''}}" data-item="{{item}}" wx:if="{{item.student==0}}" style="padding: 0 40rpx 40rpx 40rpx;display: flex;align-items: flex-start;">
+<image src="{{item.head.length>0?item.head:'/image/avatar.png'}}" mode="aspectFill" style="width: 80rpx;height: 80rpx;border-radius: 10rpx;flex-shrink: 0;"/>
+<view style="margin-left: 30rpx;">
+<view style="font-size: 28rpx;color: #1d1e1f;font-weight: bold;">{{item.username}}</view>
+<!-- content -->
+<view style="margin-top: 16rpx;">
+<!-- 文字 -->
+
+<!-- 1文本 2图片 3语音 -->
+<view wx:if="{{item.type==1}}" style="display: flex;align-items:flex-start;">
+<image src="/image/roca_arrow_white_left.png" mode="widthFix" style="width: 12rpx;margin-top: 20rpx;flex-shrink: 0;"/>
+<text style="padding: 20rpx;border-radius: 16rpx;background-color: white;">{{item.content}}</text>
+</view>
+
+<!-- 图片 -->
+<image wx:if="{{item.type==2}}" src="{{item.short}}" catchtap="preview" data-url="{{item.short}}" mode="aspectFill" style="width: 320rpx;height:200rpx;display: block;"/>
+
+
+<!-- 语音 -->
+<view wx:if="{{item.type==3}}" catchtap="playVoice" data-url="{{item.url}}" data-playing="{{item.id}}" style="display: flex;align-items: center;">
+<image src="/image/roca_arrow_white_left.png" mode="widthFix" style="width: 12rpx;margin-right: -2rpx;flex-shrink: 0;"/>
+<view style="padding: 16rpx 18rpx;background-color: white;border-radius: 10rpx;display: flex;align-items: center;min-width: 200rpx;">
+<image src="/image/{{playing_audio_state==item.id?'roca_homework_playing2.gif':'sound_left.png'}}" style="width: 26rpx;" mode="widthFix"/>
+<view style="font-size:24rpx;color:#333333;margin-left: 10rpx;">{{item.audio_size}}''</view>
+</view>
+</view>
+
+</view>
+</view>
+</view>
+
+
+
+<!-- 自己发的 -->
+<view data-item="{{item}}" wx:if="{{item.student==1}}" style="padding: 0 40rpx 40rpx 40rpx;display: flex;align-items: flex-start;justify-content: flex-end;">
+<view style="flex: 1;">
+<view style="font-size: 28rpx;color: #1d1e1f;font-weight: bold;text-align: right;">{{item.username}}</view>
+<!-- content -->
+<view style="margin-top: 16rpx;display: flex;flex-direction: column;justify-content: flex-end;width: 100%;">
+<!-- 文字 -->
+<view wx:if="{{item.type==1}}" style="display: flex;align-items:flex-start;justify-content: flex-end;">
+
+<text style="padding: 20rpx;border-radius: 16rpx;background-color: #62C4C1;color: white;">{{item.content}}</text>
+
+<image src="/image/trangle_right.png" mode="widthFix" style="width: 12rpx;margin-top: 20rpx;display: block;margin-left: -2rpx;flex-shrink: 0;"/>
+</view>
+
+<!-- 图片 -->
+<view wx:if="{{item.type==2}}" style="width: 100%;display: flex;align-items: center;justify-content: flex-end;">
+  <image catchtap="preview" src="{{item.short}}" data-url="{{item.short}}" mode="aspectFill" style="width: 320rpx;height:200rpx;display: block;"/>
+</view>
+
+
+
+<!-- 语音 -->
+<view wx:if="{{item.type==3}}" catchtap="playVoice" data-url="{{item.url}}" data-playing="{{item.id}}" style="display: flex;align-items: center;justify-content: flex-end;">
+
+<view style="padding: 16rpx 18rpx;background-color: #62C4C1;border-radius: 10rpx;display: flex;align-items: center;min-width: 200rpx;justify-content: flex-end;">
+  <view style="font-size:24rpx;color:white;margin-left: 10rpx;">{{item.audio_size}}''</view>
+<image src="/image/{{playing_audio_state==item.id?'roca_homework_playing3.gif':'sound_right.png'}}" mode="widthFix" style="width: 26rpx;margin-left: 10rpx;"/>
+
+</view>
+
+<image src="/image/trangle_right.png" mode="widthFix" style="width: 12rpx;margin-left: -2rpx;flex-shrink: 0;"/>
+</view>
+
+</view>
+</view>
+<image src="{{item.head.length>0?item.head:'/image/avatar.png'}}" mode="aspectFill" style="width: 80rpx;height: 80rpx;border-radius: 10rpx;flex-shrink: 0;margin-left: 30rpx;"/>
+
+</view>
+
+</view>
+<view style="height: {{footerHeight}}rpx;"></view>
+<view id="footer" style="height: 50rpx;"></view>
+</scroll-view>
+</view>
+
+<view style="position: fixed;bottom: 0;width: 100%;height: {{barHeight}}rpx;background-color: white;">
+<view style="padding: 20rpx 40rpx;display: flex;align-items: center;justify-content: space-between;">
+<view style="display: flex;align-items: center;">
+  <image bindtap="showVoiceAction" src="/image/roca_{{showVoice?'keybord':'voice'}}.png" style="width: 50rpx;height: 50rpx;"/>
+  <image bindtap="selectImage" src="/image/roca_camera.png" style="width: 50rpx;height: 50rpx;margin-left: 20rpx;"/>
+</view>
+<view wx:if="{{!showVoice}}" style="display: flex;align-items: center;">
+<!-- <view style="background: #E9ECF1;border-radius:8rpx;width: 100%;padding: 10rpx 20rpx 0 20rpx;margin-left: 20rpx;display: flex;align-items: center;"> -->
+<textarea auto-height="true" maxlength="-1" confirm-type="return" disable-default-padding="true" show-confirm-bar="false"  cursor-spacing="16" bindinput="handleChange" bindfocus="bindFocus" bindblur="bindBlur" style="font-size: 30rpx;width: 48vw;background: #E9ECF1;border-radius:8rpx;margin-left: 20rpx;padding: 20rpx;max-height: 80rpx;" placeholder-style="font-size:30rpx;color:#999999;"  value="{{value}}" placeholder="请输入…"></textarea>
+<!-- </view> -->
+<view bindtap="bindConfirm" style="background: {{value.length>0?'#62C4C1':'#E9ECF1'}};border-radius:8rpx;padding: 14rpx 40rpx;font-size: 30rpx;color: {{value.length>0?'white':'#999999'}};flex-shrink: 0;margin-left: 20rpx;">发送</view>
+</view>
+<view wx:if="{{showVoice}}" bindtap="sendVoice" style="background: {{tempAudio.tempFilePath&&tempAudio.tempFilePath.length>0?'#62C4C1':'#E9ECF1'}};border-radius:8rpx;padding: 14rpx 40rpx;font-size: 30rpx;color: {{tempAudio.tempFilePath&&tempAudio.tempFilePath.length>0?'white':'#999999'}};">发送</view>
+</view>
+<view wx:if="{{showVoice}}" style="border-top: 2rpx #dedede solid;">
+<view style="display: flex;align-items: center;margin-top: 120rpx;">
+<view bindtap="rerecord" style="width: 33%;display: flex;align-items: center;justify-content: center;flex-direction: column;visibility: {{tempAudio.tempFilePath&&tempAudio.tempFilePath.length>0?'visible':'hidden'}};">
+<image src="/image/class_rerecord.png" style="width: 86rpx;height: 86rpx;"/>
+<view style="font-size:24rpx;color:#999999;margin-top:16rpx;">重新录制</view>
+</view>
+<view catchtap="record" style="width: 33%;display: flex;align-items: center;justify-content: center;flex-direction: column;position: relative;">
+  <image src="/image/roca_homework_recording.gif" style="width: 230rpx;height: 230rpx;visibility: {{isRecording?'visible':'hidden'}}"/>
+  <image src="/image/class_record.png" style="width: 230rpx;height: 230rpx;visibility: {{isRecording?'hidden':'visible'}};position: absolute;top: 0;"/>
+<!-- <image src="/image/{{isRecording?'roca_homework_recording.gif':'class_record.png'}}" style="width: 230rpx;height: 230rpx;"/> -->
+<view style="font-size: 30rpx;color: #999999;">{{isRecording?'点击结束':'点击开始'}}录音</view>
+</view>
+<view catchtap="playVoice" data-playing="record" data-url="{{tempAudio.tempFilePath}}" style="width: 33%;display: flex;align-items: center;justify-content: center;flex-direction: column;visibility: {{tempAudio.tempFilePath&&tempAudio.tempFilePath.length>0?'visible':'hidden'}};">
+<image src="/image/{{playing_audio_state=='record'?'roca_homework_playing.gif':'class_play.png'}}" style="width: 86rpx;height: 86rpx;background-color: #00bfa6;border-radius: 43rpx;"/>
+<view style="font-size:24rpx;color:#999999;margin-top:16rpx;">试听</view>
+</view>
+</view>
+</view>
+</view>
+
+<van-dialog id="van-dialog" showCancelButton="true" show="{{showDia}}" message="确定要删除这条消息吗？" title="删除" confirm-button-text="确定" bind:confirm="goDelete"/>
+
+<van-popup z-index="999999" show="{{showAudioRates}}" position="bottom" custom-class="round" custom-style="height:800rpx;width:100%;" bind:close="sizerClose">
+<view wx:for="{{audioRates}}" bindtap="rate_c" data-item="{{item}}" style="padding: 34rpx 0;display: flex;align-items: center;justify-content: center;">
+  <view style="font-size:30rpx;color: {{item==currentAudioRate?'#479693':'black'}};">{{item}}</view>
+</view>
+<view style="height: 14rpx;background-color: #f7f7f7;"></view>
+<view bindtap="sizerClose" style="padding: 34rpx 0;display: flex;align-items: center;justify-content: center;">
+  <view style="font-size:32rpx;">取消</view>
+</view>
+</van-popup>

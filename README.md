@@ -1,2 +1,0 @@
-## examples of nodejs & golang
-

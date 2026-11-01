@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京澎湃波涛科技有限公司 | AI 驱动未来</title>
+<meta name="description" content="北京澎湃波涛科技有限公司，专注人工智能技术研发与产业落地，提供大模型、计算机视觉、数据智能等一站式解决方案。">
+<style>
+/* ===================== 基础 ===================== */
+:root{
+  --bg:#05060a;
+  --bg2:#080b14;
+  --cyan:#00e5ff;
+  --blue:#2f7bff;
+  --purple:#7b5cff;
+  --pink:#ff4ecd;
+  --text:#e9eefb;
+  --muted:#8d9cb5;
+  --line:rgba(120,180,255,.14);
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+::selection{background:rgba(0,229,255,.3)}
+
+/* 全局网格背景 */
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,229,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.045) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 10%, transparent 78%);
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 10%, transparent 78%);
+}
+/* 背景光晕 */
+body::after{
+  content:"";
+  position:fixed;z-index:0;pointer-events:none;
+  width:1100px;height:1100px;left:50%;top:-620px;transform:translateX(-50%);
+  background:radial-gradient(circle, rgba(0,140,255,.20), rgba(123,92,255,.10) 45%, transparent 70%);
+  filter:blur(30px);
+}
+
+.container{width:min(1180px,90%);margin:0 auto;position:relative;z-index:2}
+
+/* ===================== 导航 ===================== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;
+  transition:padding .35s ease, background .35s ease, border-color .35s ease, backdrop-filter .35s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  padding:10px 0;
+  background:rgba(5,6,10,.78);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom-color:var(--line);
+}
+.nav-inner{
+  width:min(1180px,90%);margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.02em;font-size:17px;white-space:nowrap}
+.logo-mark{
+  width:34px;height:34px;flex:0 0 34px;border-radius:10px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(0,229,255,.18),rgba(123,92,255,.18));
+  border:1px solid rgba(0,229,255,.35);
+  box-shadow:0 0 20px -6px rgba(0,229,255,.8) inset, 0 0 22px -10px rgba(0,229,255,.9);
+}
+.logo-mark svg{width:19px;height:19px;stroke:var(--cyan)}
+.logo em{font-style:normal;color:var(--cyan);font-weight:600;font-size:13px;letter-spacing:.16em;margin-left:2px}
+.logo .cn{background:linear-gradient(100deg,#ffffff,#a8d8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{
+  position:relative;display:block;padding:9px 16px;border-radius:999px;
+  font-size:14.5px;color:#b9c6da;transition:.28s;white-space:nowrap;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:50%;bottom:3px;width:0;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  transform:translateX(-50%);transition:width .3s ease;
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.nav-links a:hover::after{width:22px}
+.nav-links a.active{color:#fff;background:rgba(0,229,255,.09)}
+.nav-links a.active::after{width:22px;box-shadow:0 0 12px rgba(0,229,255,.9)}
+
+.nav-toggle{
+  display:none;width:42px;height:42px;border-radius:12px;cursor:pointer;
+  background:rgba(255,255,255,.04);border:1px solid var(--line);
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+}
+.nav-toggle span{display:block;width:18px;height:2px;background:#cfe3ff;border-radius:2px;transition:.3s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ===================== Hero ===================== */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  padding:120px 0 90px;overflow:hidden;
+}
+#particles{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:.85}
+.hero-glow{
+  position:absolute;left:50%;top:44%;width:920px;height:920px;transform:translate(-50%,-50%);
+  background:radial-gradient(circle, rgba(0,140,255,.20), rgba(123,92,255,.10) 45%, transparent 70%);
+  filter:blur(24px);pointer-events:none;z-index:0;
+}
+.hero-orb{
+  position:absolute;left:50%;top:46%;width:660px;height:660px;margin:-330px 0 0 -330px;
+  border-radius:50%;border:1px solid rgba(0,229,255,.13);pointer-events:none;z-index:0;
+  animation:spin 46s linear infinite;
+}
+.hero-orb::before{
+  content:"";position:absolute;inset:60px;border-radius:50%;
+  border:1px dashed rgba(123,92,255,.22);
+}
+.hero-orb::after{
+  content:"";position:absolute;top:-5px;left:50%;width:9px;height:9px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 18px 4px rgba(0,229,255,.85);transform:translateX(-50%);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.hero-content{position:relative;z-index:3;text-align:center;width:min(1180px,90%);margin:0 auto}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:7px 18px;border-radius:999px;font-size:13px;letter-spacing:.16em;
+  color:#9fe9ff;background:rgba(0,229,255,.07);
+  border:1px solid rgba(0,229,255,.28);
+  box-shadow:0 0 30px -12px rgba(0,229,255,.9);
+}
+.hero-badge .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 10px 2px rgba(0,229,255,.9);animation:pulse 1.8s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+
+.hero h1{
+  font-size:clamp(34px,6.2vw,66px);
+  line-height:1.18;font-weight:800;letter-spacing:-.01em;
+  margin:26px 0 22px;
+}
+.hero h1 .grad{
+  background:linear-gradient(100deg,#00e5ff 0%,#4d9bff 38%,#7b5cff 68%,#ff4ecd 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:200% auto;animation:flow 7s linear infinite;
+}
+@keyframes flow{to{background-position:200% center}}
+.hero p.lead{
+  max-width:760px;margin:0 auto;color:#9fb0c9;font-size:clamp(15px,1.6vw,17.5px);
+}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:38px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:14px 30px;border-radius:999px;font-size:15px;font-weight:600;
+  border:1px solid transparent;cursor:pointer;transition:.3s;position:relative;
+  font-family:inherit;
+}
+.btn svg{width:17px;height:17px;transition:transform .3s}
+.btn:hover svg{transform:translateX(4px)}
+.btn-primary{
+  background:linear-gradient(100deg,#00e5ff,#2f7bff 52%,#7b5cff);
+  color:#03101c;
+  box-shadow:0 14px 34px -14px rgba(0,200,255,.95);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 44px -14px rgba(0,200,255,1)}
+.btn-ghost{
+  border-color:var(--line);color:var(--text);background:rgba(255,255,255,.03);
+}
+.btn-ghost:hover{border-color:rgba(0,229,255,.6);background:rgba(0,229,255,.08);transform:translateY(-3px)}
+
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  margin-top:74px;padding-top:34px;border-top:1px solid var(--line);
+}
+.hero-stats .num{
+  font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.02em;
+  background:linear-gradient(100deg,#ffffff,#7fe4ff 70%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-stats .num small{font-size:.55em;color:var(--cyan);-webkit-text-fill-color:var(--cyan);margin-left:2px}
+.hero-stats .lbl{font-size:13px;color:var(--muted);letter-spacing:.06em;margin-top:2px}
+
+/* 滚动提示 */
+.scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  width:24px;height:40px;border:1px solid rgba(140,190,255,.35);border-radius:14px;z-index:3;
+}
+.scroll-hint::after{
+  content:"";position:absolute;left:50%;top:8px;width:4px;height:7px;border-radius:2px;
+  background:var(--cyan);transform:translateX(-50%);animation:down 1.8s infinite;
+}
+@keyframes down{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,14px)}}
+
+/* ===================== 通用 Section ===================== */
+section{position:relative;padding:112px 0;scroll-margin-top:70px;z-index:2}
+.sec-head{max-width:760px;margin-bottom:56px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12.5px;letter-spacing:.28em;color:var(--cyan);text-transform:uppercase;font-weight:600;
+}
+.sec-tag::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+.sec-head.center .sec-tag::before{display:none}
+.sec-title{
+  font-size:clamp(27px,3.7vw,42px);font-weight:800;line-height:1.28;
+  margin:16px 0 16px;letter-spacing:-.01em;
+}
+.sec-desc{color:var(--muted);font-size:16px}
+
+.grad-text{
+  background:linear-gradient(100deg,#00e5ff,#7b5cff 70%,#ff4ecd);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* 卡片 */
+.card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px 28px;transition:.42s cubic-bezier(.2,.7,.3,1);
+  backdrop-filter:blur(6px);
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,.85),transparent);
+  opacity:0;transition:opacity .42s;
+}
+.card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(0,229,255,.45);
+  box-shadow:0 0 0 1px rgba(0,229,255,.10), 0 26px 50px -26px rgba(0,229,255,.75);
+}
+.card:hover::before{opacity:1}
+
+/* 关于我们 */
+.about-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start}
+.about-text p{color:#9fb0c9;margin-bottom:16px;font-size:16px}
+.about-text p strong{color:#dceaff;font-weight:600}
+.about-points{display:grid;gap:14px;margin-top:26px}
+.point{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:#b7c6dd}
+.point .tick{
+  flex:0 0 22px;width:22px;height:22px;border-radius:7px;margin-top:3px;
+  display:grid;place-items:center;
+  background:rgba(0,229,255,.10);border:1px solid rgba(0,229,255,.35);
+}
+.point .tick svg{width:12px;height:12px;stroke:var(--cyan)}
+
+.mvv{display:grid;gap:16px}
+.mvv .card{padding:24px 24px}
+.mvv h4{font-size:16.5px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.mvv h4 .ico{
+  width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(0,229,255,.16),rgba(123,92,255,.16));
+  border:1px solid rgba(0,229,255,.28);
+}
+.mvv h4 .ico svg{width:15px;height:15px;stroke:var(--cyan)}
+.mvv p{color:var(--muted);font-size:14.5px}
+
+/* 核心业务 */
+.biz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px}
+.biz-icon{
+  width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;
+  background:linear-gradient(135deg,rgba(0,229,255,.14),rgba(123,92,255,.14));
+  border:1px solid rgba(0,229,255,.26);
+  box-shadow:0 0 26px -12px rgba(0,229,255,.9);
+  transition:.42s;
+}
+.biz-icon svg{width:24px;height:24px;stroke:var(--cyan);stroke-width:1.4}
+.card:hover .biz-icon{
+  background:linear-gradient(135deg,rgba(0,229,255,.28),rgba(123,92,255,.28));
+  box-shadow:0 0 34px -8px rgba(0,229,255,1);
+}
+.biz-grid h3{font-size:18.5px;font-weight:700;margin-bottom:10px}
+.biz-grid p{color:var(--muted);font-size:14.6px}
+.biz-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.biz-tags span{
+  font-size:12px;padding:3px 11px;border-radius:999px;color:#8fd8f5;
+  background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.18);
+}
+
+/* 技术实力 */
+.tech-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.bars{display:grid;gap:24px}
+.bar-top{display:flex;justify-content:space-between;font-size:14.5px;margin-bottom:9px;color:#cbd8ec}
+.bar-top b{color:var(--cyan);font-weight:600}
+.bar{height:6px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar i{
+  display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,#00e5ff,#7b5cff);
+  box-shadow:0 0 14px rgba(0,229,255,.75);
+  transition:width 1.5s cubic-bezier(.2,.7,.3,1);
+}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.chips span{
+  padding:9px 18px;border-radius:12px;font-size:14px;color:#a9d9f2;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
+  border:1px solid var(--line);transition:.3s;
+}
+.chips span:hover{border-color:rgba(0,229,255,.5);color:#fff;transform:translateY(-3px)}
+
+.tech-visual{
+  position:relative;aspect-ratio:1/0.92;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 45%, rgba(0,140,255,.16), transparent 62%), rgba(255,255,255,.015);
+  display:grid;place-items:center;
+}
+.core{
+  position:relative;width:132px;height:132px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  background:radial-gradient(circle,rgba(0,229,255,.30),rgba(123,92,255,.14) 62%,transparent 72%);
+  border:1px solid rgba(0,229,255,.5);
+  box-shadow:0 0 60px -10px rgba(0,229,255,.85), inset 0 0 40px -10px rgba(0,229,255,.6);
+  animation:pulse2 4s ease-in-out infinite;
+}
+.core b{font-size:19px;letter-spacing:.06em;background:linear-gradient(100deg,#fff,#8be9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.core small{display:block;font-size:11px;letter-spacing:.24em;color:#8fd8f5;margin-top:3px}
+@keyframes pulse2{0%,100%{box-shadow:0 0 60px -10px rgba(0,229,255,.85), inset 0 0 40px -10px rgba(0,229,255,.6)}50%{box-shadow:0 0 90px -6px rgba(0,229,255,1), inset 0 0 50px -8px rgba(0,229,255,.85)}}
+.ring{
+  position:absolute;border-radius:50%;border:1px dashed rgba(120,180,255,.22);
+}
+.ring.r1{width:230px;height:230px;animation:spin 30s linear infinite}
+.ring.r2{width:330px;height:330px;border-style:solid;border-color:rgba(120,180,255,.12);animation:spin 55s linear infinite reverse}
+.node{
+  position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 14px 3px rgba(0,229,255,.9);
+}
+.node.n1{top:8%;left:50%}
+.node.n2{bottom:16%;left:12%;background:var(--purple);box-shadow:0 0 14px 3px rgba(123,92,255,.9)}
+.node.n3{bottom:10%;right:16%;background:var(--pink);box-shadow:0 0 14px 3px rgba(255,78,205,.9)}
+
+/* 解决方案 */
+.sol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.sol-card{padding:28px 24px}
+.sol-card .idx{
+  font-size:13px;font-weight:700;letter-spacing:.16em;color:rgba(0,229,255,.75);margin-bottom:16px;
+}
+.sol-card h3{font-size:17.5px;margin-bottom:10px}
+.sol-card p{color:var(--muted);font-size:14.5px}
+
+/* 联系我们 */
+.contact-grid{display:grid;grid-template-columns:.85fr 1fr;gap:32px;align-items:start}
+.info-list{display:grid;gap:14px}
+.info-item{display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:14px;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.012));
+  border:1px solid var(--line);transition:.35s}
+.info-item:hover{border-color:rgba(0,229,255,.4);transform:translateX(4px)}
+.info-item .ico{
+  flex:0 0 40px;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(0,229,255,.16),rgba(123,92,255,.16));
+  border:1px solid rgba(0,229,255,.26);
+}
+.info-item .ico svg{width:18px;height:18px;stroke:var(--cyan);stroke-width:1.5;fill:none}
+.info-item small{display:block;color:var(--muted);font-size:12.5px;letter-spacing:.08em;margin-bottom:2px}
+.info-item b{font-weight:600;font-size:15px;color:#e3ecfb;word-break:break-all}
+
+.form{
+  padding:32px;border-radius:20px;
+  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+  border:1px solid var(--line);backdrop-filter:blur(8px);
+}
+.form h3{font-size:19px;margin-bottom:6px}
+.form p.sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:#a8b8ce;margin-bottom:7px;letter-spacing:.04em}
+.field input,.field textarea{
+  width:100%;padding:12px 15px;border-radius:11px;font-size:14.5px;font-family:inherit;
+  background:rgba(5,8,16,.6);border:1px solid var(--line);color:var(--text);
+  outline:none;transition:.3s;resize:vertical;
+}
+.field input:focus,.field textarea:focus{
+  border-color:rgba(0,229,255,.65);
+  box-shadow:0 0 0 3px rgba(0,229,255,.10);
+}
+.field input::placeholder,.field textarea::placeholder{color:#5e6d83}
+.form .btn{width:100%;justify-content:center;margin-top:6px}
+
+/* 页脚 */
+footer{
+  position:relative;z-index:2;
+  border-top:1px solid var(--line);
+  padding:44px 0 34px;background:rgba(4,6,11,.7);
+}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{font-size:14px;color:var(--muted);transition:.3s}
+.foot-links a:hover{color:var(--cyan)}
+.copy{font-size:13px;color:#5f6f86}
+
+/* 滚动出现动画 */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* ===================== 响应式 ===================== */
+@media (max-width:980px){
+  .about-grid,.tech-wrap,.contact-grid{grid-template-columns:1fr;gap:38px}
+  .tech-visual{order:-1;max-width:460px;margin:0 auto;width:100%}
+}
+@media (max-width:820px){
+  .nav-toggle{display:flex}
+  .nav-links{
+    position:absolute;top:calc(100% + 10px);right:5%;left:5%;
+    flex-direction:column;align-items:stretch;gap:4px;
+    padding:14px;border-radius:18px;
+    background:rgba(8,11,20,.96);border:1px solid var(--line);
+    backdrop-filter:blur(18px);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.95);
+    opacity:0;visibility:hidden;transform:translateY(-12px);transition:.32s;
+  }
+  .nav-links.open{opacity:1;visibility:visible;transform:translateY(0)}
+  .nav-links a{padding:12px 16px;border-radius:12px;font-size:15px}
+  .nav-links a::after{display:none}
+  section{padding:86px 0}
+  .hero{padding:110px 0 80px}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:26px 14px;margin-top:52px}
+  .hero-orb{width:440px;height:440px;margin:-220px 0 0 -220px}
+  .scroll-hint{display:none}
+}
+@media (max-width:480px){
+  .logo{font-size:15px}
+  .logo em{font-size:11.5px}
+  .btn{padding:13px 24px;font-size:14.5px}
+  .form{padding:24px}
+  .foot-inner{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 导航 ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/>
+          <path d="M12 12v9M12 12l8-4.5M12 12 4 7.5"/>
+        </svg>
+      </span>
+      <span class="cn">澎湃波涛</span><em>科技</em>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" class="active">关于我们</a></li>
+      <li><a href="#business">核心业务</a></li>
+      <li><a href="#tech">技术实力</a></li>
+      <li><a href="#solution">解决方案</a></li>
+      <li><a href="#contact">联系我们</a></li>
+    </ul>
+
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ Hero ============ -->
+<header class="hero" id="home">
+  <canvas id="particles"></canvas>
+  <div class="hero-glow"></div>
+  <div class="hero-orb"></div>
+
+  <div class="hero-content">
+    <span class="hero-badge"><i class="dot"></i>AI · 驱动产业新浪潮</span>
+
+    <h1>以人工智能<br><span class="grad">澎湃</span>每一个产业的未来</h1>
+
+    <p class="lead">
+      北京澎湃波涛科技有限公司 —— 专注大模型应用、计算机视觉与数据智能，
+      为企业提供从算法研发到工程落地的一站式 AI 解决方案。
+    </p>
+
+    <div class="hero-actions">
+      <a href="#business" class="btn btn-primary">
+        探索核心能力
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-ghost">联系我们</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="num"><span data-count="2019">0</span></div>
+        <div class="lbl">公司成立</div>
+      </div>
+      <div>
+        <div class="num"><span data-count="120">0</span><small>+</small></div>
+        <div class="lbl">技术团队</div>
+      </div>
+      <div>
+        <div class="num"><span data-count="300">0</span><small>+</small></div>
+        <div class="lbl">服务客户</div>
+      </div>
+      <div>
+        <div class="num"><span data-count="50">0</span><small>+</small></div>
+        <div class="lbl">技术专利</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint"></div>
+</header>
+
+<!-- ============ 关于我们 ============ -->
+<section id="about">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">About Us</span>
+      <h2 class="sec-title">关于<span class="grad-text">澎湃波涛</span></h2>
+      <p class="sec-desc">让前沿算法真正走进业务场景，是我们从第一天起就在做的事。</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          <strong>北京澎湃波涛科技有限公司</strong>成立于 2019 年，总部位于北京中关村，
+          是一家以人工智能技术研发与产业落地为核心的国家高新技术企业。
+        </p>
+        <p>
+          公司汇聚了来自顶尖高校与一线互联网企业的算法工程师、产品与行业专家，
+          围绕<strong>大语言模型、计算机视觉、多模态理解与数据智能</strong>四大方向持续投入，
+          构建了从数据治理、模型训练到推理部署的完整技术闭环。
+        </p>
+        <p>
+          我们相信，AI 的价值不在于参数规模，而在于能否在真实业务中稳定、高效、
+          可衡量地创造收益。因此我们坚持「技术 + 场景」双轮驱动，与客户共同定义问题、
+          共同验证效果、共同分享成果。
+        </p>
+
+        <div class="about-points">
+          <div class="point">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span>自主研发的模型训练与推理平台，支持千亿参数级模型高效微调</span>
+          </div>
+          <div class="point">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span>覆盖金融、制造、医疗、教育、能源等行业的成熟落地经验</span>
+          </div>
+          <div class="point">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span>通过 ISO27001 信息安全与 ISO9001 质量管理体系认证</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mvv reveal d1">
+        <div class="card">
+          <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span>我们的使命</h4>
+          <p>用可落地的人工智能技术，帮助每一家企业获得更聪明的决策与更高效的运转。</p>
+        </div>
+        <div class="card">
+          <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg></span>我们的愿景</h4>
+          <p>成为产业智能化进程中最值得信赖的技术伙伴，让 AI 像水电一样触手可及。</p>
+        </div>
+        <div class="card">
+          <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.4.8-4.7 4.3 1.2 6.3L12 17l-5.5 3 1.2-6.3L3 9.4l6.4-.8L12 3Z"/></svg></span>我们的价值观</h4>
+          <p>求真、务实、开放、共赢。用工程化的严谨，兑现每一次技术承诺。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 核心业务 ============ -->
+<section id="business">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="sec-tag">Core Business</span>
+      <h2 class="sec-title">核心<span class="grad-text">业务</span></h2>
+      <p class="sec-desc">从底层算法到上层应用，构建完整的 AI 能力矩阵。</p>
+    </div>
+
+    <div class="biz-grid">
+      <div class="card reveal">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2"/>
+            <circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/>
+            <path d="M6.7 7.1 10.4 11M6.7 16.9 10.4 13M13.6 11l3.7-3.9M13.6 13l3.7 3.9"/>
+          </svg>
+        </div>
+        <h3>智能算法与模型研发</h3>
+        <p>面向业务场景定制大语言模型微调、计算机视觉识别、多模态理解与语音交互算法，兼顾精度与推理效率。</p>
+        <div class="biz-tags"><span>LLM 微调</span><span>CV 识别</span><span>多模态</span><span>NLP</span></div>
+      </div>
+
+      <div class="card reveal d1">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/>
+          </svg>
+        </div>
+        <h3>AI 平台与工具链</h3>
+        <p>提供数据标注、模型训练、评测调优到一键部署的 MLOps 平台，让算法迭代从「月」缩短到「天」。</p>
+        <div class="biz-tags"><span>MLOps</span><span>训练平台</span><span>模型评测</span><span>推理加速</span></div>
+      </div>
+
+      <div class="card reveal d2">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/>
+          </svg>
+        </div>
+        <h3>行业智能解决方案</h3>
+        <p>深耕金融风控、智能制造质检、医疗影像辅助诊断、教育个性化学习等场景，交付可量化的业务成果。</p>
+        <div class="biz-tags"><span>金融</span><span>制造</span><span>医疗</span><span>教育</span></div>
+      </div>
+
+      <div class="card reveal d3">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>
+          </svg>
+        </div>
+        <h3>数据智能与决策</h3>
+        <p>打通多源异构数据，构建知识图谱与智能分析引擎，为企业经营决策提供实时、可解释的数据支撑。</p>
+        <div class="biz-tags"><span>知识图谱</span><span>数据中台</span><span>智能 BI</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 技术实力 ============ -->
+<section id="tech">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Technology</span>
+      <h2 class="sec-title">技术<span class="grad-text">实力</span></h2>
+      <p class="sec-desc">持续的研发投入，是我们交付稳定结果的底气。</p>
+    </div>
+
+    <div class="tech-wrap">
+      <div class="reveal">
+        <div class="bars">
+          <div>
+            <div class="bar-top"><span>大语言模型与智能体</span><b>95%</b></div>
+            <div class="bar"><i data-w="95"></i></div>
+          </div>
+          <div>
+            <div class="bar-top"><span>计算机视觉与图像识别</span><b>92%</b></div>
+            <div class="bar"><i data-w="92"></i></div>
+          </div>
+          <div>
+            <div class="bar-top"><span>数据工程与知识图谱</span><b>88%</b></div>
+            <div class="bar"><i data-w="88"></i></div>
+          </div>
+          <div>
+            <div class="bar-top"><span>云原生与高性能推理部署</span><b>90%</b></div>
+            <div class="bar"><i data-w="90"></i></div>
+          </div>
+        </div>
+
+        <div class="chips">
+          <span>Transformer</span><span>RAG</span><span>Agent</span><span>LoRA</span>
+          <span>YOLO 系列</span><span>OCR</span><span>向量数据库</span><span>Kubernetes</span>
+          <span>TensorRT</span><span>知识图谱</span><span>联邦学习</span><span>边缘计算</span>
+        </div>
+      </div>
+
+      <div class="tech-visual reveal d1">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <span class="node n1"></span>
+        <span class="node n2"></span>
+        <span class="node n3"></span>
+        <div class="core">
+          <div>
+            <b>AI CORE</b>
+            <small>ENGINE</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 解决方案 ============ -->
+<section id="solution">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="sec-tag">Solutions</span>
+      <h2 class="sec-title">行业<span class="grad-text">解决方案</span></h2>
+      <p class="sec-desc">不堆砌技术名词，只解决真实存在的问题。</p>
+    </div>
+
+    <div class="sol-grid">
+      <div class="card sol-card reveal">
+        <div class="idx">01 / FINANCE</div>
+        <h3>金融智能风控</h3>
+        <p>基于多维行为数据与图算法构建实时反欺诈模型，风险识别准确率提升至行业领先水平。</p>
+      </div>
+      <div class="card sol-card reveal d1">
+        <div class="idx">02 / MANUFACTURE</div>
+        <h3>工业视觉质检</h3>
+        <p>毫秒级缺陷检测与产线数据闭环，替代人工目检，显著降低漏检率与质量成本。</p>
+      </div>
+      <div class="card sol-card reveal d2">
+        <div class="idx">03 / HEALTHCARE</div>
+        <h3>医疗影像辅助</h3>
+        <p>面向影像科的多模态辅助诊断系统，帮助医生更快定位病灶、提升阅片效率。</p>
+      </div>
+      <div class="card sol-card reveal d3">
+        <div class="idx">04 / ENTERPRISE</div>
+        <h3>企业知识智能体</h3>
+        <p>打通内部文档与业务系统，构建可溯源的企业级 AI 助手，让知识随问随得。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 联系我们 ============ -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Contact</span>
+      <h2 class="sec-title">让我们<span class="grad-text">聊一聊</span></h2>
+      <p class="sec-desc">无论是技术合作、方案咨询还是加入我们，都欢迎随时联系。</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="info-list reveal">
+        <div class="info-item">
+          <span class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <div>
+            <small>公司地址</small>
+            <b>北京市海淀区中关村科技园区 · 澎湃大厦 12 层</b>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h4l2 5-2.5 1.5a12 12 0 0 0 5 5L14 14l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 3 6a1 1 0 0 1 1-1Z"/></svg></span>
+          <div>
+            <small>商务合作</small>
+            <b>010-8888 6666</b>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
+          <div>
+            <small>电子邮箱</small>
+            <b>contact@pengpai-ai.com</b>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <div>
+            <small>工作时间</small>
+            <b>周一至周五 09:00 - 18:30</b>
+          </div>
+        </div>
+      </div>
+
+      <form class="form reveal d1" id="contactForm">
+        <h3>提交合作需求</h3>
+        <p class="sub">我们会在 1 个工作日内与您取得联系。</p>
+
+        <div class="field">
+          <label for="name">您的称呼</label>
+          <input id="name" type="text" placeholder="请输入姓名" required>
+        </div>
+        <div class="field">
+          <label for="company">公司 / 机构</label>
+          <input id="company" type="text" placeholder="请输入公司名称">
+        </div>
+        <div class="field">
+          <label for="phone">联系方式</label>
+          <input id="phone" type="text" placeholder="手机号或邮箱" required>
+        </div>
+        <div class="field">
+          <label for="msg">需求描述</label>
+          <textarea id="msg" rows="4" placeholder="简单描述您的业务场景与期望目标…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          提交需求
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 页脚 ============ -->
+<footer>
+  <div class="container foot-inner">
+    <div>
+      <div class="logo" style="margin-bottom:8px">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/>
+            <path d="M12 12v9M12 12l8-4.5M12 12 4 7.5"/>
+          </svg>
+        </span>
+        <span class="cn">澎湃波涛</span><em>科技</em>
+      </div>
+      <div class="copy">© 2025 北京澎湃波涛科技有限公司 · 京ICP备00000000号</div>
+    </div>
+
+    <div class="foot-links">
+      <a href="#about">关于我们</a>
+      <a href="#business">核心业务</a>
+      <a href="#tech">技术实力</a>
+      <a href="#solution">解决方案</a>
+      <a href="#contact">联系我们</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================
+   1. 粒子网络背景
+===================================================== */
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, particles = [], raf = null;
+  const mouse = { x: null, y: null };
+  const LINK_DIST = 132;
+
+  function init(){
+    particles = [];
+    const count = Math.min(110, Math.max(38, Math.floor(W * H / 16000)));
+    for (let i = 0; i < count; i++){
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.42,
+        vy: (Math.random() - 0.5) * 0.42,
+        r: Math.random() * 1.5 + 0.7
+      });
+    }
+  }
+
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth;
+    H = canvas.clientHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    init();
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    // 连线
+    for (let i = 0; i < particles.length; i++){
+      const p = particles[i];
+      for (let j = i + 1; j < particles.length; j++){
+        const q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < LINK_DIST){
+          const a = (1 - d / LINK_DIST) * 0.42;
+          ctx.strokeStyle = 'rgba(0,200,255,' + a.toFixed(3) + ')';
+          ctx.lineWidth = 0.7;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // 鼠标连线
+    if (mouse.x !== null){
+      for (let i = 0; i < particles.length; i++){
+        const p = particles[i];
+        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 168){
+          const a = (1 - d / 168) * 0.55;
+          ctx.strokeStyle = 'rgba(123,92,255,' + a.toFixed(3) + ')';
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // 粒子
+    for (let i = 0; i < particles.length; i++){
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -20) p.x = W + 20;
+      if (p.x > W + 20) p.x = -20;
+      if (p.y < -20) p.y = H + 20;
+      if (p.y > H + 20) p.y = -20;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(120,225,255,0.85)';
+      ctx.shadowColor = 'rgba(0,229,255,0.9)';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  canvas.addEventListener('mousemove', function(e){
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  canvas.addEventListener('mouseleave', function(){
+    mouse.x = null; mouse.y = null;
+  });
+
+  resize();
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    draw();
+  }
+})();
+
+/* =====================================================
+   2. 导航栏滚动态 + 移动端菜单
+===================================================== */
+(function(){
+  const nav = document.getElementById('nav');
+  const navLinks = document.getElementById('navLinks');
+  const toggle = document.getElementById('navToggle');
+
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  toggle.addEventListener('click', function(){
+    navLinks.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      toggle.classList.remove('open');
+    });
+  });
+})();
+
+/* =====================================================
+   3. 滚动出现动画 + 数字滚动 + 进度条
+===================================================== */
+(function(){
+  const revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el){
+    revealObserver.observe(el);
+  });
+
+  // 数字增长
+  function countUp(el){
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 1500;
+    const start = performance.now();
+    function step(now){
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(target * eased);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+
+  const numObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        countUp(entry.target);
+        numObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    numObserver.observe(el);
+  });
+
+  // 技能进度条
+  const barObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        const bar = entry.target;
+        setTimeout(function(){
+          bar.style.width = bar.dataset.w + '%';
+        }, 180);
+        barObserver.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.bar i').forEach(function(el){
+    barObserver.observe(el);
+  });
+})();
+
+/* =====================================================
+   4. 导航高亮当前模块
+===================================================== */
+(function(){
+  const links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  const sections = links
+    .map(function(a){ return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  function update(){
+    const pos = window.scrollY + window.innerHeight * 0.32;
+    let current = sections[0];
+    sections.forEach(function(sec){
+      if (sec.offsetTop <= pos) current = sec;
+    });
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* =====================================================
+   5. 表单提交（前端演示）
+===================================================== */
+(function(){
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.innerHTML;
+    btn.innerHTML = '✓ 已提交，感谢您的信任';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '.85';
+    setTimeout(function(){
+      btn.innerHTML = original;
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+      form.reset();
+    }, 2600);
+  });
+})();
+</script>
+</body>
+</html>

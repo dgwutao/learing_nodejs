@@ -1,0 +1,6 @@
+<view class="" hover-class="none" hover-stop-propagation="false" style="display:inline-block">
+  <view class="h-btn {{'btn-type-'+type}} {{bold?'h-btn-bold':''}} {{'btn-'+size}} {{unchoosed?'btn-unchoosed':''}} {{noshadow?'noshadow':''}}" style="{{height?'height:'+height+'rpx;border-radius:'+height/2+'rpx;':''}}{{fontSize?'font-size:'+fontSize+'rpx;':''}}{{minWidth?'min-width:'+minWidth+'rpx;':''}}{{borderRadius?'border-radius:'+borderRadius+'rpx;':''}}" hover-class="none" hover-stop-propagation="false" catchtap='onclick'>
+    <image class="icon" wx:if="{{iconsrc}}" src="{{iconsrc}}" style="width:{{iconwidth}}rpx" mode="widthFix"></image>
+    {{text}}
+  </view>
+</view>

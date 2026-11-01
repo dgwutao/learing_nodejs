@@ -1,0 +1,12 @@
+page{
+  background-color: #f7f7f7;
+}
+
+.round{
+  border-top-left-radius: 48rpx;
+  border-top-right-radius: 48rpx;
+}
+
+.a-class{
+  padding: 30rpx 40rpx;
+}

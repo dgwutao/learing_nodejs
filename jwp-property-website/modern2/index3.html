@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="JWP Property">
+  <meta name="keywords" content="JWP Property">
+  <meta name="author" content="JWP Group">
+  <title>JWP Global Investment - 全球资产配置专家</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script src="/static/lib/tailwindcss.js"></script>
+  <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/google-fonts.css">
+  <script src="/components/navComponentModern2.js"></script>
+  <script src="/components/footerComponent.js"></script>
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#FF7D00',
+            neutral: '#F5F7FA',
+            dark: '#333333',
+            light: '#FFFFFF',
+            muted: '#86909C',
+            light2: '#F5F7FA',
+          },
+          // fontFamily: {
+          //   inter: ['Inter', 'sans-serif'],
+          // },
+          boxShadow: {
+            'elegant': '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
+            'hover': '0 20px 40px -5px rgba(0, 0, 0, 0.15)',
+          }
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .transition-custom {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+  </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav-component-modern></nav-component-modern>
+  
+  <!-- 英雄区域 -->
+  <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <video src="http://1258701154.vod2.myqcloud.com/fb7bc78cvodtranscq1258701154/6bc54ab73560136624205029615/v.f100040.mp4" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;" autoplay loop muted></video>
+
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-20 text-center">
+      <h1 class="text-[clamp(2.5rem,5vw,4.5rem)] font-bold text-white leading-tight mb-6 text-shadow">
+        全球资产配置<br>与高端地产投资的领航者
+      </h1>
+      <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 max-w-3xl mx-auto mb-10">
+        JWP 地产集团为高净值人群提供多元化的海外资产配置方案，
+        打造高品质的生活空间与投资机会。
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#services" class="px-8 py-3 bg-white text-primary font-semibold rounded-full shadow-elegant hover:shadow-hover transition-custom transform hover:-translate-y-1">
+          探索业务
+        </a>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center z-20">
+      <a href="#services" class="text-white animate-bounce">
+        <i class="fa fa-angle-down text-3xl"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- 核心业务领域 -->
+   <section id="services" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">核心业务领域</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">JWP地产开发业务覆盖多元房产类别，满足高净值人群跨境置业及海外资产配置需求JWP地产开发业务覆盖多元房产类别，满足高净值人群跨境置业及海外资产配置需求</p>
+      </div>
+      
+      <div style="display: flex;align-items: center;justify-content: space-between;">
+        <!-- 文旅酒店 -->
+        <div class="bg-light2 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 group" style="width: 18%;">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <i class="fa fa-building text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">文旅酒店</h3>
+          <p class="text-gray-600 mb-4">联袂全球五星级酒店品牌，打造东南亚文旅度假地产 “山海天” 战略。联袂全球五星级酒店品牌，打造东南亚文旅度假</p>
+        </div>
+        
+        <!-- 豪华别墅 -->
+        <div class="bg-light2 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 group" style="width: 18%;height: 100%;">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <i class="fa fa-home text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">豪华别墅</h3>
+          <p class="text-gray-600 mb-4">定制奢华私人别墅，提供全球高端别墅开发与资产管理服务。定制奢华私人别墅，提供全球高端别墅开发与资产管理服务。</p>
+        </div>
+        
+        <!-- 住宅公寓 -->
+        <div class="bg-light2 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 group" style="width: 18%;height: 100%;">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <i class="fa fa-car text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">住宅公寓</h3>
+          <p class="text-gray-600 mb-4">高品质住宅公寓开发，满足多元居住需求。打造高端养老社区，提供全方位康养服务,高品质住宅公寓开发，满足多元居住需求。</p>
+        </div>
+        
+        <!-- 商业养老 -->
+        <div class="bg-light2 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 group" style="width: 18%;height: 100%;">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <i class="fa fa-heartbeat text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">商业养老</h3>
+          <p class="text-gray-600 mb-4">打造高端养老社区，提供全方位康养服务。打造高端养老社区，提供全方位康养服务,打造高端养老社区，提供全方位康养服务。</p>
+        </div>
+        
+        <!-- 房产托管 -->
+        <div class="bg-light2 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 group"  style="width: 18%;height: 100%;">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <i class="fa fa-key text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">房产托管</h3>
+          <p class="text-gray-600 mb-4">专业全球房产管理服务，实现资产保值增值。专业全球房产管理服务，专业全球房产管理服务，实现资产保值增值。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 全球业务布局 -->
+   <section id="services" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">全球业务布局</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">JWP 业务范围覆盖全球四大洲 30 多个国家和地区，
+            在全球 20 + 个地区成立了分公司，拥有超过千人的员工团队。</p>
+      </div>
+
+      <div class="flex align-items justify-between mb-16">
+            <div class="bg-neutral p-6 rounded-lg" style="width: 24%;">
+              <div class="text-4xl font-bold text-primary mb-2">30 +</div>
+              <div class="text-muted">覆盖国家和地区</div>
+            </div>
+            <div class="bg-neutral p-6 rounded-lg" style="width: 24%;">
+              <div class="text-4xl font-bold text-primary mb-2">20 +</div>
+              <div class="text-muted">全球分公司</div>
+            </div>
+            <div class="bg-neutral p-6 rounded-lg" style="width: 24%;">
+              <div class="text-4xl font-bold text-primary mb-2">1000 +</div>
+              <div class="text-muted">专业团队规模</div>
+            </div>
+            <div class="bg-neutral p-6 rounded-lg" style="width: 24%;">
+              <div class="text-4xl font-bold text-primary mb-2">2000 +</div>
+              <div class="text-muted">分销渠道</div>
+            </div>
+          </div>
+
+          <img src="/static/images/service_global.png" loading="lazy" title="全球业务布局" alt="全球业务布局" style="width: 100%;object-fit: cover;object-position: center;display: block;"/>
+    </div>
+    </section>
+
+  <!-- 精选项目展示 -->
+  <section id="projects" class="py-24 bg-neutral">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-dark mb-4">精选项目展示</h2>
+        <p class="text-muted max-w-2xl mx-auto">探索我们在全球各地的标志性地产项目，
+          每一处都代表着卓越品质与独特生活方式。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 泰国普吉岛综合度假村 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-elegant">
+          <img src="https://picsum.photos/id/1039/800/1000" alt="泰国普吉岛综合度假村" class="w-full h-80 object-cover transition-custom group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-custom"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 transition-custom group-hover:translate-y-0">
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-4">
+              <span class="inline-block px-3 py-1 bg-primary text-white text-sm font-medium rounded-full mb-3">泰国</span>
+              <h3 class="text-xl font-bold text-white mb-2">普吉岛综合度假村</h3>
+              <p class="text-white/80 mb-4">位于泰国普吉岛的豪华度假村项目，融合自然景观与现代奢华。</p>
+              <a href="#" class="inline-flex items-center text-white font-medium">
+                查看详情 <i class="fa fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 塞浦路斯顶级海岸度假花园 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-elegant">
+          <img src="https://picsum.photos/id/1036/800/1000" alt="塞浦路斯顶级海岸度假花园" class="w-full h-80 object-cover transition-custom group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-custom"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 transition-custom group-hover:translate-y-0">
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-4">
+              <span class="inline-block px-3 py-1 bg-primary text-white text-sm font-medium rounded-full mb-3">塞浦路斯</span>
+              <h3 class="text-xl font-bold text-white mb-2">顶级海岸度假花园</h3>
+              <p class="text-white/80 mb-4">地中海风情的奢华度假社区，享受无敌海景与精致生活。</p>
+              <a href="#" class="inline-flex items-center text-white font-medium">
+                查看详情 <i class="fa fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 日本大阪一户建 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-elegant">
+          <img src="https://picsum.photos/id/1066/800/1000" alt="日本大阪一户建" class="w-full h-80 object-cover transition-custom group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-custom"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 transition-custom group-hover:translate-y-0">
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-4">
+              <span class="inline-block px-3 py-1 bg-primary text-white text-sm font-medium rounded-full mb-3">日本</span>
+              <h3 class="text-xl font-bold text-white mb-2">大阪一户建</h3>
+              <p class="text-white/80 mb-4">位于大阪核心区域的传统日式住宅，融合现代设计与传统文化。</p>
+              <a href="#" class="inline-flex items-center text-white font-medium">
+                查看详情 <i class="fa fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer-component></footer-component>
+
+  <!-- JavaScript -->
+  <script>
+    
+    // 平滑滚动导航
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+  </script>
+</body>
+</html>
+    

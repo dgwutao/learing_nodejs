@@ -1,0 +1,52 @@
+/* 验证点：
+   1. @import 被内联（CSS bundling 生效）
+   2. 压缩后注释、多余空白被移除，颜色值可能被缩短（如 #ffffff → #fff）
+   3. 产物落在 assets/css/style-<hash>.css
+   4. 规则实际生效（浏览器 computed style 可验证） */
+
+@import './style.css';
+
+.header {
+  background-image: url('../images/123.jpg');
+}
+
+.header2 {
+  background-image: url('../images/avatar/321.png');
+}
+
+.header3 {
+  background-image: url('../images/users/444.webp');
+}
+
+/* 这个注释在压缩后应该消失 */
+.test-box {
+  width: 100px;
+  height: 100px;
+  background-color: #ff0000;    /* 压缩后可能变成 red 或 #f00 */
+  border: 2px solid #000000;     /* 压缩后可能变成 #000 */
+  padding: var(--spacing);
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+.test-box:hover {
+  background-color: var(--primary-color);
+}
+
+/* 验证压缩器是否合并重复规则 / 移除空规则 */
+.empty-rule {
+}
+
+#app {
+  margin: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* 一个带媒体查询的规则，验证压缩后结构完整 */
+@media (max-width: 600px) {
+  .test-box {
+    width: 50px;
+    height: 50px;
+  }
+}

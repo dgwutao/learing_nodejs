@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京澎湃波涛科技有限公司 | 人工智能技术研发与产业落地</title>
+<meta name="description" content="北京澎湃波涛科技有限公司，专注人工智能技术研发与产业落地，提供大模型、计算机视觉、数据智能等一站式解决方案。">
+
+<script>
+  /* 提前设置主题，避免页面闪烁 */
+  (function(){
+    var saved = null;
+    try { saved = localStorage.getItem('ppbt-theme'); } catch(e){}
+    var theme = saved;
+    if (!theme) {
+      theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
+<style>
+/* ==========================================================
+   主题变量
+========================================================== */
+:root{
+  --brand-500:#2f6bff;
+  --brand-600:#1f4fd8;
+  --brand-400:#5b8bff;
+  --accent-cyan:#00b4d8;
+  --accent-teal:#0ea5a4;
+  --accent-violet:#7c5cff;
+  --accent-amber:#e0a020;
+
+  --radius-lg:18px;
+  --radius-md:12px;
+  --radius-sm:9px;
+
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* ---------- 暗色主题（默认） ---------- */
+html[data-theme="dark"]{
+  --bg:#080b12;
+  --bg-elev:#0e131d;
+  --bg-elev-2:#131a27;
+  --bg-subtle:#0a0f18;
+  --surface:rgba(255,255,255,.028);
+  --surface-hover:rgba(255,255,255,.055);
+  --border:rgba(130,165,225,.14);
+  --border-strong:rgba(130,165,225,.24);
+  --text:#e8eefb;
+  --text-secondary:#9dabc4;
+  --text-muted:#67748d;
+  --brand-ink:#7fa8ff;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:0 12px 30px -12px rgba(0,0,0,.7);
+  --shadow-lg:0 30px 60px -28px rgba(0,0,0,.85);
+  --glow:0 0 40px -12px rgba(47,107,255,.6);
+  --grid-color:rgba(120,160,230,.05);
+  --nav-bg:rgba(8,11,18,.78);
+  --hero-fade:rgba(8,11,18,.55);
+  color-scheme:dark;
+}
+
+/* ---------- 亮色主题 ---------- */
+html[data-theme="light"]{
+  --bg:#ffffff;
+  --bg-elev:#f7f9fc;
+  --bg-elev-2:#eef2f8;
+  --bg-subtle:#f2f5fa;
+  --surface:rgba(255,255,255,.9);
+  --surface-hover:rgba(47,107,255,.045);
+  --border:rgba(30,60,120,.11);
+  --border-strong:rgba(30,60,120,.2);
+  --text:#0d1526;
+  --text-secondary:#41506b;
+  --text-muted:#6b7a94;
+  --brand-ink:#1f4fd8;
+  --shadow-sm:0 1px 2px rgba(20,40,80,.06);
+  --shadow-md:0 14px 32px -14px rgba(20,45,90,.18);
+  --shadow-lg:0 30px 60px -30px rgba(20,45,90,.28);
+  --glow:0 0 40px -14px rgba(47,107,255,.35);
+  --grid-color:rgba(30,70,160,.045);
+  --nav-bg:rgba(255,255,255,.82);
+  --hero-fade:rgba(255,255,255,.5);
+  color-scheme:light;
+}
+
+/* ==========================================================
+   基础重置
+========================================================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  transition:background-color .45s var(--ease), color .45s var(--ease);
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+img,svg{display:block;max-width:100%}
+button,input,textarea{font-family:inherit;font-size:inherit;color:inherit}
+::selection{background:rgba(47,107,255,.3)}
+
+/* 全局背景网格 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--grid-color) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:72px 72px;
+  -webkit-mask-image:radial-gradient(ellipse 92% 62% at 50% 0%,#000 5%,transparent 76%);
+  mask-image:radial-gradient(ellipse 92% 62% at 50% 0%,#000 5%,transparent 76%);
+  transition:background-image .45s var(--ease);
+}
+
+.container{width:min(1160px,90%);margin:0 auto;position:relative;z-index:2}
+
+/* ==========================================================
+   滚动进度条
+========================================================== */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:400;
+  background:linear-gradient(90deg,var(--brand-500),var(--accent-cyan),var(--accent-violet));
+  box-shadow:0 0 12px rgba(47,107,255,.7);
+  border-radius:0 3px 3px 0;
+  transition:width .08s linear;
+}
+
+/* ==========================================================
+   导航栏
+========================================================== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  padding:18px 0;
+  border-bottom:1px solid transparent;
+  transition:padding .35s var(--ease), background-color .35s var(--ease),
+             border-color .35s var(--ease), backdrop-filter .35s var(--ease);
+}
+.nav.scrolled{
+  padding:10px 0;
+  background:var(--nav-bg);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom-color:var(--border);
+}
+.nav-inner{
+  width:min(1160px,90%);margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+}
+
+/* Logo */
+.logo{display:flex;align-items:center;gap:11px;white-space:nowrap;flex-shrink:0}
+.logo-mark{
+  width:36px;height:36px;flex:0 0 36px;border-radius:10px;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--brand-500),var(--accent-violet));
+  box-shadow:0 6px 18px -6px rgba(47,107,255,.7);
+  position:relative;overflow:hidden;
+}
+.logo-mark::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(140deg,transparent 40%,rgba(255,255,255,.35));
+  opacity:.6;
+}
+.logo-mark svg{width:19px;height:19px;stroke:#fff;stroke-width:1.7;fill:none;position:relative;z-index:1}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-text .cn{font-size:16px;font-weight:700;letter-spacing:.02em;color:var(--text)}
+.logo-text .en{font-size:9.5px;font-weight:600;letter-spacing:.2em;color:var(--text-muted);
+  font-family:var(--font-mono);text-transform:uppercase;margin-top:2px}
+
+/* 导航链接 */
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{
+  position:relative;display:block;padding:9px 15px;border-radius:8px;
+  font-size:14.5px;font-weight:500;color:var(--text-secondary);
+  transition:color .25s var(--ease), background-color .25s var(--ease);
+}
+.nav-links a::after{
+  content:"";position:absolute;left:50%;bottom:4px;
+  width:0;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--brand-500),var(--accent-cyan));
+  transform:translateX(-50%);
+  transition:width .3s var(--ease);
+}
+.nav-links a:hover{color:var(--text);background:var(--surface-hover)}
+.nav-links a:hover::after{width:20px}
+.nav-links a.active{color:var(--text);background:var(--surface-hover)}
+.nav-links a.active::after{width:20px;box-shadow:0 0 10px rgba(47,107,255,.8)}
+
+/* 导航右侧操作区 */
+.nav-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+
+/* 主题切换按钮 */
+.theme-toggle{
+  width:40px;height:40px;border-radius:10px;cursor:pointer;
+  display:grid;place-items:center;position:relative;
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text-secondary);
+  transition:all .3s var(--ease);
+}
+.theme-toggle:hover{
+  color:var(--brand-ink);
+  border-color:var(--border-strong);
+  background:var(--surface-hover);
+  transform:translateY(-1px);
+}
+.theme-toggle svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.8;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;position:absolute;
+  transition:opacity .3s var(--ease), transform .45s var(--ease);}
+.theme-toggle .icon-sun{opacity:0;transform:rotate(-90deg) scale(.6)}
+.theme-toggle .icon-moon{opacity:1;transform:rotate(0) scale(1)}
+html[data-theme="light"] .theme-toggle .icon-sun{opacity:1;transform:rotate(0) scale(1)}
+html[data-theme="light"] .theme-toggle .icon-moon{opacity:0;transform:rotate(90deg) scale(.6)}
+
+/* 移动端菜单按钮 */
+.nav-toggle{
+  display:none;width:40px;height:40px;border-radius:10px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--border);
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  transition:all .3s var(--ease);
+}
+.nav-toggle span{
+  display:block;width:17px;height:1.8px;border-radius:2px;
+  background:var(--text-secondary);
+  transition:all .3s var(--ease);
+}
+.nav-toggle.open span:nth-child(1){transform:translateY(6.8px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-6.8px) rotate(-45deg)}
+
+/* ==========================================================
+   Hero 首屏
+========================================================== */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;
+  padding:140px 0 100px;overflow:hidden;
+}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:.9}
+
+.hero-aura{
+  position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);
+  width:1000px;height:1000px;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(47,107,255,.16),rgba(124,92,255,.07) 42%,transparent 68%);
+  filter:blur(20px);
+  transition:opacity .45s var(--ease);
+}
+html[data-theme="light"] .hero-aura{opacity:.7}
+
+/* 旋转科技环 */
+.tech-rings{
+  position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
+  width:820px;height:820px;z-index:0;pointer-events:none;
+  opacity:.75;
+}
+.tech-rings .ring{position:absolute;border-radius:50%;border:1px solid transparent}
+.tech-rings .ring-1{
+  inset:0;
+  border-top-color:rgba(47,107,255,.5);
+  border-right-color:rgba(0,180,216,.3);
+  animation:spin 22s linear infinite;
+}
+.tech-rings .ring-2{
+  inset:90px;
+  border-bottom-color:rgba(124,92,255,.45);
+  border-left-color:rgba(47,107,255,.25);
+  animation:spin 32s linear infinite reverse;
+}
+.tech-rings .ring-3{
+  inset:180px;border-style:dashed;
+  border-color:rgba(130,165,225,.16);
+  animation:spin 50s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.hero-content{position:relative;z-index:3;width:100%;text-align:center}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:6px 16px;border-radius:999px;
+  font-size:12.5px;font-weight:600;letter-spacing:.1em;
+  color:var(--brand-ink);
+  background:var(--surface);
+  border:1px solid var(--border-strong);
+  box-shadow:var(--shadow-sm);
+}
+.hero-eyebrow .live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent-teal);
+  box-shadow:0 0 0 0 rgba(14,165,164,.7);
+  animation:live 2s infinite;
+}
+@keyframes live{
+  0%{box-shadow:0 0 0 0 rgba(14,165,164,.7)}
+  70%{box-shadow:0 0 0 8px rgba(14,165,164,0)}
+  100%{box-shadow:0 0 0 0 rgba(14,165,164,0)}
+}
+
+.hero h1{
+  font-size:clamp(33px,5.8vw,62px);
+  line-height:1.18;font-weight:800;
+  letter-spacing:-.025em;
+  margin:28px 0 22px;
+}
+.hero h1 .accent{
+  background:linear-gradient(105deg,var(--brand-500),var(--accent-cyan) 45%,var(--accent-violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .lede{
+  max-width:740px;margin:0 auto;
+  font-size:clamp(15px,1.55vw,17.5px);
+  color:var(--text-secondary);line-height:1.78;
+}
+.hero-actions{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  margin-top:40px;
+}
+
+/* 按钮 */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 28px;border-radius:10px;
+  font-size:15px;font-weight:600;letter-spacing:.01em;
+  border:1px solid transparent;cursor:pointer;
+  transition:all .3s var(--ease);
+  white-space:nowrap;
+}
+.btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .3s var(--ease);}
+.btn:hover svg{transform:translateX(4px)}
+.btn-primary{
+  color:#fff;
+  background:linear-gradient(135deg,var(--brand-500),var(--brand-600));
+  box-shadow:0 12px 28px -12px rgba(47,107,255,.8);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 36px -14px rgba(47,107,255,.95);
+}
+.btn-secondary{
+  color:var(--text);
+  background:var(--surface);
+  border-color:var(--border-strong);
+  box-shadow:var(--shadow-sm);
+}
+.btn-secondary:hover{
+  transform:translateY(-2px);
+  border-color:var(--brand-500);
+  color:var(--brand-ink);
+  background:var(--surface-hover);
+}
+
+/* Hero 数据指标 */
+.hero-metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  margin-top:78px;
+  padding-top:0;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  max-width:860px;
+  margin-left:auto;margin-right:auto;
+}
+.metric{
+  padding:26px 18px;
+  background:var(--bg-elev);
+  text-align:center;
+  transition:background-color .3s var(--ease);
+}
+.metric:hover{background:var(--bg-elev-2)}
+.metric .value{
+  font-size:clamp(23px,2.8vw,31px);font-weight:800;
+  letter-spacing:-.02em;line-height:1;
+  font-variant-numeric:tabular-nums;
+  color:var(--text);
+}
+.metric .value .suffix{font-size:.58em;color:var(--brand-ink);margin-left:2px;font-weight:700}
+.metric .label{
+  font-size:12.5px;color:var(--text-muted);
+  margin-top:8px;font-weight:500;letter-spacing:.05em;
+}
+
+.scroll-cue{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;flex-direction:column;align-items:center;gap:7px;
+  font-size:11px;letter-spacing:.22em;color:var(--text-muted);
+  font-family:var(--font-mono);text-transform:uppercase;
+}
+.scroll-cue .line{
+  width:1px;height:34px;position:relative;overflow:hidden;
+  background:var(--border-strong);
+}
+.scroll-cue .line::after{
+  content:"";position:absolute;top:-34px;left:0;width:100%;height:34px;
+  background:linear-gradient(180deg,transparent,var(--brand-500));
+  animation:cue 2s var(--ease) infinite;
+}
+@keyframes cue{0%{top:-34px}70%,100%{top:34px}}
+
+/* ==========================================================
+   通用 Section
+========================================================== */
+section{position:relative;padding:114px 0;scroll-margin-top:76px;z-index:2}
+.sec-head{max-width:720px;margin-bottom:58px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+
+.sec-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--brand-ink);
+}
+.sec-label::before{
+  content:"";width:26px;height:1.5px;border-radius:2px;
+  background:linear-gradient(90deg,var(--brand-500),transparent);
+}
+.sec-head.center .sec-label::before{display:none}
+.sec-label .num{color:var(--text-muted);font-weight:500}
+
+.sec-title{
+  font-size:clamp(27px,3.6vw,40px);
+  font-weight:800;line-height:1.26;
+  letter-spacing:-.02em;
+  margin:18px 0 16px;
+}
+.sec-desc{
+  font-size:16.5px;color:var(--text-secondary);
+  line-height:1.78;
+}
+
+/* 通用卡片 */
+.panel{
+  position:relative;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  transition:all .38s var(--ease);
+  overflow:hidden;
+}
+.panel::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--brand-500),transparent);
+  opacity:0;transition:opacity .4s var(--ease);
+}
+.panel:hover{
+  transform:translateY(-5px);
+  border-color:var(--border-strong);
+  box-shadow:var(--shadow-md), var(--glow);
+}
+.panel:hover::before{opacity:.85}
+
+/* ==========================================================
+   关于我们
+========================================================== */
+.about-layout{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:64px;
+  align-items:start;
+}
+
+.about-body p{
+  color:var(--text-secondary);
+  margin-bottom:17px;font-size:16px;line-height:1.82;
+}
+.about-body p strong{color:var(--text);font-weight:650}
+.about-body p .hl{
+  color:var(--brand-ink);font-weight:600;
+  background:linear-gradient(180deg,transparent 64%,rgba(47,107,255,.16) 64%);
+  padding:0 2px;
+}
+
+.about-facts{
+  display:grid;gap:14px;margin-top:30px;
+}
+.fact{
+  display:flex;gap:13px;align-items:flex-start;
+  padding:15px 17px;
+  border-radius:var(--radius-md);
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  transition:all .3s var(--ease);
+}
+.fact:hover{
+  border-color:var(--border-strong);
+  transform:translateX(4px);
+}
+.fact .fact-icon{
+  flex:0 0 30px;width:30px;height:30px;border-radius:8px;
+  display:grid;place-items:center;
+  background:rgba(47,107,255,.1);
+  border:1px solid rgba(47,107,255,.24);
+  color:var(--brand-ink);
+}
+.fact .fact-icon svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.fact .fact-text{font-size:14.8px;color:var(--text-secondary);line-height:1.62}
+.fact .fact-text b{color:var(--text);font-weight:600}
+
+/* 使命/愿景卡片组 */
+.mvv-list{display:grid;gap:16px}
+.mvv{
+  padding:28px 26px;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  position:relative;overflow:hidden;
+  transition:all .38s var(--ease);
+}
+.mvv::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--mvv-color,var(--brand-500));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform .45s var(--ease);
+}
+.mvv:hover{transform:translateX(6px);border-color:var(--border-strong);box-shadow:var(--shadow-md)}
+.mvv:hover::after{transform:scaleY(1)}
+.mvv-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.mvv-head .mvv-icon{
+  width:36px;height:36px;flex:0 0 36px;border-radius:10px;
+  display:grid;place-items:center;
+  background:color-mix(in srgb,var(--mvv-color,var(--brand-500)) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--mvv-color,var(--brand-500)) 30%,transparent);
+  color:var(--mvv-color,var(--brand-500));
+}
+.mvv-head .mvv-icon svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.mvv-head h4{font-size:16.5px;font-weight:700;letter-spacing:.01em}
+.mvv p{color:var(--text-muted);font-size:14.8px;line-height:1.7}
+
+/* ==========================================================
+   核心业务
+========================================================== */
+.biz-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(262px,1fr));
+  gap:20px;
+}
+.biz-card{
+  padding:32px 28px;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  position:relative;overflow:hidden;
+  transition:all .4s var(--ease);
+}
+.biz-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--biz-color,var(--brand-500)),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .45s var(--ease);
+}
+.biz-card:hover{
+  transform:translateY(-6px);
+  border-color:color-mix(in srgb,var(--biz-color,var(--brand-500)) 40%,var(--border));
+  box-shadow:var(--shadow-md), 0 0 40px -18px var(--biz-color,var(--brand-500));
+}
+.biz-card:hover::before{transform:scaleX(1)}
+
+.biz-icon{
+  width:50px;height:50px;border-radius:13px;
+  display:grid;place-items:center;margin-bottom:22px;
+  background:color-mix(in srgb,var(--biz-color,var(--brand-500)) 11%,transparent);
+  border:1px solid color-mix(in srgb,var(--biz-color,var(--brand-500)) 26%,transparent);
+  color:var(--biz-color,var(--brand-500));
+  transition:all .4s var(--ease);
+}
+.biz-icon svg{width:23px;height:23px;stroke:currentColor;stroke-width:1.6;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.biz-card:hover .biz-icon{
+  background:color-mix(in srgb,var(--biz-color,var(--brand-500)) 18%,transparent);
+  transform:translateY(-3px);
+}
+.biz-card h3{font-size:18px;font-weight:700;margin-bottom:11px;letter-spacing:.01em}
+.biz-card p{color:var(--text-muted);font-size:14.6px;line-height:1.72}
+.biz-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.biz-tags span{
+  font-size:11.5px;font-weight:600;letter-spacing:.03em;
+  padding:4px 11px;border-radius:6px;
+  color:var(--text-muted);
+  background:var(--bg-elev-2);
+  border:1px solid var(--border);
+}
+
+/* ==========================================================
+   技术实力
+========================================================== */
+.tech-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+}
+.skills{display:grid;gap:26px}
+.skill-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:11px;
+}
+.skill-head .name{
+  font-size:15px;font-weight:600;color:var(--text);
+  display:flex;align-items:center;gap:9px;
+}
+.skill-head .name::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--skill-color,var(--brand-500));
+  box-shadow:0 0 10px var(--skill-color,var(--brand-500));
+}
+.skill-head .pct{
+  font-family:var(--font-mono);
+  font-size:13.5px;font-weight:600;color:var(--text-muted);
+  font-variant-numeric:tabular-nums;
+}
+.skill-track{
+  height:6px;border-radius:99px;
+  background:var(--bg-elev-2);
+  overflow:hidden;position:relative;
+  border:1px solid var(--border);
+}
+.skill-fill{
+  display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--skill-color,var(--brand-500)),
+              color-mix(in srgb,var(--skill-color,var(--brand-500)) 55%,var(--accent-cyan)));
+  box-shadow:0 0 14px -2px var(--skill-color,var(--brand-500));
+  transition:width 1.6s var(--ease);
+}
+
+.tech-stack{
+  display:flex;flex-wrap:wrap;gap:9px;margin-top:36px;
+}
+.tech-stack span{
+  font-family:var(--font-mono);
+  font-size:12.5px;font-weight:500;
+  padding:7px 14px;border-radius:7px;
+  color:var(--text-secondary);
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  transition:all .3s var(--ease);
+  cursor:default;
+}
+.tech-stack span:hover{
+  color:var(--brand-ink);
+  border-color:var(--brand-500);
+  background:var(--surface-hover);
+  transform:translateY(-2px);
+}
+
+/* 技术可视化 */
+.tech-visual{
+  position:relative;aspect-ratio:1/.94;
+  border-radius:24px;overflow:hidden;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  display:grid;place-items:center;
+  box-shadow:var(--shadow-md);
+}
+.tech-visual::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 30% 28%,rgba(47,107,255,.13),transparent 52%),
+    radial-gradient(circle at 74% 72%,rgba(124,92,255,.12),transparent 52%),
+    radial-gradient(circle at 74% 24%,rgba(0,180,216,.1),transparent 50%);
+}
+.t-visual-rings{position:absolute;inset:0;display:grid;place-items:center}
+.t-visual-rings .t-ring{
+  position:absolute;border-radius:50%;border:1px solid transparent;
+}
+.t-visual-rings .tr-1{
+  width:190px;height:190px;
+  border-top-color:var(--brand-500);
+  border-right-color:rgba(0,180,216,.5);
+  animation:spin 10s linear infinite;
+}
+.t-visual-rings .tr-2{
+  width:275px;height:275px;
+  border-bottom-color:var(--accent-violet);
+  border-left-color:rgba(47,107,255,.35);
+  animation:spin 17s linear infinite reverse;
+}
+.t-visual-rings .tr-3{
+  width:360px;height:360px;border-style:dashed;
+  border-color:var(--border-strong);
+  animation:spin 34s linear infinite;
+}
+.core-node{
+  position:relative;z-index:2;
+  width:112px;height:112px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  background:linear-gradient(140deg,var(--brand-500),var(--accent-violet));
+  box-shadow:0 18px 40px -12px rgba(47,107,255,.85),
+             inset 0 1px 0 rgba(255,255,255,.35);
+  animation:coreFloat 5s ease-in-out infinite;
+}
+@keyframes coreFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+.core-node .core-label{
+  color:#fff;font-family:var(--font-mono);
+  font-size:13.5px;font-weight:700;letter-spacing:.1em;
+  line-height:1.25;
+}
+.core-node .core-label small{
+  display:block;font-size:9px;letter-spacing:.28em;
+  opacity:.85;font-weight:500;margin-top:2px;
+}
+.orbit-dot{
+  position:absolute;width:9px;height:9px;border-radius:50%;
+  border:2px solid var(--bg-elev);
+  z-index:3;
+}
+.od-1{top:14%;left:50%;background:var(--brand-500);box-shadow:0 0 14px 2px rgba(47,107,255,.8)}
+.od-2{bottom:20%;left:14%;background:var(--accent-cyan);box-shadow:0 0 14px 2px rgba(0,180,216,.8)}
+.od-3{bottom:16%;right:16%;background:var(--accent-violet);box-shadow:0 0 14px 2px rgba(124,92,255,.8)}
+.od-4{top:26%;right:12%;background:var(--accent-teal);box-shadow:0 0 14px 2px rgba(14,165,164,.8)}
+
+/* ==========================================================
+   解决方案
+========================================================== */
+.sol-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+.sol-card{
+  padding:30px 26px;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  position:relative;overflow:hidden;
+  transition:all .4s var(--ease);
+}
+.sol-card .sol-num{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:600;letter-spacing:.16em;
+  color:var(--sol-color,var(--brand-ink));
+  margin-bottom:18px;
+  display:flex;align-items:center;gap:8px;
+}
+.sol-card .sol-num::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--sol-color,var(--brand-500)) 40%,transparent),transparent);
+}
+.sol-card h3{font-size:17.5px;font-weight:700;margin-bottom:11px}
+.sol-card p{color:var(--text-muted);font-size:14.5px;line-height:1.72}
+.sol-card:hover{
+  transform:translateY(-6px);
+  border-color:color-mix(in srgb,var(--sol-color,var(--brand-500)) 45%,var(--border));
+  box-shadow:var(--shadow-md), 0 0 44px -20px var(--sol-color,var(--brand-500));
+}
+
+/* ==========================================================
+   联系我们
+========================================================== */
+.contact-layout{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:36px;align-items:start;
+}
+.contact-info{display:grid;gap:14px}
+.contact-item{
+  display:flex;gap:15px;align-items:flex-start;
+  padding:20px 22px;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  transition:all .33s var(--ease);
+}
+.contact-item:hover{
+  border-color:var(--border-strong);
+  transform:translateX(5px);
+  box-shadow:var(--shadow-sm);
+}
+.contact-item .ci-icon{
+  flex:0 0 42px;width:42px;height:42px;border-radius:11px;
+  display:grid;place-items:center;
+  background:rgba(47,107,255,.09);
+  border:1px solid rgba(47,107,255,.22);
+  color:var(--brand-ink);
+}
+.contact-item .ci-icon svg{
+  width:18px;height:18px;stroke:currentColor;stroke-width:1.7;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;
+}
+.contact-item .ci-label{
+  font-size:12px;font-weight:600;letter-spacing:.08em;
+  color:var(--text-muted);margin-bottom:3px;
+  text-transform:uppercase;font-family:var(--font-mono);
+}
+.contact-item .ci-value{
+  font-size:15px;font-weight:600;color:var(--text);
+  word-break:break-all;line-height:1.5;
+}
+
+/* 表单 */
+.contact-form{
+  padding:34px;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.contact-form::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--brand-500),var(--accent-cyan),var(--accent-violet));
+}
+.contact-form h3{font-size:19px;font-weight:700;margin-bottom:6px}
+.contact-form .form-sub{
+  font-size:14px;color:var(--text-muted);margin-bottom:26px;
+}
+.field{margin-bottom:16px}
+.field label{
+  display:block;font-size:13px;font-weight:600;
+  color:var(--text-secondary);margin-bottom:8px;
+  letter-spacing:.02em;
+}
+.field input,.field textarea{
+  width:100%;padding:12px 15px;
+  border-radius:var(--radius-sm);
+  font-size:14.5px;line-height:1.5;
+  background:var(--bg-subtle);
+  border:1px solid var(--border);
+  color:var(--text);
+  outline:none;
+  transition:all .28s var(--ease);
+  resize:vertical;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-muted);opacity:.75}
+.field input:focus,.field textarea:focus{
+  border-color:var(--brand-500);
+  background:var(--bg-elev);
+  box-shadow:0 0 0 3px rgba(47,107,255,.13);
+}
+.contact-form .btn{width:100%;margin-top:6px}
+
+/* ==========================================================
+   页脚
+========================================================== */
+.footer{
+  position:relative;z-index:2;
+  border-top:1px solid var(--border);
+  padding:50px 0 38px;
+  background:var(--bg-subtle);
+  transition:background-color .45s var(--ease);
+}
+.footer-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;gap:40px;flex-wrap:wrap;
+  padding-bottom:34px;
+  border-bottom:1px solid var(--border);
+}
+.footer-brand{max-width:340px}
+.footer-brand .logo{margin-bottom:16px}
+.footer-brand p{
+  font-size:14px;color:var(--text-muted);line-height:1.75;
+}
+.footer-nav{display:flex;gap:56px;flex-wrap:wrap}
+.footer-col h5{
+  font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-muted);
+  font-family:var(--font-mono);
+  margin-bottom:16px;
+}
+.footer-col ul{display:grid;gap:11px}
+.footer-col a{
+  font-size:14.2px;color:var(--text-secondary);
+  transition:color .25s var(--ease);
+  display:inline-flex;align-items:center;gap:6px;
+}
+.footer-col a::before{
+  content:"";width:0;height:1px;background:var(--brand-500);
+  transition:width .3s var(--ease);
+}
+.footer-col a:hover{color:var(--brand-ink)}
+.footer-col a:hover::before{width:12px}
+
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap;
+  padding-top:26px;
+}
+.footer-bottom .copy{
+  font-size:13px;color:var(--text-muted);
+}
+.footer-bottom .copy a{color:var(--text-secondary);transition:color .25s}
+.footer-bottom .copy a:hover{color:var(--brand-ink)}
+.footer-social{display:flex;gap:9px}
+.footer-social a{
+  width:34px;height:34px;border-radius:9px;
+  display:grid;place-items:center;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  color:var(--text-muted);
+  transition:all .3s var(--ease);
+}
+.footer-social a:hover{
+  color:var(--brand-ink);
+  border-color:var(--brand-500);
+  transform:translateY(-2px);
+}
+.footer-social svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.7;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ==========================================================
+   滚动出现动画
+========================================================== */
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.08s}
+.d2{transition-delay:.16s}
+.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}
+
+/* ==========================================================
+   响应式
+========================================================== */
+@media (max-width:1024px){
+  .about-layout,.tech-layout,.contact-layout{grid-template-columns:1fr;gap:44px}
+  .tech-visual{order:-1;max-width:460px;margin:0 auto;width:100%}
+  .tech-rings{width:600px;height:600px}
+}
+@media (max-width:860px){
+  .nav-toggle{display:flex}
+  .nav-links{
+    position:absolute;top:calc(100% + 12px);
+    left:5%;right:5%;
+    flex-direction:column;align-items:stretch;gap:4px;
+    padding:14px;border-radius:16px;
+    background:var(--nav-bg);
+    backdrop-filter:blur(24px) saturate(180%);
+    -webkit-backdrop-filter:blur(24px) saturate(180%);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow-lg);
+    opacity:0;visibility:hidden;transform:translateY(-12px);
+    transition:all .3s var(--ease);
+  }
+  .nav-links.open{opacity:1;visibility:visible;transform:translateY(0)}
+  .nav-links a{padding:12px 15px;font-size:15px;border-radius:9px}
+  .nav-links a::after{display:none}
+  .nav-links a.active{background:var(--surface-hover)}
+
+  section{padding:88px 0}
+  .hero{padding:126px 0 86px}
+  .hero-metrics{grid-template-columns:repeat(2,1fr);margin-top:56px}
+  .tech-rings{width:440px;height:440px;opacity:.5}
+  .scroll-cue{display:none}
+  .footer-nav{gap:38px}
+}
+@media (max-width:520px){
+  .logo-text .cn{font-size:15px}
+  .logo-text .en{display:none}
+  .logo-mark{width:33px;height:33px;flex-basis:33px;border-radius:9px}
+  .btn{padding:13px 22px;font-size:14.5px}
+  .contact-form{padding:26px 22px}
+  .metric{padding:22px 12px}
+  .hero-actions{flex-direction:column;align-items:stretch;max-width:300px;margin-left:auto;margin-right:auto}
+  .footer-top{flex-direction:column;gap:30px}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+
+/* 减少动效偏好 */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- 滚动进度条 -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ==================== 导航栏 ==================== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo" aria-label="澎湃波涛科技首页">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2.8 3.5 7.6v8.8L12 21.2l8.5-4.8V7.6L12 2.8Z"/>
+          <path d="M12 12v9.2M12 12l8.5-4.4M12 12 3.5 7.6"/>
+        </svg>
+      </span>
+      <span class="logo-text">
+        <span class="cn">澎湃波涛科技</span>
+        <span class="en">PENGPAI AI</span>
+      </span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" class="active">关于我们</a></li>
+      <li><a href="#business">核心业务</a></li>
+      <li><a href="#tech">技术实力</a></li>
+      <li><a href="#solution">解决方案</a></li>
+      <li><a href="#contact">联系我们</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换明暗模式" title="切换明暗模式">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== Hero 首屏 ==================== -->
+<header class="hero" id="home">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-aura"></div>
+  <div class="tech-rings" aria-hidden="true">
+    <span class="ring ring-1"></span>
+    <span class="ring ring-2"></span>
+    <span class="ring ring-3"></span>
+  </div>
+
+  <div class="hero-content container">
+    <span class="hero-eyebrow">
+      <i class="live-dot"></i>
+      AI TECHNOLOGY · 产业智能化服务商
+    </span>
+
+    <h1>
+      以人工智能技术<br>
+      驱动<span class="accent">产业智能升级</span>
+    </h1>
+
+    <p class="lede">
+      北京澎湃波涛科技有限公司专注大模型应用、计算机视觉与数据智能，
+      为企业提供从算法研发到工程落地的一站式 AI 解决方案，
+      让前沿技术真正转化为可持续的业务价值。
+    </p>
+
+    <div class="hero-actions">
+      <a href="#business" class="btn btn-primary">
+        了解核心能力
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-secondary">预约技术咨询</a>
+    </div>
+
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="value"><span data-count="2019">0</span></div>
+        <div class="label">公司成立</div>
+      </div>
+      <div class="metric">
+        <div class="value"><span data-count="120">0</span><span class="suffix">+</span></div>
+        <div class="label">技术团队</div>
+      </div>
+      <div class="metric">
+        <div class="value"><span data-count="300">0</span><span class="suffix">+</span></div>
+        <div class="label">服务客户</div>
+      </div>
+      <div class="metric">
+        <div class="value"><span data-count="50">0</span><span class="suffix">+</span></div>
+        <div class="label">技术专利</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>SCROLL</span>
+    <span class="line"></span>
+  </div>
+</header>
+
+<!-- ==================== 关于我们 ==================== -->
+<section id="about">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-label"><span class="num">01</span> About Us</span>
+      <h2 class="sec-title">关于澎湃波涛</h2>
+      <p class="sec-desc">让前沿算法真正走进业务场景，是我们从第一天起就在做的事。</p>
+    </div>
+
+    <div class="about-layout">
+      <div class="about-body reveal">
+        <p>
+          <strong>北京澎湃波涛科技有限公司</strong>成立于 2019 年，总部位于北京中关村，
+          是一家以人工智能技术研发与产业落地为核心的国家高新技术企业。
+        </p>
+        <p>
+          公司汇聚了来自顶尖高校与一线互联网企业的算法工程师、产品经理与行业专家，
+          围绕<span class="hl">大语言模型、计算机视觉、多模态理解与数据智能</span>四大方向持续投入，
+          构建了从数据治理、模型训练到推理部署的完整技术闭环。
+        </p>
+        <p>
+          我们相信，AI 的价值不在于参数规模，而在于能否在真实业务中稳定、高效、
+          可衡量地创造收益。因此我们坚持「技术 + 场景」双轮驱动，
+          与客户共同定义问题、共同验证效果、共同分享成果。
+        </p>
+
+        <div class="about-facts">
+          <div class="fact">
+            <span class="fact-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span class="fact-text">
+              <b>自主研发</b>的模型训练与推理平台，支持千亿参数级模型高效微调
+            </span>
+          </div>
+          <div class="fact">
+            <span class="fact-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span class="fact-text">
+              覆盖<b>金融、制造、医疗、教育、能源</b>等行业的成熟落地经验
+            </span>
+          </div>
+          <div class="fact">
+            <span class="fact-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span class="fact-text">
+              通过 <b>ISO27001</b> 信息安全与 <b>ISO9001</b> 质量管理体系认证
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mvv-list reveal d1">
+        <div class="mvv" style="--mvv-color:#2f6bff">
+          <div class="mvv-head">
+            <span class="mvv-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+            </span>
+            <h4>我们的使命</h4>
+          </div>
+          <p>用可落地的人工智能技术，帮助每一家企业获得更聪明的决策与更高效的运转。</p>
+        </div>
+
+        <div class="mvv" style="--mvv-color:#0ea5a4">
+          <div class="mvv-head">
+            <span class="mvv-icon">
+              <svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+            </span>
+            <h4>我们的愿景</h4>
+          </div>
+          <p>成为产业智能化进程中最值得信赖的技术伙伴，让 AI 像水电一样触手可及。</p>
+        </div>
+
+        <div class="mvv" style="--mvv-color:#7c5cff">
+          <div class="mvv-head">
+            <span class="mvv-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.4.8-4.7 4.3 1.2 6.3L12 17l-5.5 3 1.2-6.3L3 9.4l6.4-.8L12 3Z"/></svg>
+            </span>
+            <h4>我们的价值观</h4>
+          </div>
+          <p>求真、务实、开放、共赢。用工程化的严谨，兑现每一次技术承诺。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 核心业务 ==================== -->
+<section id="business">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="sec-label"><span class="num">02</span> Core Business</span>
+      <h2 class="sec-title">核心业务</h2>
+      <p class="sec-desc">从底层算法到上层应用，构建完整的 AI 能力矩阵。</p>
+    </div>
+
+    <div class="biz-grid">
+      <div class="biz-card reveal" style="--biz-color:#2f6bff">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2"/>
+            <circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/>
+            <path d="M6.7 7.1 10.4 11M6.7 16.9 10.4 13M13.6 11l3.7-3.9M13.6 13l3.7 3.9"/>
+          </svg>
+        </div>
+        <h3>智能算法与模型研发</h3>
+        <p>面向业务场景定制大语言模型微调、计算机视觉识别、多模态理解与语音交互算法，兼顾精度与推理效率。</p>
+        <div class="biz-tags">
+          <span>LLM 微调</span><span>CV 识别</span><span>多模态</span><span>NLP</span>
+        </div>
+      </div>
+
+      <div class="biz-card reveal d1" style="--biz-color:#00b4d8">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.8"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.8"/>
+          </svg>
+        </div>
+        <h3>AI 平台与工具链</h3>
+        <p>提供数据标注、模型训练、评测调优到一键部署的 MLOps 平台，让算法迭代从「月」缩短到「天」。</p>
+        <div class="biz-tags">
+          <span>MLOps</span><span>训练平台</span><span>模型评测</span><span>推理加速</span>
+        </div>
+      </div>
+
+      <div class="biz-card reveal d2" style="--biz-color:#0ea5a4">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/>
+          </svg>
+        </div>
+        <h3>行业智能解决方案</h3>
+        <p>深耕金融风控、智能制造质检、医疗影像辅助诊断、教育个性化学习等场景，交付可量化的业务成果。</p>
+        <div class="biz-tags">
+          <span>金融</span><span>制造</span><span>医疗</span><span>教育</span>
+        </div>
+      </div>
+
+      <div class="biz-card reveal d3" style="--biz-color:#7c5cff">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>
+          </svg>
+        </div>
+        <h3>数据智能与决策</h3>
+        <p>打通多源异构数据，构建知识图谱与智能分析引擎，为企业经营决策提供实时、可解释的数据支撑。</p>
+        <div class="biz-tags">
+          <span>知识图谱</span><span>数据中台</span><span>智能 BI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 技术实力 ==================== -->
+<section id="tech">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-label"><span class="num">03</span> Technology</span>
+      <h2 class="sec-title">技术实力</h2>
+      <p class="sec-desc">持续的研发投入，是我们交付稳定结果的底气。</p>
+    </div>
+
+    <div class="tech-layout">
+      <div class="reveal">
+        <div class="skills">
+          <div class="skill" style="--skill-color:#2f6bff">
+            <div class="skill-head">
+              <span class="name">大语言模型与智能体</span>
+              <span class="pct">95%</span>
+            </div>
+            <div class="skill-track"><i class="skill-fill" data-w="95"></i></div>
+          </div>
+
+          <div class="skill" style="--skill-color:#00b4d8">
+            <div class="skill-head">
+              <span class="name">计算机视觉与图像识别</span>
+              <span class="pct">92%</span>
+            </div>
+            <div class="skill-track"><i class="skill-fill" data-w="92"></i></div>
+          </div>
+
+          <div class="skill" style="--skill-color:#0ea5a4">
+            <div class="skill-head">
+              <span class="name">数据工程与知识图谱</span>
+              <span class="pct">88%</span>
+            </div>
+            <div class="skill-track"><i class="skill-fill" data-w="88"></i></div>
+          </div>
+
+          <div class="skill" style="--skill-color:#7c5cff">
+            <div class="skill-head">
+              <span class="name">云原生与高性能推理部署</span>
+              <span class="pct">90%</span>
+            </div>
+            <div class="skill-track"><i class="skill-fill" data-w="90"></i></div>
+          </div>
+        </div>
+
+        <div class="tech-stack">
+          <span>Transformer</span><span>RAG</span><span>Agent</span><span>LoRA</span>
+          <span>YOLO</span><span>OCR</span><span>Vector DB</span><span>Kubernetes</span>
+          <span>TensorRT</span><span>Knowledge Graph</span><span>Federated Learning</span><span>Edge AI</span>
+        </div>
+      </div>
+
+      <div class="tech-visual reveal d1">
+        <div class="t-visual-rings">
+          <span class="t-ring tr-1"></span>
+          <span class="t-ring tr-2"></span>
+          <span class="t-ring tr-3"></span>
+        </div>
+        <span class="orbit-dot od-1"></span>
+        <span class="orbit-dot od-2"></span>
+        <span class="orbit-dot od-3"></span>
+        <span class="orbit-dot od-4"></span>
+        <div class="core-node">
+          <div class="core-label">
+            AI CORE
+            <small>ENGINE</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 解决方案 ==================== -->
+<section id="solution">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="sec-label"><span class="num">04</span> Solutions</span>
+      <h2 class="sec-title">行业解决方案</h2>
+      <p class="sec-desc">不堆砌技术名词，只解决真实存在的问题。</p>
+    </div>
+
+    <div class="sol-grid">
+      <div class="sol-card reveal" style="--sol-color:#2f6bff">
+        <div class="sol-num">01 / FINANCE</div>
+        <h3>金融智能风控</h3>
+        <p>基于多维行为数据与图算法构建实时反欺诈模型，风险识别准确率提升至行业领先水平。</p>
+      </div>
+
+      <div class="sol-card reveal d1" style="--sol-color:#00b4d8">
+        <div class="sol-num">02 / MANUFACTURE</div>
+        <h3>工业视觉质检</h3>
+        <p>毫秒级缺陷检测与产线数据闭环，替代人工目检，显著降低漏检率与质量成本。</p>
+      </div>
+
+      <div class="sol-card reveal d2" style="--sol-color:#0ea5a4">
+        <div class="sol-num">03 / HEALTHCARE</div>
+        <h3>医疗影像辅助</h3>
+        <p>面向影像科的多模态辅助诊断系统，帮助医生更快定位病灶、提升阅片效率。</p>
+      </div>
+
+      <div class="sol-card reveal d3" style="--sol-color:#7c5cff">
+        <div class="sol-num">04 / ENTERPRISE</div>
+        <h3>企业知识智能体</h3>
+        <p>打通内部文档与业务系统，构建可溯源的企业级 AI 助手，让知识随问随得。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 联系我们 ==================== -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-label"><span class="num">05</span> Contact</span>
+      <h2 class="sec-title">联系我们</h2>
+      <p class="sec-desc">无论是技术合作、方案咨询还是加入我们，都欢迎随时联系。</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <span class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          </span>
+          <div>
+            <div class="ci-label">公司地址</div>
+            <div class="ci-value">北京市海淀区中关村科技园区 · 澎湃大厦 12 层</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 5h4l2 5-2.5 1.5a12 12 0 0 0 5 5L14 14l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 3 6a1 1 0 0 1 1-1Z"/></svg>
+          </span>
+          <div>
+            <div class="ci-label">商务合作</div>
+            <div class="ci-value">010-8888 6666</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="ci-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+          </span>
+          <div>
+            <div class="ci-label">电子邮箱</div>
+            <div class="ci-value">contact@pengpai-ai.com</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="ci-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          </span>
+          <div>
+            <div class="ci-label">工作时间</div>
+            <div class="ci-value">周一至周五 09:00 - 18:30</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal d1" id="contactForm" novalidate>
+        <h3>提交合作需求</h3>
+        <p class="form-sub">我们会在 1 个工作日内与您取得联系。</p>
+
+        <div class="field">
+          <label for="cf-name">您的称呼</label>
+          <input id="cf-name" name="name" type="text" placeholder="请输入姓名" required>
+        </div>
+
+        <div class="field">
+          <label for="cf-company">公司 / 机构</label>
+          <input id="cf-company" name="company" type="text" placeholder="请输入公司名称">
+        </div>
+
+        <div class="field">
+          <label for="cf-contact">联系方式</label>
+          <input id="cf-contact" name="contact" type="text" placeholder="手机号或邮箱" required>
+        </div>
+
+        <div class="field">
+          <label for="cf-message">需求描述</label>
+          <textarea id="cf-message" name="message" rows="4" placeholder="简单描述您的业务场景与期望目标…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          提交需求
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.8 3.5 7.6v8.8L12 21.2l8.5-4.8V7.6L12 2.8Z"/>
+              <path d="M12 12v9.2M12 12l8.5-4.4M12 12 3.5 7.6"/>
+            </svg>
+          </span>
+          <span class="logo-text">
+            <span class="cn">澎湃波涛科技</span>
+            <span class="en">PENGPAI AI</span>
+          </span>
+        </a>
+        <p>专注人工智能技术研发与产业落地，为企业提供从算法到工程的一站式 AI 解决方案。</p>
+      </div>
+
+      <div class="footer-nav">
+        <div class="footer-col">
+          <h5>公司</h5>
+          <ul>
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#business">核心业务</a></li>
+            <li><a href="#tech">技术实力</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>服务</h5>
+          <ul>
+            <li><a href="#solution">解决方案</a></li>
+            <li><a href="#contact">技术咨询</a></li>
+            <li><a href="#contact">商务合作</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>联系</h5>
+          <ul>
+            <li><a href="mailto:contact@pengpai-ai.com">contact@pengpai-ai.com</a></li>
+            <li><a href="tel:01088886666">010-8888 6666</a></li>
+            <li><a href="#contact">北京市海淀区中关村</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copy">
+        © 2025 北京澎湃波涛科技有限公司 · 京ICP备00000000号 · 京公网安备00000000000000号
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="微信" title="微信">
+          <svg viewBox="0 0 24 24"><path d="M8.5 4C4.9 4 2 6.6 2 9.8c0 1.8 1 3.4 2.6 4.5L4 16.5l2.3-1.2c.7.2 1.4.3 2.2.3h.5"/><path d="M22 14.5c0-2.7-2.5-4.9-5.5-4.9s-5.5 2.2-5.5 4.9 2.5 4.9 5.5 4.9c.6 0 1.2-.1 1.8-.3L20.5 20l-.4-1.4c1.1-.9 1.9-2.4 1.9-4.1Z"/></svg>
+        </a>
+        <a href="#" aria-label="微博" title="微博">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5-1.8 3.5-4 3.5-4-1.5-4-3.5Z"/></svg>
+        </a>
+        <a href="#" aria-label="领英" title="领英">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10v6M7.5 7.2v.1M12 16v-3.5a2 2 0 0 1 4 0V16"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================
+   1. 明暗模式切换
+========================================================== */
+(function(){
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+
+  function applyTheme(theme, persist){
+    root.setAttribute('data-theme', theme);
+    if (persist){
+      try { localStorage.setItem('ppbt-theme', theme); } catch(e){}
+    }
+    // 通知粒子系统更新配色
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: theme } }));
+  }
+
+  toggle.addEventListener('click', function(){
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next, true);
+  });
+
+  // 跟随系统变化（仅当用户未手动选择过）
+  const media = window.matchMedia('(prefers-color-scheme: light)');
+  media.addEventListener('change', function(e){
+    let saved = null;
+    try { saved = localStorage.getItem('ppbt-theme'); } catch(err){}
+    if (!saved){
+      applyTheme(e.matches ? 'light' : 'dark', false);
+    }
+  });
+})();
+
+/* ==========================================================
+   2. 滚动进度条
+========================================================== */
+(function(){
+  const bar = document.getElementById('scrollProgress');
+  function update(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? (window.scrollY / max) * 100 : 0;
+    bar.style.width = p + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ==========================================================
+   3. Hero 粒子网络（自适应明暗主题）
+========================================================== */
+(function(){
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, particles = [], rafId = null;
+  const mouse = { x: null, y: null };
+  const LINK_DIST = 140;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 主题配色
+  let palette = {
+    dot: [[47,107,255],[0,180,216],[124,92,255],[14,165,164]],
+    line: [47,107,255],
+    mouse: [124,92,255],
+    dotAlpha: 0.85,
+    lineAlpha: 0.32,
+    glow: true
+  };
+
+  function setPalette(theme){
+    if (theme === 'light'){
+      palette = {
+        dot: [[47,107,255],[0,180,216],[124,92,255],[14,165,164]],
+        line: [47,107,255],
+        mouse: [124,92,255],
+        dotAlpha: 0.6,
+        lineAlpha: 0.22,
+        glow: false
+      };
+    } else {
+      palette = {
+        dot: [[100,150,255],[0,200,235],[140,110,255],[30,185,185]],
+        line: [80,140,240],
+        mouse: [140,110,255],
+        dotAlpha: 0.9,
+        lineAlpha: 0.34,
+        glow: true
+      };
+    }
+  }
+
+  function init(){
+    particles = [];
+    const count = Math.min(88, Math.max(30, Math.floor(W * H / 22000)));
+    for (let i = 0; i < count; i++){
+      const c = palette.dot[Math.floor(Math.random() * palette.dot.length)];
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.34,
+        vy: (Math.random() - 0.5) * 0.34,
+        r: Math.random() * 1.6 + 0.9,
+        c: c
+      });
+    }
+  }
+
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth;
+    H = canvas.clientHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    init();
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    // 粒子连线
+    for (let i = 0; i < particles.length; i++){
+      const p = particles[i];
+      for (let j = i + 1; j < particles.length; j++){
+        const q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < LINK_DIST){
+          const a = (1 - d / LINK_DIST) * palette.lineAlpha;
+          ctx.strokeStyle = 'rgba(' + palette.line[0] + ',' + palette.line[1] + ',' + palette.line[2] + ',' + a.toFixed(3) + ')';
+          ctx.lineWidth = 0.9;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // 鼠标连线
+    if (mouse.x !== null){
+      for (let i = 0; i < particles.length; i++){
+        const p = particles[i];
+        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 170){
+          const a = (1 - d / 170) * (palette.lineAlpha + 0.18);
+          ctx.strokeStyle = 'rgba(' + palette.mouse[0] + ',' + palette.mouse[1] + ',' + palette.mouse[2] + ',' + a.toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // 粒子本体
+    for (let i = 0; i < particles.length; i++){
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -22) p.x = W + 22;
+      if (p.x > W + 22) p.x = -22;
+      if (p.y < -22) p.y = H + 22;
+      if (p.y > H + 22) p.y = -22;
+
+      if (palette.glow){
+        const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4.5);
+        grd.addColorStop(0, 'rgba(' + p.c[0] + ',' + p.c[1] + ',' + p.c[2] + ',0.35)');
+        grd.addColorStop(1, 'rgba(' + p.c[0] + ',' + p.c[1] + ',' + p.c[2] + ',0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 4.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + p.c[0] + ',' + p.c[1] + ',' + p.c[2] + ',' + palette.dotAlpha + ')';
+      ctx.fill();
+    }
+
+    rafId = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function(){
+    clearTimeout(window.__ppbtResize);
+    window.__ppbtResize = setTimeout(resize, 180);
+  });
+
+  canvas.addEventListener('mousemove', function(e){
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  canvas.addEventListener('mouseleave', function(){
+    mouse.x = null; mouse.y = null;
+  });
+
+  window.addEventListener('themechange', function(e){
+    setPalette(e.detail.theme);
+    init();
+  });
+
+  // 初始化
+  setPalette(document.documentElement.getAttribute('data-theme'));
+  resize();
+  if (!reduceMotion) draw();
+})();
+
+/* ==========================================================
+   4. 导航栏滚动 + 移动端菜单
+========================================================== */
+(function(){
+  const nav = document.getElementById('nav');
+  const navLinks = document.getElementById('navLinks');
+  const toggle = document.getElementById('navToggle');
+
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+
+  toggle.addEventListener('click', function(){
+    navLinks.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      toggle.classList.remove('open');
+    });
+  });
+})();
+
+/* ==========================================================
+   5. 滚动出现动画 / 数字滚动 / 技能进度条
+========================================================== */
+(function(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ----- 元素出现 ----- */
+  const revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el){
+    if (reduceMotion) { el.classList.add('visible'); return; }
+    revealObserver.observe(el);
+  });
+
+  /* ----- 数字滚动 ----- */
+  function countUp(el){
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 1500;
+    const start = performance.now();
+    function step(now){
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(target * eased);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+
+  const numObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        countUp(entry.target);
+        numObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    if (reduceMotion){ el.textContent = el.dataset.count; return; }
+    numObserver.observe(el);
+  });
+
+  /* ----- 技能进度条 ----- */
+  const barObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        const bar = entry.target;
+        setTimeout(function(){
+          bar.style.width = bar.dataset.w + '%';
+        }, 180);
+        barObserver.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.35 });
+
+  document.querySelectorAll('.skill-fill').forEach(function(el){
+    if (reduceMotion){ el.style.width = el.dataset.w + '%'; return; }
+    barObserver.observe(el);
+  });
+})();
+
+/* ==========================================================
+   6. 导航高亮当前区块
+========================================================== */
+(function(){
+  const links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  const sections = links
+    .map(function(a){ return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  function update(){
+    const pos = window.scrollY + window.innerHeight * 0.32;
+    let current = sections[0];
+    sections.forEach(function(sec){
+      if (sec.offsetTop <= pos) current = sec;
+    });
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ==========================================================
+   7. 表单提交（前端演示）
+========================================================== */
+(function(){
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('cf-name').value.trim();
+    const contact = document.getElementById('cf-contact').value.trim();
+
+    if (!name || !contact){
+      const missing = !name ? document.getElementById('cf-name') : document.getElementById('cf-contact');
+      missing.focus();
+      missing.style.borderColor = '#ef4444';
+      missing.style.boxShadow = '0 0 0 3px rgba(239,68,68,.15)';
+      setTimeout(function(){
+        missing.style.borderColor = '';
+        missing.style.boxShadow = '';
+      }, 1800);
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.innerHTML;
+    btn.innerHTML = '✓ 已提交，感谢您的信任';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '.85';
+
+    setTimeout(function(){
+      btn.innerHTML = original;
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+      form.reset();
+    }, 2600);
+  });
+})();
+</script>
+</body>
+</html>

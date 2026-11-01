@@ -1,0 +1,90 @@
+<view style="position: relative;">
+
+<image src="/image/roca_mine_bg.png" mode="widthFix" style="width: 100%;position: absolute;z-index: -99;"/>
+<view style="font-size: 34rpx;color: white;font-weight: bold;width: 100%;text-align: center;position: relative;top: 100rpx;">我的</view>
+<view bindtap="goLogin" style="padding: 160rpx 30rpx 30rpx 30rpx;display: flex;align-items: center;margin-top: 40rpx;">
+<image src="{{user.head.length>0?user.head:'/image/roca_default_avatar.png'}}" style="border-radius: 50%;width: 128rpx;height: 128rpx;"/>
+<view style="margin-left: 30rpx;">
+<view wx:if="{{!isLogin}}" style="font-size: 40rpx;color: white;font-weight: bold;">未登录</view>
+<view wx:if="{{isLogin}}" style="font-size: 40rpx;color: white;font-weight: bold;">{{user.name.length>0?user.name:'姓名'}}</view>
+<view style="font-size: 24rpx;color: white;margin-top: 15rpx;visibility: visible;">{{isLogin?'欢迎回家':'登录后使用更多功能'}}</view>
+</view>
+</view>
+</view>
+
+<view style="padding: 80rpx 30rpx 30rpx 30rpx;">
+<view style="background-color: white;padding: 30rpx;box-shadow: 0 10rpx 20rpx 0 rgba(22,154,120,0.08);border-radius: 16rpx;">
+<view style="display: flex;align-items: center;justify-content: space-between;margin-bottom: 10rpx;">
+<view style="display: flex;align-items: center;">
+<image src="/image/roca_play_history.png" mode="widthFix" style="width: 60rpx;height: 60rpx;"/>
+<view style="font-size: 32rpx;font-weight: bold;color: black;margin-left: 10rpx;">观看历史</view>
+</view>
+<view bindtap="goMoreLession" wx:if="{{isLogin&&history.length>0}}" style="display: flex;align-items: center;">
+<view style="font-size: 24rpx;font-weight: bold;color: #666666;">更多</view>
+<image src="/image/roca_arrow_right.png" mode="widthFix" style="width: 8rpx;height: 16rpx;margin-left: 6rpx;"/>
+</view>
+</view>
+
+<scroll-view wx:if="{{isLogin&&history.length>0}}" scroll-x="true">
+
+<view style="display: flex;align-items: center;">
+<view wx:for="{{history}}">
+<view bindtap="goVideo" data-item="{{item}}" style="width: 232rpx;margin-right: 20rpx;">
+
+<view style="position: relative;width: 100%;height: 160rpx;border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;">
+<image src="{{item.cover}}" style="width: 232rpx;height: 160rpx;border-radius: 10rpx;"/>
+
+<view style="position: absolute;left: 0;bottom: 0;width: 100%;">
+<view style="background-color: black;opacity: 0.1;width: 100%;height: 40rpx;position: absolute;bottom: 0;left: 0;"></view>
+<view style="display: flex;align-items: center;margin-bottom: 6rpx;">
+<image src="/image/roca_video_play.png" style="width: 9rpx;height: 14rpx;margin-left: 10rpx;margin-right: 10rpx;z-index: 999;"/>
+<view style="font-size: 22rpx;color: white;font-weight: bold;z-index: 999;">剩余{{item.left}}</view>
+</view>
+<view style="width:100%;position: absolute;left: 0;bottom: 0;">
+<view style="width: 100%;height: 4rpx;background-color: #169A78;opacity: 0.1;"></view>
+<view style="width: {{item.detail.currentTime/item.detail.duration*100}}%;height: 4rpx;background-color: #039F9C;position: absolute;top: 0;left: 0;"></view>
+</view>
+</view>
+</view>
+
+<view style="font-size: 24rpx;color: #333333;margin-top: 10rpx;">{{item.title}}</view>
+
+</view>
+</view>
+</view>
+
+</scroll-view>
+
+
+<view wx:if="{{history.length==0}}" style="display: flex;align-items: center;justify-content: center;flex-direction: column;padding: 30rpx;">
+<image src="/image/roca_mine_no_history.png" mode="widthFix" style="width: 200rpx;height: auto;"/>
+<view style="font-size: 24rpx;color: #666666;margin-top: 15rpx;">暂时还没有观看记录</view>
+</view>
+</view>
+</view>
+
+<view style="padding:0 60rpx 60rpx 60rpx;">
+<view bindtap="goAllLession" style="padding: 40rpx 0;display: flex;align-items: center;justify-content: space-between;border-bottom: 2rpx #ebebeb solid;">
+<view style="display: flex;align-items: center;">
+<image src="/image/roca_label.png" mode="widthFix" style="width: 60rpx;height: 60rpx;"/>
+<view style="font-size: 32rpx;font-weight: bold;margin-left: 20rpx;">我的全部课程</view>
+</view>
+<image src="/image/roca_arrow_right.png" style="width: 12rpx;height: 22rpx;"/>
+</view>
+<view bindtap="goSetting" style="padding: 40rpx 0;display: flex;align-items: center;justify-content: space-between;">
+<view style="display: flex;align-items: center;">
+<image src="/image/roca_setting.png" mode="widthFix" style="width: 60rpx;height: 60rpx;"/>
+<view style="font-size: 32rpx;font-weight: bold;margin-left: 20rpx;">设置</view>
+</view>
+<image src="/image/roca_arrow_right.png" style="width: 12rpx;height: 22rpx;"/>
+</view>
+</view>
+
+<view style="position: fixed;bottom: 100rpx;right: 10rpx;width: 130rpx;height: 130rpx;">
+<button class="button" open-type="contact" style="width: 130rpx;height: 130rpx;padding: 0;background-color: white;line-height: unset;">
+<image src="/image/roca_service.png" mode="widthFix" style="width: 130rpx;height: 130rpx;"/>
+</button>
+</view>
+
+
+

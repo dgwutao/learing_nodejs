@@ -1,0 +1,48 @@
+<view style="position: fixed;top: 0;left: 0;width: 100%;background-color: white;">
+<view style="padding: 32rpx 0;display: flex;align-items: center;justify-content:space-around;">
+<view bindtap="switch" data-id="0" style="position: relative;">
+<view style="width: 202rpx;height: 28rpx;background: linear-gradient(90deg,#56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;position: absolute;top: 18rpx;z-index: -9;visibility: {{tab==0?'visible':'hidden'}};"></view>
+<view style="font-size: 30rpx;color: {{tab==0?'#333333':'#666666'}};font-weight: {{tab==0?'bold':'normal'}};">已学单词({{count.xuexi}})</view>
+</view>
+
+<view bindtap="switch" data-id="1" style="position: relative;">
+<view style="width: 202rpx;height: 28rpx;background: linear-gradient(90deg,#56CDAF 0%, rgba(137,230,212,0) 100%);border-radius: 20rpx;position: absolute;top: 18rpx;z-index: -9;visibility: {{tab==1?'visible':'hidden'}};"></view>
+<view style="font-size: 30rpx;color: {{tab==1?'#333333':'#666666'}};font-weight: {{tab==1?'bold':'normal'}};">未学单词({{count.xuexi_no}})</view>
+</view>
+</view>
+</view>
+
+
+
+<view style="height: 100rpx;"></view>
+<view style="padding: 0 20rpx;">
+<scroll-view scroll-y lower-threshold="100" bindscrolltolower="nextData" style="height:100vh">
+<view wx:for="{{list}}" style="margin-top: 20rpx;">
+<view bindtap="goDetail" data-item="{{item}}" style="display:flex;align-items: center;justify-content: space-between;background-color: white;border-radius: 16rpx;padding: 20rpx;">
+<view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 36rpx;color: #1d1e1f;font-weight: bold;">{{item.danci}}</view>
+<image catchtap="playVoice" data-item="{{item}}" src="/image/{{playing_audio_state==item.yinpin?'ff_14.gif':'ff_05.png'}}" mode="widthFix" style="width: 36rpx;height: 36rpx;margin-left: 20rpx;"/>
+</view>
+<view style="font-size: 26rpx;color: #999999;margin-top: 14rpx;">释义：{{item.shiyi_cn}}</view>
+</view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 22rpx;color: #999999;font-weight: bold;">详情</view>
+<image src="/image/roca_arrow_right.png" mode="widthFix" style="width: 10rpx;margin-left: 8rpx;"/>
+</view>
+</view>
+</view>
+
+<view style="height: 200rpx;"></view>
+
+<view wx:if="{{list.length==0}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+<image src="/image/no_data.png" mode="widthFix" style="width: 280rpx;"/>
+<view style="margin-top: 30rpx;font-size: 24rpx;color: #999999;">暂无单词</view>
+</view>
+</scroll-view>
+
+
+
+
+</view>
+

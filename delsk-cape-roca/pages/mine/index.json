@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "h-btn":"/components/h-btn/h-btn"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,18 @@
+<view style="display: flex;align-items: center;flex-direction: column;justify-content: center;">
+<video wx:if="{{url.length>0}}" id="video"
+src="{{url}}" 
+title="{{title}}"
+page-gesture="true"
+bindtimeupdate='handleTimeUpdate'
+autoplay="false"
+loop="false"
+show-mute-btn="true"
+enable-play-gesture="true"
+vslide-gesture="true"
+show-casting-button="true"
+enable-auto-rotation="true"
+show-screen-lock-button="true"
+style="width: 100%;"></video>
+</view>
+
+<!-- initial-time="{{initial_time}}" -->

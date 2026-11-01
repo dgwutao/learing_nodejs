@@ -1,0 +1,22 @@
+
+<view class="shareditem" bindtap="createpic"  wx:if="{{!loadding}}">
+  <image src="/image/btn_7.png" mode="widthFix" class="pic-btn"></image>
+<view class="shared-text">分享海报</view>
+</view>
+<canvas class="canvas-poster"   style="height:{{Height}}px" 
+  canvas-id="canvasPoster"></canvas>
+<view class="tui-loading-row" wx:if="{{loadding}}">  
+    <view class="circle-line">
+      <text></text>
+      <text></text>
+      <text></text>
+      <text></text>
+      <text></text>
+      <text></text>
+      <text></text>
+      <text></text>
+    </view> 
+</view>
+
+
+

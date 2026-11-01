@@ -1,0 +1,74 @@
+@color1:#6D84F6;@color1-shadow:rgba(109,132,246,.5);
+@color2:#F8BC0C;@color2-shadow:rgba(119,197,124,.5);
+@red:#F8830C;@red-shadow:rgba(248,131,12,0.5);
+@green:#77C57C;@green-shadow:rgba(119,197,124,.5);
+@gray:#DADADA;@gray-shadow:rgba(187,187,187,.5);
+
+.h-btn{
+    color: white;
+    border-radius: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.h-btn-bold{
+      font-weight: bold;
+    }
+    &.btn-type-standard{
+        background: @color1;
+        box-shadow: 0 2rpx 14rpx @color1-shadow;
+        color: white;
+    }
+    &.btn-type-warning{
+        background: @color2;
+        box-shadow: 0 2rpx 14rpx @color2;
+    }
+    &.btn-type-danger{
+        background: @red;
+        box-shadow: 0 2rpx 14rpx @red;
+    }
+    &.btn-type-success{
+      background: @green;
+      box-shadow: 0 2rpx 14rpx @green;
+    }
+    &.btn-type-info{
+      background: @gray;
+      box-shadow: 0 2rpx 14rpx @gray;
+    }
+    &.btn-standard{
+      font-size: 32rpx;
+      width: 300rpx;
+      height: 100rpx;
+      border-radius: 50rpx;
+    }
+    &.btn-big{
+      width: 100%;
+      height: 100rpx;
+      border-radius: 50rpx;
+    }
+    &.btn-mini{
+      // min-width: 104rpx;
+      font-size: 28rpx;
+      height: 60rpx;
+      border-radius: 30rpx;
+      padding:0 24rpx;
+    }
+    &.btn-small{
+      font-size: 32rpx;
+      min-width: 200rpx;
+      height: 100rpx;
+      border-radius: 50rpx;
+      padding:0 32rpx;
+      box-shadow: none;
+    }
+    &.btn-unchoosed{
+      background-color: #f7f7f7;
+      color: #c7c7c7;
+    }
+    .icon{
+      width: 0;
+      margin-right: 12rpx;
+    }
+    &.noshadow{
+      box-shadow: none;
+    }
+  }

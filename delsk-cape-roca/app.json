@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/index/index",
+    "pages/login/index",
+    "pages/mine/index",
+    "pages/center/index",
+    "pages/square/index",
+    "pages/setting/index",
+    "pages/squareDetail/index",
+    "pages/centerDetail/index",
+    "pages/videoPlay/index",
+    "pages/webview/index",
+    "pages/bindName/index",
+    "pages/historyList/index",
+    "pages/classroom/index",
+    "pages/homework/index",
+    "pages/homeworkDetail/index",
+    "pages/letter/index",
+    "pages/letterList/index",
+    "pages/squareList/index",
+    "pages/beidanci0/index",
+    "pages/beidanci1/index",
+    "pages/beidanci2/index",
+    "pages/beidanci3/index",
+    "pages/beidanci4/index",
+    "pages/beidanci5/index",
+    "pages/beidanci6/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#9B9B9B",
+    "selectedColor": "#353535",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "image/roca_home_select.png",
+        "iconPath": "image/roca_home_normal.png",
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "image/roca_square_select.png",
+        "iconPath": "image/roca_square_normal.png",
+        "pagePath": "pages/square/index",
+        "text": "葡语广场"
+      },
+      {
+        "selectedIconPath": "image/roca_center_select.png",
+        "iconPath": "image/roca_center_normal.png",
+        "pagePath": "pages/center/index",
+        "text": "学习中心"
+      },
+      {
+        "selectedIconPath": "image/roca_mine_select.png",
+        "iconPath": "image/roca_mine_normal.png",
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

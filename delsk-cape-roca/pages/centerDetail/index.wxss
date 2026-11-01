@@ -1,0 +1,5 @@
+.button::after{ border: none;}
+
+page{
+  background-color: #f7f7f7;
+}

@@ -1,0 +1,108 @@
+<view style="position: relative;">
+<image src="/image/ff_bg.png" mode="widthFix" style="width: 100%;position: absolute;top: 0;left: 0;z-index: -9;"/>
+<view style="padding: 30rpx;">
+<view style="background-color: white;border-radius: 22rpx;padding: 30rpx;position: relative;">
+<image bindtap="change" src="/image/ff_03.png" mode="widthFix" style="width: 100%;position: absolute;top: 0;right: 0;"/>
+<view bindtap="change" style="display: flex;align-items:baseline">
+  <view style="font-size: 30rpx;font-weight: bold;">更换词书</view>
+  <image src="/image/ff_04.png" mode="widthFix" style="width: 10rpx;height: 10rpx;margin-left: 4rpx;"/>
+</view>
+
+<view style="display: flex;align-items: center;padding: 30rpx 0;background-color: white;margin-top: 20rpx;border-radius: 22rpx;">
+<image src="{{cs_info.cs_fengmian}}" mode="aspectFill" style="width: 148rpx;height: 176rpx;border-radius: 12rpx;"/>
+<view style="flex: 1;margin-left: 20rpx;">
+<view style="font-size: 30rpx;color: #1d1e1f;font-weight: bold;">{{cs_info.cs_name}}</view>
+<view style="font-size: 24rpx;color: #999999;margin-top: 16rpx;">单词：{{cs_info.danci_num}}词</view>
+<view style="background-color: #F6F5FA;width: 100%;height: 10rpx;border-radius: 6rpx;margin-top: 20rpx;">
+<view style="width: {{rate}}%;background-color: #50D0AF;height: 10rpx;border-radius: 6rpx;"></view>
+</view>
+<view style="display: flex;align-items: center;justify-content: space-between;margin-top: 16rpx;">
+<view style="font-size: 22rpx;color: #999999;">学习进度</view>
+<view style="font-size: 22rpx;color: #999999;">{{cs_info.wancheng_num}}/{{cs_info.danci_num}}</view>
+</view>
+</view>
+</view>
+
+<view style="padding: 20rpx;margin-top: 40rpx;background: linear-gradient(180deg, rgba(221,255,241,0.34) 0%, rgba(255,255,255,0.34) 100%);border-radius: 12rpx;">
+<view style="display: flex;align-items: center;justify-content: space-between;">
+<view style="font-size: 28rpx;font-weight: bold;color: #333333;">今日计划</view>
+<view bindtap="goPlan" style="display: flex;align-items: center;">
+<view style="font-size: 22rpx;color: #999999;font-weight: bold;">修改学习计划</view>
+<image src="/image/roca_arrow_right.png" mode="widthFix" style="width: 10rpx;margin-left: 8rpx;"/>
+</view>
+</view>
+<view style="display: flex;align-items: center;margin-top: 30rpx;">
+<view style="display: flex;align-items: center;justify-content: center;flex-direction: column;width: 50%;">
+<view>
+<text style="font-size: 44rpx;font-weight: bold;">{{data.tongji.new_num}}</text>
+<text style="font-size: 28rpx;font-weight: bold;">词</text>
+</view>
+<view style="font-size: 22rpx;margin-top: 10rpx;">需新学</view>
+</view>
+<view style="background-color: #DEDEDE;width: 2rpx;height: 50rpx;"></view>
+<view style="display: flex;align-items: center;justify-content: center;flex-direction: column;width: 50%;">
+<view>
+<text style="font-size: 44rpx;font-weight: bold;">{{data.tongji.fuxi_num}}</text>
+<text style="font-size: 28rpx;font-weight: bold;">词</text>
+</view>
+<view style="font-size: 22rpx;margin-top: 10rpx;">需复习</view>
+</view>
+</view>
+</view>
+
+<view bindtap="gogogo" style="padding: 28rpx 0;width: 100%;background: #41D996;box-shadow: 0 4rpx 12rpx 0 rgba(20,139,88,0.24);border-radius: 10rpx;margin-top: 30rpx;text-align: center;color: white;">{{data.xuexi_wancheng==1?'恭喜你，今日学习已完成！':'开始学习'}}</view>
+
+<!--  -->
+<view wx:if="{{data.xuexi_wancheng==1}}" bindtap="gogogo2" style="font-size: 26rpx;font-weight: bold;color: #3BD49A;margin-top: 30rpx;width: 100%;text-align: center;">加量学习</view>
+
+</view>
+</view>
+
+<view style="padding: 0 30rpx;">
+<view style="display: flex;align-items: center;justify-content: space-between;">
+<view bindtap="toCollection" style="display:flex;align-items: center;justify-content: space-between;width: 49%;background-color: white;border-radius: 12rpx;">
+<view>
+<view style="font-size: 30rpx;margin-left: 24rpx;">{{data.shoucang_num}}</view>
+<view style="display: flex;align-items: center;margin-left: 24rpx;margin-top: 2rpx;">
+<view style="font-size: 22rpx;color: #666666;">收藏单词</view>
+<image src="/image/roca_arrow_right.png" mode="widthFix" style="width: 10rpx;margin-left: 8rpx;"/>
+</view>
+</view>
+<image src="/image/ff_01.png" mode="aspectFill" style="height: 104rpx;width: 132rpx;"/>
+</view>
+
+<view bindtap="toList" style="display:flex;align-items: center;justify-content: space-between;width: 49%;background-color: white;border-radius: 12rpx;">
+<view>
+<view style="font-size: 30rpx;margin-left: 24rpx;">{{cs_info.danci_num}}</view>
+<view style="display: flex;align-items: center;margin-left: 24rpx;margin-top: 2rpx;">
+<view style="font-size: 22rpx;color: #666666;">单词列表</view>
+<image src="/image/roca_arrow_right.png" mode="widthFix" style="width: 10rpx;margin-left: 8rpx;"/>
+</view>
+</view>
+<image src="/image/ff_02.png" mode="aspectFill" style="height: 104rpx;width: 132rpx;"/>
+</view>
+</view>
+</view>
+
+<view style="padding: 30rpx;">
+<view wx:if="{{freeCourse.pic.length>0}}" style="font-size: 36rpx;font-weight: bold;margin-top: 30rpx;">葡语字母免费学</view>
+
+<image wx:if="{{freeCourse.pic.length>0}}" bindtap="toLetter" data-url="{{freeCourse.dataid}}" src="{{freeCourse.pic}}" mode="widthFix" style="width: 100%;margin-top: 20rpx;box-shadow: 0 4rpx 12rpx 0 #f4f4f4;border-radius: 12rpx;"/>
+</view>
+
+</view>
+
+<van-dialog id="van-dialog" 
+showCancelButton="{{false}}" 
+show="{{showDia}}" 
+use-slot
+customStyle="font-size:32rpx;font-weight:bold;color:#333333;"
+message="加量学习{{jh_info.danci_day_num}}个单词?" title="" confirm-button-color="#41D996"
+confirm-button-text="开始学习"
+bind:confirm="goOK">
+<view style="position: relative;">
+<image bind:tap="closePop" src="/image/roca_player_close.png" mode="widthFix" style="width: 30rpx;height: 30rpx;position: absolute;top:-40rpx;right: 30rpx;"/>
+<view style="font-size:32rpx;font-weight:bold;color:#333333;text-align: center;margin-top: 70rpx;">加量学习{{jh_info.danci_day_num}}个单词?</view>
+<view style="font-size: 26rpx;color: #999999;text-align: center;margin-top: 30rpx;margin-bottom: 70rpx;font-weight: normal;">加量学习会增加下次学习复习量哦～</view>
+</view>
+</van-dialog>

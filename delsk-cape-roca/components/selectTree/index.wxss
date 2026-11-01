@@ -1,0 +1,57 @@
+.flex
+{  
+  display: flex;
+ width: 100%;
+}
+.left {
+  margin-right: 0px;  /*间距*/
+  width: 150rpx;
+  background-color: #ffffff;
+  height: 400rpx;
+}
+.center {
+  margin-right: 0px;  /*间距*/
+  width: 170rpx;
+  background-color: #F8F8F8;
+  height: 400rpx;
+}
+.right {
+  flex: 1;  /*均分#parent剩余的部分达到自适应*/
+  width: 120rpx;
+  background-color: #EEEEEE;
+  height: 400rpx;
+  overflow: hidden;
+}
+.title{
+  font-size: 28rpx;
+  color: #262626;
+  border-bottom: 1rpx solid #eeeeee;
+  margin:0rpx 0 0rpx 30rpx;
+  padding: 15rpx 5rpx;
+}
+.active{  
+   color: #2D99EB;
+}
+.title2 {
+  font-size: 28rpx;
+  border-bottom: 1rpx solid #eeeeee;
+  margin:0rpx 0 0rpx 30rpx;
+  padding: 15rpx 5rpx;
+}
+
+.title3{
+  width: 100%;
+  font-size: 28rpx;
+  border-bottom: 1rpx solid #e3e3e3;
+  margin:0rpx 0 0rpx 30rpx;
+  padding: 15rpx 5rpx;
+  text-align: left;
+  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+} 
+
+
+.scrollbar{
+  height: 400rpx
+}

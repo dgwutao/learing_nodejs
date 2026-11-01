@@ -1,0 +1,96 @@
+<image wx:if="{{place.pic}}" src="{{place.pic}}" style="width: 100%;" mode="widthFix"/>
+
+<view wx:else style="padding: 30rpx;">
+
+<view style="display: flex;align-items: center;justify-content: space-between;width: 100%;margin-bottom: 30rpx;">
+<view bindtap="goList" data-id="美食类" style="margin-right: 20rpx;border-radius: 16rpx;width: 50%;background-color: white;">
+<image src="https://staticpms.delsk.com/images/edu/cat3.png" mode="aspectFill" style="width: 100%;height: 130rpx;border-top-left-radius: 16rpx;border-top-right-radius: 16rpx;display: block;"/>
+<view style="display: flex;align-items: center;justify-content: space-between;padding: 16rpx 20rpx;">
+<view style="font-size: 30rpx;color: #333333;font-weight: bold;">美食类</view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 20rpx;color: #999999;">查看详情</view>
+<image mode="widthFix" src="/image/roca_arrow_right.png" style="width: 12rpx;height: 12rpx;margin-left: 10rpx;"/>
+</view>
+</view>
+</view>
+
+<view bindtap="goList" data-id="生活类" style="border-radius: 16rpx;width: 50%;background-color: white;">
+<image src="https://staticpms.delsk.com/images/edu/cat4.png" mode="aspectFill" style="width: 100%;height: 130rpx;border-top-left-radius: 16rpx;border-top-right-radius: 16rpx;display: block;"/>
+<view style="display: flex;align-items: center;justify-content: space-between;padding: 16rpx 20rpx;">
+<view style="font-size: 30rpx;color: #333333;font-weight: bold;">生活类</view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 20rpx;color: #999999;">查看详情</view>
+<image mode="widthFix" src="/image/roca_arrow_right.png" style="width: 12rpx;height: 12rpx;margin-left: 10rpx;"/>
+</view>
+</view>
+</view>
+</view>
+
+
+<view style="display: flex;align-items: center;justify-content: space-between;width: 100%;margin-bottom: 30rpx;">
+<view bindtap="goList" data-id="文化类" style="margin-right: 20rpx;border-radius: 16rpx;width: 50%;background-color: white;">
+<image src="https://staticpms.delsk.com/images/edu/cat1.png" mode="aspectFill" style="width: 100%;height: 130rpx;border-top-left-radius: 16rpx;border-top-right-radius: 16rpx;display: block;"/>
+<view style="display: flex;align-items: center;justify-content: space-between;padding: 16rpx 20rpx;">
+<view style="font-size: 30rpx;color: #333333;font-weight: bold;">文化类</view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 20rpx;color: #999999;">查看详情</view>
+<image mode="widthFix" src="/image/roca_arrow_right.png" style="width: 12rpx;height: 12rpx;margin-left: 10rpx;"/>
+</view>
+</view>
+</view>
+
+<view bindtap="goList" data-id="旅游类" style="border-radius: 16rpx;width: 50%;background-color: white;">
+<image src="https://staticpms.delsk.com/images/edu/cat2.png" mode="aspectFill" style="width: 100%;height: 130rpx;border-top-left-radius: 16rpx;border-top-right-radius: 16rpx;display: block;"/>
+<view style="display: flex;align-items: center;justify-content: space-between;padding: 16rpx 20rpx;">
+<view style="font-size: 30rpx;color: #333333;font-weight: bold;">旅游类</view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 20rpx;color: #999999;">查看详情</view>
+<image mode="widthFix" src="/image/roca_arrow_right.png" style="width: 12rpx;height: 12rpx;margin-left: 10rpx;"/>
+</view>
+</view>
+</view>
+
+
+</view>
+
+
+
+<view wx:for="{{list}}">
+<view bindtap="toDetail" data-item="{{item}}" style="margin-bottom: 20rpx;display: flex;flex-direction: column;position: relative;">
+<image src="{{item.pic}}" mode="aspectFill" style="width: 100%;height: 390rpx;border-top-left-radius: 14rpx;border-top-right-radius: 14rpx;"/>
+
+<view style="background-color: white;padding: 20rpx;margin-top: 0;border-bottom-left-radius: 14rpx;border-bottom-right-radius: 14rpx;">
+<view style="font-size: 32rpx;font-weight: bold;">{{item.title}}</view>
+<view style="font-size: 24rpx;margin-top: 12rpx;color: #666666;">{{item.intro}}</view>
+</view>
+
+<view wx:if="{{item.type==2}}" style="height: 390rpx;width: 100%;border-top-left-radius: 14rpx;border-top-right-radius: 14rpx;position: absolute;top: 0;left: 0;">
+<view style="width: 100%;height: 390rpx;background-color: black;opacity: 0.2;"></view>
+<image src="/image/roca_video_play.png" style="width: 40rpx;height: 52rpx;position: absolute;top: 170rpx;left: 46%;"/>
+</view>
+
+<view style="background: #23ACA9;border-radius: 4rpx;opacity: 0.72;padding: 4rpx 20rpx;font-size: 24rpx;color: white;font-weight: bold;position:absolute;top: 20rpx;left: 0;">{{item.type==2?'直播课':item.type==3?'精听':item.type==3?'精看':'图文'}}</view>
+</view>
+
+
+</view>
+
+<view wx:if="{{list.length>0}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-top: 30rpx;">
+<view style="font-size: 24rpx;color: #999999;">暂时没有更多了</view>
+</view>
+
+
+<!-- <view style="height: 200rpx;"></view> -->
+
+
+
+
+
+
+
+
+
+
+
+
+</view>

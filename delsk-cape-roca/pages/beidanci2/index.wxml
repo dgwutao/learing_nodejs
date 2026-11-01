@@ -1,0 +1,27 @@
+<view style="padding: 0 20rpx;">
+<view wx:for="{{list}}" style="margin-top: 20rpx;">
+<view bindtap="goDetail" data-item="{{item}}" style="display:flex;align-items: center;justify-content: space-between;background-color: white;border-radius: 16rpx;padding: 20rpx;">
+<view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 36rpx;color: #1d1e1f;font-weight: bold;">{{item.danci}}</view>
+<image catchtap="playVoice" data-item="{{item}}" src="/image/{{playing_audio_state==item.yinpin?'ff_14.gif':'ff_05.png'}}" mode="widthFix" style="width: 36rpx;height: 36rpx;margin-left: 20rpx;"/>
+</view>
+<view style="font-size: 26rpx;color: #999999;margin-top: 14rpx;">释义：{{item.shiyi_cn}}</view>
+</view>
+<view style="display: flex;align-items: center;">
+<view style="font-size: 22rpx;color: #999999;font-weight: bold;">详情</view>
+<image src="/image/roca_arrow_right.png" mode="widthFix" style="width: 10rpx;margin-left: 8rpx;"/>
+</view>
+</view>
+</view>
+
+<view style="height: 200rpx;"></view>
+
+<view wx:if="{{list.length==0}}" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+<image src="/image/no_data.png" mode="widthFix" style="width: 280rpx;"/>
+<view style="margin-top: 30rpx;font-size: 24rpx;color: #999999;">暂无收藏</view>
+</view>
+
+
+
+</view>

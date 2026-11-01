@@ -1,0 +1,93 @@
+<view style="padding: 30rpx;">
+<image bindtap="toDetail" data-url="{{banner.dataid}}" src="{{banner.pic}}" mode="widthFix" style="width: 100%;"/>
+<view style="display: flex;align-items: center;margin-top: 20rpx;flex-wrap: wrap;">
+<image bindtap="toDetail" data-url="{{item.dataid}}" wx:for="{{recommends}}" wx:for-index="idx" src="{{item.pic}}"  mode="widthFix" style="width: 48%;border-radius: 10rpx;margin-right: {{idx%2==0?'20rpx':'0'}};"/>
+</view>
+
+
+<!-- <image bindtap="toLetter" data-url="{{freeCourse.dataid}}" src="{{freeCourse.pic}}" mode="widthFix" style="width: 100%;margin-top: 20rpx;box-shadow: 0 4rpx 12rpx 0 #f4f4f4;border-radius: 12rpx;"/> -->
+
+
+<view wx:if="{{freeCourse.pic.length>0}}" style="font-size: 36rpx;font-weight: bold;margin-top: 30rpx;">轻松学</view>
+
+<image wx:if="{{freeCourse2.pic.length>0}}" bindtap="toCishu" data-url="{{freeCourse2.dataid}}" src="{{freeCourse2.pic}}" mode="widthFix" style="width: 100%;margin-top: 20rpx;box-shadow: 0 4rpx 12rpx 0 #f4f4f4;border-radius: 12rpx;"/>
+
+<image wx:if="{{freeCourse.pic.length>0}}" bindtap="toLetter" data-url="{{freeCourse.dataid}}" src="{{freeCourse.pic}}" mode="widthFix" style="width: 100%;margin-top: 20rpx;box-shadow: 0 4rpx 12rpx 0 #f4f4f4;border-radius: 12rpx;"/>
+
+<view wx:if="{{recommends2.length>0}}" style="font-size: 36rpx;font-weight: bold;margin-top: 30rpx;margin-bottom: 20rpx;">{{recommends2[0].title}}</view>
+
+<image wx:if="{{recommends2.length>0}}" show-menu-by-longpress="true" src="{{recommends2[0].pic}}" mode="widthFix" style="width: 100%;"/>
+
+<view wx:if="{{list0.length>0&&recommends2.length==0}}" style="font-size: 36rpx;font-weight: bold;margin-top: 30rpx;margin-bottom: 20rpx;">葡语专栏</view>
+
+<scroll-view wx:if="{{recommends2.length==0}}" scroll-x="true" style="width: 100%;">
+<view style="display: flex;align-items: center;">
+<view wx:for="{{list0}}" bindtap="toDetail2" data-item="{{item}}" style="width: 434rpx;background: #FFFFFF;box-shadow: 0px 2px 6px 0px #F4F4F4;border-radius: 12rpx;padding: 30rpx;margin-right: 20rpx;">
+<image src="{{item.pic}}" mode="aspectFill" style="width: 374rpx;height: 260rpx;border-radius: 12rpx;flex-shrink: 0;"/>
+<view style="font-size: 28rpx;font-weight: bold;margin-top: 10rpx;width: 100%;word-break: normal;word-wrap: break-word;">{{item.title}}</view>
+<view style="display: flex;align-items: center;justify-content: space-between;">
+<view style="font-size: 24rpx;color: 999999;">共{{item.course_count}}节</view>
+<view style="font-size: 36rpx;font-weight: bold;color: #FE7033;">{{item.type==1?'免费':('￥'+item.price)}}</view>
+</view>
+</view>
+</view>
+</scroll-view>
+
+
+
+
+<view wx:if="{{list2.length>0&&recommends2.length==0}}" style="font-size: 36rpx;font-weight: bold;margin-top: 30rpx;">课程列表</view>
+
+<view wx:if="{{recommends2.length==0}}" wx:for="{{list2}}">
+<view bindtap="toDetail2" data-item="{{item}}" style="padding:20rpx;box-shadow: 0 4rpx 12rpx 0 #f4f4f4;border-radius: 12rpx;display:flex;align-items:center;margin-top:20rpx;background-color: white;">
+<image src="{{item.pic}}" mode="aspectFill" style="width: 224rpx;height: 164rpx;border-radius: 10rpx;"/>
+<view style="margin-left: 20rpx;flex: 1;height: 164rpx;">
+<view style="font-size: 32rpx;font-weight: bold;margin-top: 10rpx;">{{item.title}}</view>
+<view style="display: flex;align-items: center;justify-content: space-between;margin-top: 20rpx;width: 100%;">
+<view style="display: flex;align-items:center;">
+<view style="font-size: 24rpx;color: #999999;margin-top: 10rpx;">共{{item.course_count}}节</view>
+</view>
+<view wx:if="{{item.type==1}}" style="display: flex;align-items: center;">
+<view style="font-size: 36rpx;color: #fe7033;font-weight: bold;">免费</view>
+</view>
+<view wx:if="{{item.type==2}}" style="display: flex;align-items: center;">
+<view style="font-size: 22rpx;color: #fe7033;margin-top: 10rpx;">￥</view>
+<view style="font-size: 36rpx;color: #fe7033;font-weight: bold;">{{item.price}}</view>
+</view>
+</view>
+</view>
+</view>
+</view>
+
+
+
+
+
+
+<view wx:if="{{recommends2.length==0}}" style="font-size: 36rpx;font-weight: bold;margin-top: 30rpx;">葡语小班课</view>
+
+
+<view wx:if="{{recommends2.length==0}}" wx:for="{{list}}">
+<view bindtap="toDetail2" data-item="{{item}}" style="padding:20rpx;box-shadow: 0 4rpx 12rpx 0 #f4f4f4;border-radius: 12rpx;display:flex;align-items:center;margin-top:20rpx;background-color: white;">
+<image src="{{item.pic}}" mode="aspectFill" style="width: 224rpx;height: 164rpx;border-radius: 10rpx;"/>
+<view style="margin-left: 20rpx;flex: 1;height: 164rpx;">
+<view style="font-size: 32rpx;font-weight: bold;margin-top: 10rpx;">{{item.title}}</view>
+<view style="display: flex;align-items: center;justify-content: space-between;margin-top: 20rpx;width: 100%;">
+<view style="display: flex;align-items:center;">
+<view style="font-size: 24rpx;color: #999999;margin-top: 10rpx;">共{{item.course_count}}节</view>
+</view>
+<view wx:if="{{item.type==1}}" style="display: flex;align-items: center;">
+<view style="font-size: 36rpx;color: #fe7033;font-weight: bold;">免费</view>
+</view>
+<view wx:if="{{item.type==2}}" style="display: flex;align-items: center;">
+<view style="font-size: 22rpx;color: #fe7033;margin-top: 10rpx;">￥</view>
+<view style="font-size: 36rpx;color: #fe7033;font-weight: bold;">{{item.price}}</view>
+</view>
+</view>
+</view>
+</view>
+</view>
+
+<!-- <view style="height: 150rpx;"></view> -->
+
+</view>

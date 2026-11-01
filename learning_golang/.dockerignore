@@ -1,0 +1,9 @@
+.git
+.gitignore
+dist
+*.ps1
+*.bat
+*.md
+.env.*
+!.env.example
+node_modules
